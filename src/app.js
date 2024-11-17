@@ -27,6 +27,11 @@ const absensi = require('./routes/absensi.js');
 const cuti = require('./routes/cuti.js');
 const user = require('./routes/user.js');
 const landingPage = require('./routes/landing-page.js');
+const dashboard = require('./routes/dashboard.js');
+const anakAsuh = require('./routes/anak-asuh.js');
+const donasi = require('./routes/donasi.js');
+const campaign = require('./routes/campaign.js');
+const report = require('./routes/report.js');
 // const dashboardAnalytic = require('./routes/dashboard-analytic.js');
 
 // app.use(logger('dev'));
@@ -47,6 +52,11 @@ var corsOptions = {
 
 app.get('/', landingPage);
 
+app.use('/dashboard', dashboard);
+app.use('/anak-asuh', anakAsuh);
+app.use('/donasi', donasi);
+app.use('/campaign', campaign);
+app.use('/laporan', report);
 app.use('/auth', auth);
 // app.use('/', dashboard);
 // app.use('/dashboard', dashboardAnalytic);
