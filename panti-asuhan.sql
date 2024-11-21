@@ -6,6 +6,8 @@ CREATE TABLE `admin` (
   `email` varchar(128)  NOT NULL,
   `password` varchar(255)  NOT NULL,
   `is_active` tinyint(1) DEFAULT '0',
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 );

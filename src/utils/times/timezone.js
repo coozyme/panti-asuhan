@@ -20,7 +20,6 @@ function GetDate() {
    var dt = TimeZoneIndonesia()
    var mth = dt.getMonth() + 1
    var rs = dt.getFullYear() + "-" + mth + "-" + dt.getDate()
-   console.log('LOG-RES', rs)
    return rs
 }
 function GetTime() {

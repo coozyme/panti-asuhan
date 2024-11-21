@@ -83,7 +83,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       {
          tableName: "anak_asuh",
-         timestamps: true
+         timestamps: true,
       }
    );
 

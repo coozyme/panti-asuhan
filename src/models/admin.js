@@ -32,11 +32,22 @@ module.exports = (sequelize, DataTypes) => {
          is_active: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+         },
+         created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+         },
+         updated_at: {
+            type: DataTypes.DATE,
+            allowNull: true
          }
       },
       {
          tableName: "admin",
-         timestamps: true
+         timestamps: true,
+         createdAt: 'created_at',
+         updatedAt: 'updated_at'
       }
    );
    return Admin;
