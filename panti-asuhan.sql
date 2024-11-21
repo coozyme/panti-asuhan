@@ -7,19 +7,19 @@ CREATE TABLE `admin` (
   `password` varchar(255)  NOT NULL,
   `is_active` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+  UNIQUE KEY `username` (`username`)
+);
 
 CREATE TABLE `donatur` (
-  `id`int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `address` text,
   `number_phone` varchar(128),
   `email` varchar(128) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `status` varchar(128) enum('PENDING', 'VERIFIED', 'REJECT') DEFAULT 'PENDING',
-  PRIMARY KEY (`id`),
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+  `status` enum('PENDING', 'VERIFIED', 'REJECT') DEFAULT 'PENDING',
+  PRIMARY KEY (`id`)
+);
 
 CREATE TABLE `wali` (
   `id`int NOT NULL AUTO_INCREMENT,
@@ -28,8 +28,8 @@ CREATE TABLE `wali` (
   `number_phone` varchar(128),
   `umur` varchar(128),
   `photo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+  PRIMARY KEY (`id`)
+);
 
 CREATE TABLE `anak_asuh` (
   `id`int NOT NULL AUTO_INCREMENT,
@@ -52,7 +52,7 @@ CREATE TABLE `anak_asuh` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`),
   FOREIGN KEY (`id_wali`) REFERENCES `wali`(`id`)
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+);
 
 
 CREATE TABLE `campaign_donasi` (
@@ -70,7 +70,7 @@ CREATE TABLE `campaign_donasi` (
   `updated_at` DATETIME,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+);
 
 
 CREATE TABLE `galeri` (
@@ -78,10 +78,10 @@ CREATE TABLE `galeri` (
   `foto` varchar(255) NOT NULL,
   `kegiatan` varchar(128) NOT NULL,
   `keterangan` varchar(128),
-  `tanggal` DATE NOT NULL DEFAULT CURDATE(),
-  `tanggal_upload` DATETIME NOT NULL DEFAULT NOW(),
+  `tanggal` DATE NOT NULL DEFAULT (CURRENT_DATE),
+  `tanggal_upload` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
   PRIMARY KEY (`id`)
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+);
 
 
 CREATE TABLE `donasi` (
@@ -101,14 +101,14 @@ CREATE TABLE `donasi` (
   `updated_at` DATETIME,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+);
 
 CREATE TABLE `pengeluaran` (
   `id`int NOT NULL AUTO_INCREMENT,
   `kegiatan` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `jumlah` double(11,0) NOT NULL DEFAULT '0',
-  `tanggal` DATE NOT NULL DEFAULT CURDATE(),
+  `tanggal` DATE NOT NULL DEFAULT (CURRENT_DATE),
   `foto` varchar(255) DEFAULT NULL,
   `id_campaign_donasi` int,
   `id_admin` int NOT NULL,
@@ -116,4 +116,4 @@ CREATE TABLE `pengeluaran` (
   `updated_at` DATETIME,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
-); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+);
