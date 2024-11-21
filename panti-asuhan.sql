@@ -47,9 +47,11 @@ CREATE TABLE `anak_asuh` (
   `ibu` varchar(50),
   `tanggal_wafat` date DEFAULT NULL,
   `keterangan` date DEFAULT NULL,
+  `id_wali` int NOT NULL,
   `id_admin` int NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`),
+  FOREIGN KEY (`id_wali`) REFERENCES `wali`(`id`)
 ); ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
 
@@ -108,6 +110,7 @@ CREATE TABLE `pengeluaran` (
   `jumlah` double(11,0) NOT NULL DEFAULT '0',
   `tanggal` DATE NOT NULL DEFAULT CURDATE(),
   `foto` varchar(255) DEFAULT NULL,
+  `id_campaign_donasi` int,
   `id_admin` int NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT NOW(),
   `updated_at` DATETIME,
