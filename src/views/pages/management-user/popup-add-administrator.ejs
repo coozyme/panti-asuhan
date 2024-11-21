@@ -1,0 +1,84 @@
+<div class="col-sm-6 col-md-4 col-xl-3">
+   <div class="my-4 text-center">
+      <!-- Small modal -->
+      <!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+         data-bs-target=".bs-example-modal-center">Center
+         modal</button> -->
+   </div>
+
+   <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Buat Akun Administrator</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <form class="custom-validation" action="#">
+                           <div class="mb-3">
+                              <label class="form-label">Nama Lengkap</label>
+                              <input type="text" class="form-control" required placeholder="Enter Nama Lengkap">
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">Username</label>
+                              <input type="text" class="form-control" required placeholder="Enter username">
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">E-Mail</label>
+                              <div>
+                                 <input type="email" class="form-control" required parsley-type="email"
+                                    placeholder="Enter a valid email">
+                              </div>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">Nomor Telphone</label>
+                              <div>
+                                 <input data-parsley-type="number" type="text" class="form-control" required
+                                    placeholder="Enter only numbers">
+                              </div>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">Password</label>
+                              <div>
+                                 <input type="password" id="pass2" class="form-control" required placeholder="Password">
+                              </div>
+                           </div>
+                           <div class="md-3">
+                              <label for="validationCustom04" class="form-label">Status</label>
+                              <select class="form-select" id="validationCustom04" required>
+                                 <option selected disabled value="">Choose...</option>
+                                 <option value="aktif">Aktif</option>
+                                 <option value="non-aktif">Non Aktif</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                 Please select a valid state.
+                              </div>
+                           </div>
+                           <div class="mb-0 mt-3">
+                              <div>
+                                 <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                    Submit
+                                 </button>
+                                 <button type="reset" class="btn btn-secondary waves-effect">
+                                    Cancel
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                        <!-- end form -->
+                     </div><!-- end cardbody -->
+                  </div><!-- end card -->
+               </div> <!-- end col -->
+               <!-- end col -->
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+   <!-- /.modal -->
+</div>

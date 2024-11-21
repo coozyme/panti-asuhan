@@ -6,44 +6,47 @@ const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
 const { TimeZoneIndonesia, GetDate } = require("../utils/times/timezone");
 const user = require('./user');
+const path = require('path');
 
 module.exports = {
    Login: async (req, res) => {
       try {
-         dataBody = {
-            username: req.body.username,
-            password: req.body.password,
-         }
+         // dataBody = {
+         //    username: req.body.username,
+         //    password: req.body.password,
+         // }
 
-         Users.findOne({
-            where: {
-               username: dataBody.username,
-            },
-         }).then(async (user) => {
-            if (!user) {
-               res.set('Content-Type', 'application/json')
-               res.status(404).send(Response(false, "404", "User not found", null))
-               return
-            }
+         // Users.findOne({
+         //    where: {
+         //       username: dataBody.username,
+         //    },
+         // }).then(async (user) => {
+         //    if (!user) {
+         //       res.set('Content-Type', 'application/json')
+         //       res.status(404).send(Response(false, "404", "User not found", null))
+         //       return
+         //    }
 
-            isValidPassword = await CheckPassword(dataBody.password, user.password)
-            if (!isValidPassword) {
-               res.set('Content-Type', 'application/json')
-               res.status(401).send(Response(false, "401", "Password is wrong", null))
-               return
-            }
-            // uid = UUID.stringify(user.id)
-            // console.log('LOG-uid', uid)
-            const payload = AuthPayload(user.id)
-            console.log('LOG-payload', payload)
-            const token = await GenerateToken(payload)
-            dataObject = {
-               token: token,
-            }
+         //    isValidPassword = await CheckPassword(dataBody.password, user.password)
+         //    if (!isValidPassword) {
+         //       res.set('Content-Type', 'application/json')
+         //       res.status(401).send(Response(false, "401", "Password is wrong", null))
+         //       return
+         //    }
+         //    // uid = UUID.stringify(user.id)
+         //    // console.log('LOG-uid', uid)
+         //    const payload = AuthPayload(user.id)
+         //    console.log('LOG-payload', payload)
+         //    const token = await GenerateToken(payload)
+         //    dataObject = {
+         //       token: token,
+         //    }
 
-            res.set('Content-Type', 'application/json')
-            res.status(200).send(Response(true, "200", "Success login", dataObject))
-         })
+         //    res.set('Content-Type', 'application/json')
+         //    res.status(200).send(Response(true, "200", "Success login", dataObject))
+         // })
+
+         res.render(path.join(__dirname, '../../src/views/pages/auth/login.ejs'));
 
       } catch (err) {
          console.log('er', err)
@@ -53,46 +56,47 @@ module.exports = {
    },
    Register: async (req, res) => {
       try {
-         const { fullname, username, password, role, devisiID, shiftID, limitCuti } = req.body
-         passwordHash = await EncryptPassword(password)
-         uuid = UUID.v4()
+         // const { fullname, username, password, role, devisiID, shiftID, limitCuti } = req.body
+         // passwordHash = await EncryptPassword(password)
+         // uuid = UUID.v4()
 
-         const user = await Users.create({
-            fullname: fullname,
-            username: username,
-            password: passwordHash,
-            role_id: role,
-            devisi_id: devisiID,
-            shift_id: shiftID,
-            is_active: 1,
-            created_at: TimeZoneIndonesia(),
-         })
+         // const user = await Users.create({
+         //    fullname: fullname,
+         //    username: username,
+         //    password: passwordHash,
+         //    role_id: role,
+         //    devisi_id: devisiID,
+         //    shift_id: shiftID,
+         //    is_active: 1,
+         //    created_at: TimeZoneIndonesia(),
+         // })
 
-         if (!user) {
-            res.set('Content-Type', 'application/json')
-            res.status(500).send(Response(false, "500", "Internal Server Error", null))
-            return
-         }
-         const datauser = await Users.findOne({
-            where: {
-               username: user.username,
-            },
-         })
-         userId = datauser.dataValues.id
+         // if (!user) {
+         //    res.set('Content-Type', 'application/json')
+         //    res.status(500).send(Response(false, "500", "Internal Server Error", null))
+         //    return
+         // }
+         // const datauser = await Users.findOne({
+         //    where: {
+         //       username: user.username,
+         //    },
+         // })
+         // userId = datauser.dataValues.id
 
-         await Cuti.create({
-            user_id: userId,
-            limit: limitCuti,
-            created_at: GetDate()
-         });
+         // await Cuti.create({
+         //    user_id: userId,
+         //    limit: limitCuti,
+         //    created_at: GetDate()
+         // });
 
-         dataObject = {
-            id: datauser.dataValues.id,
-            username: user.dataValues.username,
-            fullname: user.dataValues.fullname,
-         }
-         res.set('Content-Type', 'application/json')
-         res.status(201).send(Response(true, "201", "Success created", dataObject))
+         // dataObject = {
+         //    id: datauser.dataValues.id,
+         //    username: user.dataValues.username,
+         //    fullname: user.dataValues.fullname,
+         // }
+         // res.set('Content-Type', 'application/json')
+         // res.status(201).send(Response(true, "201", "Success created", dataObject))
+         res.render(path.join(__dirname, '../../src/views/pages/auth/register.ejs'));
       } catch (err) {
          console.log('er', err)
          msg = err.errors?.map(e => e.message)[0]

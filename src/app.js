@@ -32,6 +32,7 @@ const anakAsuh = require('./routes/anak-asuh.js');
 const donasi = require('./routes/donasi.js');
 const campaign = require('./routes/campaign.js');
 const report = require('./routes/report.js');
+const managementUser = require('./routes/management-user.js');
 // const dashboardAnalytic = require('./routes/dashboard-analytic.js');
 
 // app.use(logger('dev'));
@@ -57,6 +58,7 @@ app.use('/anak-asuh', anakAsuh);
 app.use('/donasi', donasi);
 app.use('/campaign', campaign);
 app.use('/laporan', report);
+app.use('/management-user', managementUser);
 app.use('/auth', auth);
 // app.use('/', dashboard);
 // app.use('/dashboard', dashboardAnalytic);
@@ -75,7 +77,7 @@ app.use('/leave', cuti);
 // });
 
 app.get('*', function (req, res) {
-  res.send('no route ...', 404);
+  res.render(path.join(__dirname, '../src/views/pages/not-found.ejs'));
 });
 
 // error handler
