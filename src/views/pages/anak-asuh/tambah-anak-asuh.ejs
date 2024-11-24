@@ -8,7 +8,7 @@
             <div class="page-title-box">
                <div class="row align-items-center">
                   <div class="col-md-8">
-                     <h6 class="page-title">Tambah Data Anak Asuh</h6>
+                     <h6 class="page-title">Tambah Data Asuh</h6>
                   </div>
                   <div class="col-md-4">
                      <div class="float-end d-none d-md-block">
@@ -23,165 +23,174 @@
             </div>
             <!-- end page title -->
             <div class="row">
-               <div class="col-lg-6">
-                  <div class="card">
-                     <div class="card-body">
+               <form class="custom-validation" action="/anak-asuh/tambah-anak-asuh" method="post">
+                  <div class="col-lg-6">
+                     <div class="card">
+                        <div class="card-body">
+                           <h4 class="card-title mb-4">Data Anak Asuh</h4>
 
-                        <h4 class="card-title mb-4">Data Anak Asuh</h4>
-
-                        <form class="custom-validation" action="#">
                            <div class="mb-3">
-                              <label class="form-label">Nama Lengkap</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
+                              <label class="form-label" for="namaLengkap">Nama Lengkap</label>
+                              <input type="text" class="form-control" name="namaLengkap" required
+                                 placeholder="nama lengkap">
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Tempat Lahir</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
+                              <label class="form-label" for="tempatLahir">Tempat Lahir</label>
+                              <input type="text" class="form-control" name="tempatLahir" required
+                                 placeholder="tempat lahir">
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Tanggal Lahir</label>
+                              <label class="form-label" for="tanggalLahir">Tanggal Lahir</label>
                               <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M, yyyy"
-                                    data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalLahir"
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
                                     data-provide="datepicker" data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div><!-- input-group -->
+                              </div>
                            </div>
 
                            <div class="mb-3">
                               <label class="form-label mb-3 d-flex">Gender :</label>
                               <div class="form-check form-check-inline">
-                                 <input type="radio" id="customRadioInline1" name="customRadioInline1"
+                                 <input type="radio" id="customRadioInline1" name="gender" value="Male"
                                     class="form-check-input">
-                                 <label class="form-check-label" for="customRadioInline1">Male</label>
+                                 <label class="form-check-label" for="gender">Male</label>
                               </div>
                               <div class="form-check form-check-inline">
-                                 <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                                 <input type="radio" id="customRadioInline2" name="gender" value="Female"
                                     class="form-check-input">
-                                 <label class="form-check-label" for="customRadioInline2">Female</label>
+                                 <label class="form-check-label" for="gender">Female</label>
+                              </div>
+                           </div>
+                           <div class="md-3">
+                              <label for="validationCustom04" class="form-label">Status</label>
+                              <select class="form-select" id="validationCustom04" required name="status">
+                                 <option selected disabled value="">Choose...</option>
+                                 <option value="YATIM">Yatim</option>
+                                 <option value="PIATU">Piatu</option>
+                                 <option value="YATIM_PIATU">Yatim Piatu</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                 Please select a valid state.
                               </div>
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Status</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
+                              <label class="form-label" for="alamat">Alamat</label>
+                              <input type="text" class="form-control" name="alamat" required placeholder="alamat">
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Alamat</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
+                              <label class="form-label" for="hubungan">Hubungan</label>
+                              <input type="text" class="form-control" name="hubungan" required placeholder="hubungan">
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Hubungan</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
+                              <label class="form-label" for="photo">Photo</label>
+                              <input type="text" class="form-control" required placeholder="photo">
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Photo</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Tanggal Masuk</label>
+                              <label class="form-label" for="tanggalMasuk">Tanggal Masuk</label>
                               <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M, yyyy"
-                                    data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalMasuk"
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
                                     data-provide="datepicker" data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div><!-- input-group -->
+                              </div>
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">Tanggal Keluar</label>
+                              <label class="form-label" for="tanggalKeluar">Tanggal Keluar</label>
                               <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M, yyyy"
-                                    data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalKeluar"
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
                                     data-provide="datepicker" data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div><!-- input-group -->
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Ayah</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Ibu</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Wafat</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Nomor Handphone</label>
-                              <input type="number" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Keterangan</label>
-                              <div>
-                                 <textarea required class="form-control" rows="5" placeholder="Type here"></textarea>
-                              </div>
-                           </div>
-                           <div class="mb-0">
-                              <div>
-                                 <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                    Submit
-                                 </button>
-                                 <button type="reset" class="btn btn-secondary waves-effect">
-                                    Cancel
-                                 </button>
-                              </div>
-                           </div>
-                        </form>
-                        <!-- end form -->
-                     </div><!-- end cardbody -->
-                  </div><!-- end card -->
-               </div> <!-- end col -->
-               <div class="col-lg-6">
-                  <div class="card">
-                     <div class="card-body">
-
-                        <h4 class="card-title mb-4">Data Wali Anak Asuh</h4>
-
-                        <form class="custom-validation" action="#">
-                           <div class="mb-3">
-                              <label class="form-label">Nama Lengkap</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label">Alamat</label>
-                              <input type="text" class="form-control" required placeholder="Type something">
-                           </div>
-
-
-                           <div class="mb-3">
-                              <label class="form-label">Umur</label>
-                              <div>
-                                 <input type="number" class="form-control" required parsley-type="email"
-                                    placeholder="Enter a valid email">
                               </div>
                            </div>
                            <div class="mb-3">
-                              <label class="form-label">No Telp.</label>
-                              <div>
-                                 <input data-parsley-type="number" type="text" class="form-control" required
-                                    placeholder="Enter only numbers">
-                              </div>
+                              <label class="form-label" for="ayah">Ayah</label>
+                              <input type="text" class="form-control" placeholder="nama ayah" name="ayah">
                            </div>
-                           <div class="mb-0">
-                              <div>
-                                 <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                    Submit
-                                 </button>
-                                 <button type="reset" class="btn btn-secondary waves-effect">
-                                    Cancel
-                                 </button>
-                              </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="ibu">Ibu</label>
+                              <input type="text" class="form-control" placeholder="nama ibu" name="ibu">
                            </div>
-                        </form>
-                        <!-- end form -->
-                     </div><!-- end cardbody -->
-                  </div><!-- end card -->
-               </div> <!-- end col -->
+                           <div class="mb-3">
+                              <label class="form-label">Tanggal Wafat</label>
+                              <div class="input-group" id="datepicker2">
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalWafat"
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
+                                    data-provide="datepicker" data-date-autoclose="true">
 
+                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                              </div>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="noHandphone">Nomor Handphone</label>
+                              <input type="number" class="form-control" name="noHandphone"
+                                 placeholder="nomor handphone">
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="keterangan">Keterangan</label>
+                              <div>
+                                 <textarea name="keterangan" class="form-control" rows="5"
+                                    placeholder="keterangan"></textarea>
+                              </div>
+                           </div>
+                           <!-- end form -->
+                        </div><!-- end cardbody -->
+                     </div><!-- end card -->
+                  </div>
+                  <!-- end col -->
+                  <div class="col-lg-6">
+                     <div class="card">
+                        <div class="card-body">
+                           <form class="custom-validation" action="#">
+                              <h4 class="card-title mb-4">Data Wali Anak Asuh</h4>
+
+                              <form class="custom-validation" action="#">
+                                 <div class="mb-3">
+                                    <label class="form-label" for="namaLengkapWali">Nama Lengkap</label>
+                                    <input type="text" class="form-control" name="namaLengkapWali" required
+                                       placeholder="nama lengkap wali">
+                                 </div>
+                                 <div class="mb-3">
+                                    <label class="form-label" for="alamatWali">Alamat</label>
+                                    <input type="text" class="form-control" name="alamatWali" required
+                                       placeholder="alamat wali">
+                                 </div>
+                                 <div class="mb-3">
+                                    <label class="form-label" for="umurWali">Umur</label>
+                                    <div>
+                                       <input type="text" class="form-control" required name="umurWali"
+                                          placeholder="umur wali">
+                                    </div>
+                                 </div>
+                                 <div class="mb-3">
+                                    <label class="form-label" for="noTelpWali">No Telp.</label>
+                                    <div>
+                                       <input data-parsley-type="number" type="number" class="form-control" required
+                                          name="noTelpWali" placeholder="Enter only numbers">
+                                    </div>
+                                    <div class="mb-3">
+                                       <label class="form-label" for="photoWali">Photo</label>
+                                       <div>
+                                          <input type="number" class="form-control" name="photoWali"
+                                             placeholder="photo wali">
+                                       </div>
+                                    </div>
+                                 </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mb-0">
+                     <div>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                           Submit
+                        </button>
+                     </div>
+                  </div>
+               </form>
             </div>
          </div>
       </div>

@@ -33,28 +33,34 @@ CREATE TABLE `wali` (
   PRIMARY KEY (`id`)
 );
 
+-- db_panti_asuhan.anak_asuh definition
+
 CREATE TABLE `anak_asuh` (
-  `id`int NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(255) NOT NULL,
-  `kelamin` varchar(128) NOT NULL,
-  `tempat_lahir` varchar(128) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `kelamin` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
+  `tempat_lahir` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
   `tanggal_lahir` date NOT NULL,
-  `address` text,
-  `status` varchar(50),
-  `number_phone` varchar(128),
-  `photo` varchar(255) DEFAULT NULL,
+  `address` text COLLATE utf8mb4_general_ci,
+  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `number_phone` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tanggal_masuk` date DEFAULT NULL,
   `tanggal_keluar` date DEFAULT NULL,
-  `ayah` varchar(50),
-  `ibu` varchar(50),
+  `ayah` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ibu` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tanggal_wafat` date DEFAULT NULL,
-  `keterangan` date DEFAULT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `id_wali` int NOT NULL,
   `id_admin` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`),
-  FOREIGN KEY (`id_wali`) REFERENCES `wali`(`id`)
-);
+  KEY `id_admin` (`id_admin`),
+  KEY `id_wali` (`id_wali`),
+  CONSTRAINT `anak_asuh_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`),
+  CONSTRAINT `anak_asuh_ibfk_2` FOREIGN KEY (`id_wali`) REFERENCES `wali` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 CREATE TABLE `campaign_donasi` (

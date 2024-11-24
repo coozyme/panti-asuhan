@@ -31,7 +31,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       {
          tableName: "wali",
-         timestamps: true
+         timestamps: true,
+         // If don't want createdAt
+         createdAt: false,
+
+         // If don't want updatedAt
+         updatedAt: false,
       }
    );
    return Wali;
