@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_DIALECT, PORT } =
+const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_DIALECT, PORT, SECRET_KEY } =
    process.env;
 
 module.exports = {
@@ -12,6 +12,7 @@ module.exports = {
       dialectOptions: {
          useUTC: false, // for reading from database
       },
-      timezone: '+07:00'
+      timezone: '+07:00',
+      secretKey: SECRET_KEY
    }
 };

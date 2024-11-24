@@ -1,4 +1,7 @@
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+// const passport = require('./passport');
+
 const { Response } = require('../utils/response/response');
 
 const secretKey = process.env.SECRET_KEY;
@@ -46,6 +49,63 @@ const AuthenticateToken = (req, res, next) => {
       }
    });
 }
+const AuthMiddleware = {
+   // Basic authentication middleware
+   authenticate: (req, res, next) => {
+      passport.authenticate('local', {
+         successRedirect: '/dashboard',
+         failureRedirect: '/auth/login',
+         badRequestMessage: 'Your message you want to change.',
+         // failureFlash: true
+      })(req, res, next);
+   },
+
+   // Enhanced authentication middleware with custom callbacks
+   authenticateWithCustomCallback: (req, res, next) => {
+      console.log('LOG-EES', req.isAuthenticated())
+      passport.authenticate('local', (err, user, info) => {
+         console.log("LOG-RESQ", err, user, info)
+         if (err) {
+            console.log('err@authenticateWithCustomCallback', err)
+            // req.flash('error', 'An error occurred during authentication');
+            return res.redirect('/auth/login');
+         }
+         console.log('user@authenticateWithCustomCallback', user)
+         if (!user) {
+            console.log('err@authenticateWithCustomCallback', 'Invalid credentials')
+            // req.flash('error', info.message || 'Invalid credentials');
+            return res.redirect('/auth/login');
+         }
+
+         req.logIn(user, (err) => {
+            if (err) {
+               // req.flash('error', 'Failed to establish session');
+               console.log('err@authenticateWithCustomCallback', 'Invalid credentials', err
 
 
-module.exports = { AuthPayload, AuthenticateToken };
+               )
+               return res.redirect('/auth/login');
+            }
+
+            // Add user data to session if needed
+            req.session.user = {
+               id: user.id,
+               username: user.username,
+               lastLogin: new Date()
+            };
+
+            return res.redirect('/dashboard');
+         });
+      })(req, res, next);
+   },
+
+   // Check if user is authenticated
+   isAuthenticated: (req, res, next) => {
+      if (req.isAuthenticated()) {
+         return next();
+      }
+      res.redirect('/auth/login')
+   },
+}
+
+module.exports = { AuthPayload, AuthenticateToken, AuthMiddleware };

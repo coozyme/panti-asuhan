@@ -33,6 +33,16 @@ const donasi = require('./routes/donasi.js');
 const campaign = require('./routes/campaign.js');
 const report = require('./routes/report.js');
 const managementUser = require('./routes/management-user.js');
+const passport = require('passport');
+const { Admin } = require("../src/models");
+const LocalStrategy = require('passport-local').Strategy;
+
+const passportConfig = require('../src/middleware/passport.js');
+// require('./middleware/passport')(passport);
+const session = require('express-session');
+const config = require('./config/config.js');
+const { sessionStore } = require('./middleware/session.js');
+const { checkAuthenticated, AuthMiddleware } = require('./middleware/auth.js');
 // const dashboardAnalytic = require('./routes/dashboard-analytic.js');
 
 // app.use(logger('dev'));
@@ -50,6 +60,64 @@ var corsOptions = {
   origin: 'http:/127.0.0.1',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) chok
 }
+
+app.use(session({
+  secret: config.development.secretKey,
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'development',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    sameSite: 'strict'
+  }
+}));
+
+passportConfig(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport.use('local', new LocalStrategy(
+//   function (username, password, done) {
+//     Admin.findOne({
+//       username
+//     }, function (err, user) {
+//       if (err) {
+//         return done(err);
+//       }
+//       if (!user) {
+//         return done(null, false, {
+//           message: 'Incorrect username.'
+//         });
+//       }
+//       if (!user.validPassword(password)) {
+//         return done(null, false, {
+//           message: 'Incorrect password.'
+//         });
+
+//       }
+//       return done(null, user);
+//     });
+//   }
+// ));
+// passport.serializeUser((user, done) => {
+//   console.log('LOG-serializeUser', user.id)
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     console.log('LOG-deserializeUser', id)
+//     const user = await Admin.findById(id);
+//     done(null, user);
+//   } catch (err) {
+//     console.log('LOG-ERR-deserializeUser', err)
+//     done(err);
+//   }
+// });
+
 
 app.get('/', landingPage);
 

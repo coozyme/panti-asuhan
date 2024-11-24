@@ -31,11 +31,8 @@ module.exports = {
    },
    CreateAdmin: async (req, res) => {
       try {
-         console.log('LOG-CreateAdmin', req.body)
-         console.log('LOG-CreateAdmin-req', req)
          const { fullname, username, email, password, noTelp, status } = req.body
          const passwordEncrypted = await EncryptPassword(password)
-
 
          const payload = {
             fullname: fullname,
@@ -50,8 +47,6 @@ module.exports = {
 
 
          res.redirect('/management-user/administrator')
-         // res.set('Content-Type', 'application/json')
-         // res.status(201).send(Response(true, "201", "Success", null))
       } catch (err) {
          console.log('LOG-ERR-CreateAdmin', err)
          res.set('Content-Type', 'application/json')

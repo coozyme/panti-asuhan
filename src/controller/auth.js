@@ -1,58 +1,78 @@
-const UUID = require('uuid');
-
-const { Users, Cuti } = require("../models");
+const { Admin } = require("../models");
 const { AuthPayload } = require("../middleware/auth");
 const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
 const { TimeZoneIndonesia, GetDate } = require("../utils/times/timezone");
 const user = require('./user');
 const path = require('path');
+const { IGNORE } = require('sequelize/lib/index-hints');
+const passport = require('passport');
+// require('../middleware/passport')(passport);
+// app.use(passport.initialize());
+// app.use(passport.session());
+// require('../middleware/passport')(passport);
 
 module.exports = {
-   Login: async (req, res) => {
-      try {
-         // dataBody = {
-         //    username: req.body.username,
-         //    password: req.body.password,
-         // }
+   Login: async (req, res, next) => {
 
-         // Users.findOne({
-         //    where: {
-         //       username: dataBody.username,
-         //    },
-         // }).then(async (user) => {
-         //    if (!user) {
-         //       res.set('Content-Type', 'application/json')
-         //       res.status(404).send(Response(false, "404", "User not found", null))
-         //       return
-         //    }
+      // find 
+      const user = await Admin.findOne({
+         where: {
+            username: req.body.username,
+         }
+      })
 
-         //    isValidPassword = await CheckPassword(dataBody.password, user.password)
-         //    if (!isValidPassword) {
-         //       res.set('Content-Type', 'application/json')
-         //       res.status(401).send(Response(false, "401", "Password is wrong", null))
-         //       return
-         //    }
-         //    // uid = UUID.stringify(user.id)
-         //    // console.log('LOG-uid', uid)
-         //    const payload = AuthPayload(user.id)
-         //    console.log('LOG-payload', payload)
-         //    const token = await GenerateToken(payload)
-         //    dataObject = {
-         //       token: token,
-         //    }
-
-         //    res.set('Content-Type', 'application/json')
-         //    res.status(200).send(Response(true, "200", "Success login", dataObject))
-         // })
-
-         res.render(path.join(__dirname, '../../src/views/pages/auth/login.ejs'));
-
-      } catch (err) {
-         console.log('er', err)
-         res.set('Content-Type', 'application/json')
-         res.status(500).send(Response(false, "500", "Internal Server Error", null))
+      if (!user) {
+         return res.status(401).json({
+            success: false,
+            message: 'No user found'
+         });
       }
+
+      passport.authenticate('local', (err, user, info) => {
+         try {
+            if (err) {
+               return next(err);
+            }
+
+            if (req.body.username === '' || req.body.email === '' || req.body.password === '')
+               info.message = 'Please fill the form';
+
+            if (!user) {
+               return res.status(401).json({
+                  success: false,
+                  message: info.message
+               });
+            }
+
+            req.logIn(user, async (err) => {
+               if (err) {
+                  return next(err);
+               }
+
+               // Update user's last login
+               user.lastLogin = new Date();
+               await user.save();
+
+               // Set custom session data
+               req.session.loginAttempts = 0;
+               req.session.userAgent = req.headers['user-agent'];
+               req.session.lastActive = new Date();
+               req.session.userId = user.id;
+
+               // Save the session before redirection to ensure cookies are set
+               req.session.save(function (err) {
+                  if (err) {
+                     return next(err);
+                  }
+
+                  res.redirect('/dashboard');
+               });
+            });
+         } catch (error) {
+            next(error);
+         }
+      })(req, res, next);
    },
    Register: async (req, res) => {
       try {

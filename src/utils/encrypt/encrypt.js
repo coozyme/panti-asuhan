@@ -1,17 +1,17 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("../../config/config");
 
 async function EncryptPassword(password) {
    //Hash password
-   const salt = await bcrypt.genSalt(10);
+   const salt = await bcrypt.genSalt(12);
    const hasPassword = await bcrypt.hash(password, salt);
    console.log('LOG-EncryptPassword', password, hasPassword)
    return hasPassword;
 }
 
-function CheckPassword(password, hashPassword) {
-   //Check password
-   const isValidPassword = bcrypt.compare(password, hashPassword);
+async function CheckPassword(password, hashPassword) {
+   const isValidPassword = await bcrypt.compare(password, hashPassword);
    return isValidPassword;
 }
 
