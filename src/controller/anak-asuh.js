@@ -8,6 +8,42 @@ const path = require('path');
 const moment = require("moment");
 
 module.exports = {
+   GetDataAnakAsuh: async (req, res) => {
+      const datas = await AnakAsuh.findAll({
+         include: [
+            {
+               model: Wali,
+               as: 'wali',
+               attributes: ['fullname', 'address', 'number_phone', 'umur', 'photo']
+            }
+         ]
+      })
+      console.log("LOG-DATA", datas)
+      const dataAnakAsuh = datas.map((data) => {
+         return {
+            id: data.id,
+            namaLengkap: data.fullname,
+            kelamin: data.kelamin,
+            tempatLahir: data.tempat_lahir,
+            tanggalLahir: data.tanggal_lahir,
+            alamat: data.alamat,
+            status: data.status,
+            hubungan: data.hubungan,
+            photo: data.photo,
+            umur: new Date().getFullYear() - new Date(data.tanggal_lahir).getFullYear(),
+            tanggalMasuk: data.tanggal_masuk,
+            tanggalKeluar: data.tanggal_keluar,
+            ayah: data.ayah,
+            ibu: data.ibu,
+            noHandphone: data.number_phone,
+            keterangan: data.keterangan,
+            wali: data.wali
+         }
+      })
+      console.log("LOG-DATA-ANAK-ASUH", dataAnakAsuh)
+
+      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/anak-asuh.ejs'), { data: dataAnakAsuh });
+   },
    AddAnakAsuh: async (req, res) => {
       const { userId } = req.session
       console.log("LOG-REQ-SESSION", userId, req.session)

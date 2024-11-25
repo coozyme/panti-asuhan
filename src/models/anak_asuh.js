@@ -90,8 +90,8 @@ module.exports = (sequelize, DataTypes) => {
    );
 
    AnakAsuh.associate = (models) => {
-      AnakAsuh.belongsTo(models.Wali, { foreignKey: 'id_wali' });
-      AnakAsuh.belongsTo(models.Admin, { foreignKey: 'id_admin' });
+      AnakAsuh.belongsTo(models.Wali, { foreignKey: 'id_wali', as: 'wali' });
+      AnakAsuh.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
    };
 
    return AnakAsuh;
