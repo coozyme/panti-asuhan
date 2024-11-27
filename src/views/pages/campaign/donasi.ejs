@@ -12,12 +12,12 @@
                   </div>
                   <div class="col-md-4">
                      <div class="float-end d-none d-md-block">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                           data-bs-target=".bs-example-modal-center">
-                           <i class="fas fa-print"></i> Cetak</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                           data-bs-target=".bs-example-modal-center">
-                           <i class="fas fa-plus"></i> Tambah</button>
+                        <a href="/campaign/tambah-campaign-donasi">
+                           <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                              ac data-bs-target=".bs-example-modal-center">
+                              <i class="fas fa-plus"></i> Tambah</button>
+
+                        </a>
                      </div>
                   </div>
                </div>
@@ -37,13 +37,14 @@
                            <table class="table table-editable table-nowrap align-middle table-edits">
                               <thead>
                                  <tr>
-                                    <th>Nomor</th>
-                                    <th>Donatur</th>
-                                    <th>Jumlah</th>
-                                    <th>Metode</th>
+                                    <th>No</th>
+                                    <th>Judul</th>
+                                    <th>Target Donasi</th>
+                                    <th>Terkumpul</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th>Main Campaign</th>
                                     <th>Status</th>
-                                    <th>Tanggal Donasi</th>
-                                    <th>Tanggal Verifikasi</th>
                                     <th>Action</th>
                                  </tr>
                               </thead>
@@ -55,8 +56,12 @@
                                     <td data-field="method">Tangerang</td>
                                     <td data-field="status">24</td>
                                     <td data-field="date-donate">Yatim</td>
+                                    <td data-field="date-donate">Yatim</td>
                                     <td data-field="date-verif">Yatim</td>
                                     <td style="width: 100px">
+                                       <a class="btn btn-secondary btn-sm edit" title="detail">
+                                          <i class="fas fa-eye"></i>
+                                       </a>
                                        <a class="btn btn-secondary btn-sm edit" title="Edit">
                                           <i class="fas fa-pencil-alt"></i>
                                        </a>
