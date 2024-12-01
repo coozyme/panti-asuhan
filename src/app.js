@@ -50,6 +50,8 @@ const { checkAuthenticated, AuthMiddleware } = require('./middleware/auth.js');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public/')));
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
 // app.use(cookieParser());
 
 // app.use('/static', express.static('public'))

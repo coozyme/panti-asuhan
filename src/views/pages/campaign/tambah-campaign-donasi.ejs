@@ -14,7 +14,8 @@
             </div>
             <!-- end page title -->
             <div class="row">
-               <form class="custom-validation" action="/anak-asuh/tambah-anak-asuh" method="post">
+               <form class="custom-validation" action="/campaign/tambah-campaign-donasi" method="post"
+                  enctype="multipart/form-data">
                   <div class="col-lg-12">
                      <div class="card">
                         <div class="card-body">
@@ -33,23 +34,8 @@
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="targetDonasi">Target Donasi</label>
-                              <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="targetDonasi"
-                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    data-provide="datepicker" data-date-autoclose="true">
-
-                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div>
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label" for="terkumpul">Terkumpul</label>
-                              <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="terkumpul"
-                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    data-provide="datepicker" data-date-autoclose="true">
-
-                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div>
+                              <input type="number" class="form-control" name="targetDonasi" required
+                                 placeholder="target donasi">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="tanggalMulai">Tanggal Mulai</label>
@@ -74,17 +60,16 @@
                            <div class="mb-3">
                               <label class="form-label" for="thumbnail">Thumbnail</label>
                               <div class="mb-5">
-                                 <form action="#" class="dropzone">
-                                    <div class="fallback">
-                                       <input name="file" type="file" accept="image/png, image/jpeg, image/jpg">
-                                    </div>
-                                 </form><!-- end form -->
+                                 <div class="fallback">
+                                    <input name="file" type="file" accept="image/png, image/jpeg, image/jpg">
+                                 </div>
                               </div>
                            </div>
                            <div class="col-12">
                               <div class="form-check">
-                                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck1" required>
-                                 <label class="form-check-label" for="invalidCheck1">
+                                 <input class="form-check-input" type="checkbox" id="invalidCheck1"
+                                    name="isPrimaryCampaign">
+                                 <label class="form-check-label" for="isPrimaryCampaign">
                                     Set Sebagai Primary Campaign Donasi
                                  </label>
                               </div>

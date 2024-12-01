@@ -49,25 +49,42 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr data-id="1">
-                                    <td data-field="nomor" style="width: 80px">1</td>
-                                    <td data-field="donatur">David McHenry</td>
-                                    <td data-field="total">Male</td>
-                                    <td data-field="method">Tangerang</td>
-                                    <td data-field="status">24</td>
-                                    <td data-field="date-donate">Yatim</td>
-                                    <td data-field="date-donate">Yatim</td>
-                                    <td data-field="date-verif">Yatim</td>
-                                    <td style="width: 100px">
-                                       <a class="btn btn-secondary btn-sm edit" title="detail">
-                                          <i class="fas fa-eye"></i>
-                                       </a>
-                                       <a class="btn btn-secondary btn-sm edit" title="Edit">
-                                          <i class="fas fa-pencil-alt"></i>
-                                       </a>
-                                    </td>
-                                 </tr>
-
+                                 <% for(var i=0; i < data.length; i++) { %>
+                                    <tr data-id="1">
+                                       <td data-field="nomor" style="width: 80px">
+                                          <%= i + 1 %>
+                                       </td>
+                                       <td data-field="donatur">
+                                          <%=data[i].judul%>
+                                       </td>
+                                       <td data-field="method">
+                                          <%=data[i].targetDonasi%>
+                                       </td>
+                                       <td data-field="status">
+                                          <%=data[i].terkumpul%>
+                                       </td>
+                                       <td data-field="date-donate">
+                                          <%=data[i].tanggalMulai%>
+                                       </td>
+                                       <td data-field="date-donate">
+                                          <%=data[i].tanggalSelesai%>
+                                       </td>
+                                       <td data-field="date-verif">
+                                          <%=data[i].mainCampaign%>
+                                       </td>
+                                       <td data-field="date-verif">
+                                          <%=data[i].status%>
+                                       </td>
+                                       <td style="width: 100px">
+                                          <a class="btn btn-secondary btn-sm edit" title="detail">
+                                             <i class="fas fa-eye"></i>
+                                          </a>
+                                          <a class="btn btn-secondary btn-sm edit" title="Edit">
+                                             <i class="fas fa-pencil-alt"></i>
+                                          </a>
+                                       </td>
+                                    </tr>
+                                    <% } %>
                               </tbody>
                               <!-- end tbody -->
                            </table>

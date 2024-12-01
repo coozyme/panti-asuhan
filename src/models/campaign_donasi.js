@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-   const CampagnDonasi = sequelize.define(
-      "CampagnDonasi",
+   const CampaignDonasi = sequelize.define(
+      "CampaignDonasi",
       {
          id: {
             type: DataTypes.INTEGER,
@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.ENUM('PUBLISH', 'UNPUBLISH'),
             defaultValue: 'PUBLISH'
          },
+         main_campaign: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 'FALSE'
+         },
          id_admin: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -58,9 +62,9 @@ module.exports = (sequelize, DataTypes) => {
       }
    );
 
-   CampagnDonasi.associate = (models) => {
-      CampagnDonasi.belongsTo(models.Admin, { foreignKey: 'id_admin' });
+   CampaignDonasi.associate = (models) => {
+      CampaignDonasi.belongsTo(models.Admin, { foreignKey: 'id_admin' });
    };
 
-   return CampagnDonasi;
+   return CampaignDonasi;
 };

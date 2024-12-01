@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-               model: 'CampagnDonasi',
+               model: 'CampaignDonasi',
                key: 'id'
             }
          },
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 
    Pengeluaran.associate = (models) => {
       Pengeluaran.belongsTo(models.Admin, { foreignKey: 'id_admin' });
-      Pengeluaran.belongsTo(models.CampagnDonasi, { foreignKey: 'id_campaign_donasi', allowNull: true });
+      Pengeluaran.belongsTo(models.CampaignDonasi, { foreignKey: 'id_campaign_donasi', allowNull: true });
    };
 
    return Pengeluaran;
