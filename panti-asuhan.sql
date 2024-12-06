@@ -73,6 +73,7 @@ CREATE TABLE `campaign_donasi` (
   `tanggal_selesai` date NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `status` enum('PUBLISH', 'UNPUBLISH') DEFAULT 'PUBLISH',
+  `main_campaign` bool DEFAULT false,
   `id_admin` int NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT NOW(),
   `updated_at` DATETIME,
