@@ -29,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
          },
          status: {
-            type: DataTypes.STRING(50),
-            allowNull: true
+            type: DataTypes.ENUM('YATIM', 'PIATU', 'YATIM PIATU', 'DHUAFA'),
+            defaultValue: 'YATIM',
+            allowNull: false
          },
          number_phone: {
             type: DataTypes.STRING(128),

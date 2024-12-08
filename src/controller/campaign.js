@@ -1,13 +1,15 @@
+const path = require('path');
+const fs = require('fs');
+const moment = require("moment");
+const multer = require("multer");
 const { CampaignDonasi } = require("../models");
 const { AuthPayload } = require("../middleware/auth");
 const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
 const { TimeZoneIndonesia, GetDate } = require("../utils/times/timezone");
 const user = require('./user');
-const path = require('path');
-const moment = require("moment");
-const multer = require("multer");
 const { formatRupiah } = require("../utils/currency/format");
+const config = require('../config/config');
 
 module.exports = {
    AddCampaignDonasi: async (req, res) => {
@@ -41,13 +43,13 @@ module.exports = {
       res.redirect('/campaign/donasi')
    },
    GetCampaignDonasi: async (req, res) => {
+      // const files = fs.readdirSync('/uploads/campaign/').map(name => name.split('.')[0])
+      // console.log("LOG-FILES", files)
       await CampaignDonasi.findAll({}).then((data) => {
          const datas = data.map((item) => {
 
             // get photo from storage folder 
-            // const photo = item.photo ? `/images/${item.photo}` : null
-            // find photo from public folder 
-            const photo = item.photo ? path.join(__dirname, '../../uploads/' + item.photo) : null
+            const photo = item.photo ? `http://${config.url}/uploads/campaign/${item.photo}` : null
 
 
             console.log("LOG-PHOTO", photo)

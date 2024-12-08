@@ -8,7 +8,8 @@ const logger = require('morgan');
 const http = require('http');
 var cors = require('cors')
 const Socket = require('./utils/socket/socket.js');
-const port = process.env.PORT || 3001;
+const config = require('./config/config.js');
+const port = config.port || 3001;
 
 
 var app = express();
@@ -40,7 +41,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const passportConfig = require('../src/middleware/passport.js');
 // require('./middleware/passport')(passport);
 const session = require('express-session');
-const config = require('./config/config.js');
+
 const { sessionStore } = require('./middleware/session.js');
 const { checkAuthenticated, AuthMiddleware } = require('./middleware/auth.js');
 // const dashboardAnalytic = require('./routes/dashboard-analytic.js');
@@ -51,6 +52,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/')));
 app.use('/uploads', express.static('uploads'));
 // app.use(cookieParser());
 

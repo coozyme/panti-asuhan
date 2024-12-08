@@ -14,5 +14,7 @@ module.exports = {
       },
       timezone: '+07:00',
       secretKey: SECRET_KEY
-   }
+   },
+   url: `127.0.0.1:${PORT}`,
+   port: PORT
 };

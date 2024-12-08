@@ -661,6 +661,7 @@ Video Area
                   </div>
                   <div class="box-content">
                      <h3 class="box-title"><a href="blog-details.html">Big charity: build school for poor children</a>
+
                      </h3>
                      <p>Stay informed about our upcoming events and campaigns.</p>
                      <div class="donation-card_progress-wrap">
@@ -674,10 +675,31 @@ Video Area
                            <span class="donation-card_goal text-theme2">Goal - $10,00.00</span>
                         </div>
                      </div>
-                     <a href="blog-details.html" class="th-btn style6">Donate Now <i
-                           class="fas fa-arrow-up-right ms-2"></i></a>
+                     <!-- <a href="#" class="th-btn style6" id="openDonatePopup">Donate Now <i
+                           class="fas fa-arrow-up-right ms-2"></i></a> -->
+                     <!-- Button to trigger modal -->
+                     <button type="button" class="th-btn style6" data-bs-toggle="modal"
+                        data-bs-target="#donateNowModal">
+                        Donate Now <i class="fas fa-arrow-up-right ms-2"></i>
+                     </button>
+
+
+
+                     <!-- Button to trigger modal -->
+                     <!-- <a href="#" class="th-btn style6" data-bs-toggle="modal" data-bs-target="#donateNowModal">Donate
+                        Now <i class="fas fa-arrow-up-right ms-2"></i></a>
+
+                     <button type="button" class="icon-btn box-title style2 searchBoxToggler d-lg-block d-none"><i
+                           class="far fa-search"></i></button> -->
                   </div>
                </div>
+               <!-- <div class="popup-search-box d-none d-lg-block">
+                  <button class="searchClose"><i class="far fa-times"></i></button>
+                  <form action="#">
+                     <input type="text" placeholder="What are you looking for?">
+                     <button type="submit"><i class="fal fa-search"></i></button>
+                  </form>
+               </div> -->
             </div>
             <div class="col-lg-6">
                <div class="video-thumb2-1 video-box-center">
@@ -1865,6 +1887,84 @@ Blog Area
       </svg>
    </div>
 
+   <!-- Donate Now Modal -->
+   <div class="modal fade" id="donateNowModal" tabindex="-1" aria-labelledby="donateNowModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 50%; width: 50%; height: 30%;"></div>
+      <div class="modal-content" style="background-color: white;">
+         <div class="modal-header">
+            <h5 class="modal-title" id="donateNowModalLabel">Donate Now</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form>
+               <div class="mb-3">
+                  <label for="donationAmount" class="form-label">Donation Amount</label>
+                  <input type="number" class="form-control" id="donationAmount" placeholder="Enter amount">
+               </div>
+               <div class="mb-3">
+                  <label for="donorName" class="form-label">Your Name</label>
+                  <input type="text" class="form-control" id="donorName" placeholder="Enter your name">
+               </div>
+               <!-- <div class="mb-3">
+                  <label for="donorEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="donorEmail" placeholder="Enter your email">
+               </div> -->
+               <div class="mb-3">
+                  <label for="bankAccount" class="form-label">Select Bank Account</label>
+                  <select class="form-control" id="bankAccount">
+                     <option value="" disabled selected>Pilihan Rekening</option>
+                     <option value="BCA">9871623123123 - BCA A.N Yayasan Panti Asuhan</option>
+                     <option value="NIAGA">98716231231234 - NIAGA A.N Yayasan Panti Asuhan</option>
+                     <option value="BRI">98716231231235 - BRI A.N Yayasan Panti Asuhan</option>
+                  </select>
+                  <button type="button" class="btn btn-secondary mt-2" onclick="copyBankAccount()">Copy Bank
+                     Account</button>
+                  <div class="mt-3" style="display: none;">
+                     <label for="bankAccountCopy" class="form-label">Copy Bank Account</label>
+                     <input type="text" class="form-control" id="bankAccountCopy" readonly>
+                  </div>
+                  <script>
+                     document.getElementById('bankAccount').addEventListener('change', function () {
+                        document.getElementById('bankAccountCopy').value = this.options[this.selectedIndex].text;
+                     });
+
+                     function copyBankAccount() {
+                        var copyText = document.getElementById('bankAccountCopy');
+                        var textToCopy = copyText.value.split(' - ')[0]; // Take the text value in front of the symbol '-'
+                        alert('Copied the text: ' + textToCopy);
+                        navigator.clipboard.writeText(textToCopy);
+                     }
+                  </script>
+               </div>
+               <div class="mb-3"></div>
+               <label class="form-label" for="buktiTransfer">Bukti Transfer</label>
+               <div class="mb-5 d-flex justify-content-start">
+                  <div class="custom-file" style="width: 50%; border-radius: 0;">
+                     <input name="file" type="file" accept="image/png, image/jpeg, image/jpg" class="custom-file-input"
+                        id="customFile" ondragover="event.preventDefault()" ondrop="handleFileDrop(event)"
+                        style="background-color: transparent; border-radius: 0; border: none;">
+                  </div>
+               </div>
+               <script>
+                  function handleFileDrop(event) {
+                     event.preventDefault();
+                     const fileInput = document.getElementById('customFile');
+                     fileInput.files = event.dataTransfer.files;
+                     const label = document.querySelector('.custom-file-label');
+                     label.textContent = fileInput.files[0].name;
+                  }
+               </script>
+               <div class="mb-3">
+                  <label for="donorNotes" class="form-label">Notes</label>
+                  <textarea class="form-control" id="donorNotes" rows="3" placeholder="Enter any notes"></textarea>
+               </div>
+               <button type="submit" class="btn btn-primary">Donate</button>
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </form>
+         </div>
+      </div>
+   </div>
+   </div>
 
    <!--==============================
     All Js File

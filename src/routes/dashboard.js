@@ -2,6 +2,7 @@ var express = require('express');
 const passport = require('passport');
 const path = require('path');
 const { AuthMiddleware, checkAuthenticated } = require('../middleware/auth');
+const dashboard = require('../controller/dashboard');
 // const { AuthMiddleware } = require('../middleware/auth');
 // const { AuthMiddleware } = require('../middleware/passport');
 var router = express.Router();
@@ -11,9 +12,6 @@ var router = express.Router();
 // require('../middleware/passport')(passport);
 
 
-router.get('/', AuthMiddleware.isAuthenticated,
-   function (req, res, next) {
-      res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'));
-   })
+router.get('/', AuthMiddleware.isAuthenticated, dashboard.Dashboard)
 
 module.exports = router;
