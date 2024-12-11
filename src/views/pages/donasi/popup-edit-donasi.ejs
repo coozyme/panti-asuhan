@@ -1,0 +1,134 @@
+<div class="modal fade col-sm-6 col-md-4 col-xl-3" tabindex="-1" role="dialog" aria-labelledby="edit<%= idx %>"
+   id="edit<%= edit.id %>id" data-target="#edit<%= edit.id %>id" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="edit<%= idx %>">
+               Ubah Donasi
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="modal-body">
+               <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
+
+                        <form class="custom-validation" action="/donasi/edit-donasi/<%= edit.id %>" method="post"
+                           enctype="multipart/form-data">
+                           <div class="mb-3">
+                              <label class="form-label" for="namaDonatur">Nama Donatur</label>
+                              <input type="text" class="form-control" required placeholder="nama" name="namaDonatur"
+                                 value="<%= edit.donatur %>">
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label" for=jumlah">Jumlah</label>
+                              <input type="number" class="form-control" required placeholder="Jumlah" name="jumlah"
+                                 value="<%= edit.jumlahNominal %>">
+                           </div>
+
+
+                           <div class="md-3">
+                              <label for="validationCustom04" class="form-label">Metode</label>
+                              <select class="form-select" id="validationCustom04" required name="methode">
+                                 <option selected disabled value="">Choose...</option>
+                                 <option <%=edit.metode==="TRANSFER" && "selected" %>
+                                    value="TRANSFER">TRANSFER</option>
+                                 <option <%=edit.metode==="TUNAI" && "selected" %>
+                                    value="TUNAI">TUNAI</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                 Please select a valid state.
+                              </div>
+                           </div>
+                           <div class="md-3">
+                              <label for="validationCustom04" class="form-label">Status</label>
+                              <select class="form-select" id="validationCustom04" required name="status">
+                                 <option selected disabled value="">Choose...</option>
+                                 <option <%=edit.status_verifikasi==="VERIFIED" && "selected" %>
+                                    value="VERIFIED">VERIFIED</option>
+                                 <option <%=edit.status_verifikasi==="PENDING" && "selected" %>
+                                    value="PENDING">PENDING</option>
+                                 <option <%=edit.status_verifikasi==="REJECT" && "selected" %>
+                                    value="REJECT">REJECT</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                 Please select a valid state.
+                              </div>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="tanggalDonasi">Tanggal Donasi</label>
+                              <div class="input-group" id="datepicker2">
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalDonasi"
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
+                                    data-provide="datepicker" data-date-autoclose="true"
+                                    value="<%= edit.tanggal_submit %>">
+
+                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                              </div>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="tanggalVerifikasi">Tanggal Verifikasi</label>
+                              <div class="input-group" id="datepicker2">
+                                 <input type="text" class="form-control" placeholder="dd M yyyy"
+                                    name="tanggalVerifikasi" data-date-format="dd M yyyy"
+                                    data-date-container='#datepicker2' data-provide="datepicker"
+                                    data-date-autoclose="true" value="<%= edit.tanggal_verifikasi %>">
+
+                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                              </div>
+                           </div>
+
+                           <div class="mb-3">
+                              <label class="form-label" for="buktiTransaksi">Bukti Transaksi</label>
+                              <div class="mb-5">
+                                 <div class="fallback">
+                                    <n class="custom-file">
+
+                                       <input name="file" type="file" accept="image/png, image/jpeg, image/jpg, .pdf"
+                                          style="background-color: transparent; border-radius: 0; border: none;">
+                                 </div>
+                              </div>
+                           </div>
+                     </div>
+
+                     <div class="mb-3">
+                        <label class="form-label" for="catatan">Catatan</label>
+                        <div>
+                           <textarea name="catatan" class="form-control" rows="5"
+                              placeholder="catatan"><%= edit.catatan %></textarea>
+                        </div>
+                     </div>
+                     <div class="mb-0">
+                        <div>
+                           <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                              Submit
+                           </button>
+                        </div>
+                     </div>
+                     </form>
+                     <!-- end form -->
+                  </div><!-- end cardbody -->
+               </div><!-- end card -->
+            </div> <!-- end col -->
+         </div>
+
+         <!-- <div class="col-xl-8 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Bukti Transaksi</h4>
+                  <% if (edit.photo) { %>
+                     <div class="card">
+                        <img class="card-img-top img-fluid" src="<%= edit.photo %>" alt="">
+                     </div>
+                     <% } else { %>
+                        <div class="alert alert-warning">
+                           Tidak ada bukti transaksi.
+                        </div>
+                        <% } %>
+               </div> -->
+      </div>
+
+   </div>
+</div>
+
+</div>

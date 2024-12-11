@@ -35,6 +35,7 @@ const campaign = require('./routes/campaign.js');
 const report = require('./routes/report.js');
 const managementUser = require('./routes/management-user.js');
 const passport = require('passport');
+var flash = require('connect-flash');
 const { Admin } = require("../src/models");
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -54,6 +55,7 @@ app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '/')));
 app.use('/uploads', express.static('uploads'));
+app.use(flash());
 // app.use(cookieParser());
 
 // app.use('/static', express.static('public'))

@@ -7,6 +7,14 @@ function formatRupiah(number) {
    });
 }
 
+function getNominal(rupiahString) {
+   // Remove 'Rp', commas, and trim whitespace
+   const cleanedString = rupiahString.replace(/[Rp\s,]/g, '');
+
+   // Convert to number
+   return parseInt(cleanedString, 10);
+}
 module.exports = {
-   formatRupiah
+   formatRupiah,
+   getNominal
 }

@@ -126,3 +126,29 @@ CREATE TABLE `pengeluaran` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
 );
+
+
+ALTER TABLE `campaign_donasi`
+ADD COLUMN `main_campaign` bool DEFAULT false after status;
+
+ALTER TABLE anak_asuh
+MODIFY COLUMN status ENUM('YATIM', 'PIATU', 'YATIM PIATU', 'DHUAFA');
+
+ALTER TABLE `donasi`
+MODIFY COLUMN `id_admin` int NULL;
+
+ALTER TABLE `donasi`
+DROP COLUMN `id_rekening`;
+
+ALTER TABLE `donasi`
+MODIFY COLUMN `keterangan` int NULL;
+
+
+ALTER TABLE `donasi`
+CHANGE COLUMN `keterangan` `donatur` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL;
+
+ALTER TABLE `donasi`
+MODIFY COLUMN `catatan` text COLLATE utf8mb4_general_ci DEFAULT NULL;
+
+ALTER TABLE `donasi`
+MODIFY COLUMN `id_campaign_donasi` int NULL;

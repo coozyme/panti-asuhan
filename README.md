@@ -33,9 +33,10 @@
    1. admin bisa delete data anak asuh & wali
 1. Donasi
    - Donasi
-      1. admin bisa menambahkan data donasi
-      1. admin bisa melihat detail upload photo donatur
-      1. admin bisa memverifikasi donasi [PENDING | REJECT | APPROVED]
+      1. admin bisa menambahkan data donasi &#9745;
+      1. admin bisa melihat detail upload photo donatur &#9745;
+      1. admin bisa memverifikasi donasi [PENDING | REJECT | APPROVED] &#9745;
+      1. admin bisa update donasi &#9745;
    - Donatur
       1. admin bisa melihat list account donatur
       1. admin bisa mengapprove account request donatur

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          },
          id_campaign_donasi: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                model: 'CampaignDonasi',
                key: 'id'
@@ -25,13 +25,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
          },
-         id_rekening: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-         },
-         keterangan: {
+         donatur: {
             type: DataTypes.STRING(255),
-            allowNull: true
+            allowNull: false
          },
          catatan: {
             type: DataTypes.TEXT,
@@ -56,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
          },
          id_admin: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                model: 'Admin',
                key: 'id'

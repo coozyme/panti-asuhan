@@ -1,0 +1,107 @@
+<div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="detail<%= idx %>"
+   id="detail<%= detail.id %>id" data-target="#detail<%= detail.id %>id" aria-hidden="true">
+   <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="detail<%= idx %>">
+               Detail Donasi
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-xl-4 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Informasi </h4>
+
+                  <div class="table-responsive">
+                     <table class="table table-bordered table-striped">
+                        <tbody>
+                           <tr>
+                              <th>Donatur </th>
+                              <td>
+                                 <%= detail.donatur %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Jumlah </th>
+                              <td>
+                                 <%= detail.jumlah %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Metode </th>
+                              <td>
+                                 <%= detail.metode %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Status </th>
+                              <td>
+                                 <% if(detail.status_verifikasi==="VERIFIED" ) { %>
+                                    <span class="badge bg-success">
+                                       <%= detail.status_verifikasi %>
+                                    </span>
+                                    <% } else if(detail.status_verifikasi==="PENDING" ) { %>
+                                       <span class="badge bg-secondary">
+                                          <%= detail.status_verifikasi %>
+                                       </span>
+                                       <% } else { %>
+                                          <span class="badge bg-warning">
+                                             <%= detail.status_verifikasi %>
+                                          </span>
+                                          <% } %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tanggal Donasi </th>
+                              <td>
+                                 <%= detail.tanggal_submit %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tanggal Verifikasi </th>
+                              <td>
+                                 <%= detail.tanggal_verifikasi %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Catatan </th>
+                              <td>
+                                 <%= detail.catatan %>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+
+
+               </div>
+
+               <div class="col-xl-8 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Bukti Transaksi</h4>
+                  <% if (detail.photo) { %>
+                     <div class="card">
+                        <img class="card-img-top img-fluid" src="<%= detail.photo %>" alt="">
+                     </div>
+                     <% } else { %>
+                        <div class="alert alert-warning">
+                           Tidak ada bukti transaksi.
+                        </div>
+                        <% } %>
+               </div>
+            </div>
+         </div>
+
+         <div class="modal-footer">
+            <form class="custom-validation" action="<%= detail.url_verified %>" method="post">
+               <button type="submit" class="btn btn-primary waves-effect waves-ligh" data-bs-dismiss="modal"
+                  action="submit">VERIFIED</button>
+            </form>
+            <form class="custom-validation" action="<%= detail.url_reject %>" method="post">
+               <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">REJECT</button>
+            </form>
+         </div>
+      </div>
+   </div>
+
+</div>
