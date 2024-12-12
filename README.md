@@ -65,4 +65,4 @@
      aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
 3. Jadiin button register donatur
 4. Button Cetak(pdf),Update,Delete belum fungsi
-5. Field hubungan,tanggal ditambah data
+5. Field hubungan,tanggal wafat, sama data wali dihapus aja
