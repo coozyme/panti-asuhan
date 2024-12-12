@@ -66,3 +66,4 @@
 3. Jadiin button register donatur
 4. Button Cetak(pdf),Update,Delete belum fungsi
 5. Field hubungan,tanggal wafat, sama data wali dihapus aja
+6. Alert klo gagal login,daftar,create,update,delete.
