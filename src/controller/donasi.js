@@ -8,6 +8,7 @@ const moment = require("moment");
 const path = require('path');
 const { formatRupiah, getNominal } = require("../utils/currency/format");
 const config = require("../config/config");
+const { convertDateFormat } = require("../utils/times/datetime");
 
 module.exports = {
    AddDonasiManual: async (req, res) => {
@@ -30,7 +31,7 @@ module.exports = {
          jumlah: jumlah,
          metode: methode,
          status_verifikasi: status,
-         tanggal_submit: tanggalDonasi,
+         tanggal_submit: convertDateFormat(tanggalDonasi),
          tanggal_verifikasi: new Date(),
          catatan: catatan,
          foto: filename,
@@ -126,9 +127,12 @@ module.exports = {
       const { status, id } = req.params
 
       console.log('REQ-params', req.params)
-      await Donasi.update({ status_verifikasi: status }, {
+      await Donasi.update({
+         status_verifikasi: status,
+         tanggal_verifikasi: new Date(),
+      }, {
          where: {
-            id: id
+            id: id,
          }
       })
 

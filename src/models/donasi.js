@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
          },
          tanggal_verifikasi: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
          },
          id_admin: {
             type: DataTypes.INTEGER,

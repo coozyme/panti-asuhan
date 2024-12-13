@@ -42,66 +42,15 @@
                            <div class="float-start mini-stat-img me-4">
                               <img src="assets/images/services-icon/01.png" alt="">
                            </div>
-                           <h5 class="font-size-16 text-uppercase text-white-50">ANAK ASUH YATIM</h5>
+                           <h5 class="font-size-16 text-uppercase text-white-50">ANAK ASUH</h5>
 
 
                            <h4 class="fw-medium font-size-24">
-                              <%= data.yatim %>
+                              <%= totalAnakAsuh %>
                            </h4>
                         </div>
                         <div class="pt-2">
-                           <p class="text-white-50 mb-0 mt-1">Jumlah Anak Asuh Yatim</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stat bg-primary text-white">
-                     <div class="card-body">
-                        <div class="mb-2">
-                           <div class="float-start mini-stat-img me-4">
-                              <img src="assets/images/services-icon/01.png" alt="">
-                           </div>
-                           <h5 class="font-size-16 text-uppercase text-white-50">ANAK ASUH PIATU</h5>
-                           <h4 class="fw-medium font-size-24">
-                              <%= data.piatu %>
-                        </div>
-                        <div class="pt-2">
-                           <p class="text-white-50 mb-0 mt-1">Jumlah Anak Asuh Piatu</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stat bg-primary text-white">
-                     <div class="card-body">
-                        <div class="mb-2">
-                           <div class="float-start mini-stat-img me-4">
-                              <img src="assets/images/services-icon/01.png" alt="">
-                           </div>
-                           <h5 class="font-size-16 text-uppercase text-white-50">ANAK ASUH YATIM PIATU</h5>
-                           <h4 class="fw-medium font-size-24">
-                              <%= data.yatimPiatu %>
-                        </div>
-                        <div class="pt-2">
-                           <p class="text-white-50 mb-0 mt-1">Jumlah Anak Asuh Yatim Piatu</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stat bg-primary text-white">
-                     <div class="card-body">
-                        <div class="mb-2">
-                           <div class="float-start mini-stat-img me-4">
-                              <img src="assets/images/services-icon/01.png" alt="">
-                           </div>
-                           <h5 class="font-size-16 text-uppercase text-white-50">ANAK ASUH DHUAFA</h5>
-                           <h4 class="fw-medium font-size-24">
-                              <%= data.dhuafa %>
-                        </div>
-                        <div class="pt-2">
-                           <p class="text-white-50 mb-0 mt-1">Jumlah Anak Asuh Dhuafa</p>
+                           <p class="text-white-50 mb-0 mt-1">Jumlah Anak Asuh</p>
                         </div>
                      </div>
                   </div>
@@ -115,7 +64,7 @@
                            </div>
                            <h5 class="font-size-16 text-uppercase text-white-50">DONATUR</h5>
                            <h4 class="fw-medium font-size-24">
-                              <%= data.donasiVerified %>
+                              <%= donasiVerified %>
                         </div>
                         <div class="pt-2">
                            <p class="text-white-50 mb-0 mt-1">Jumlah donatur yang telah berpartisipasi</p>
@@ -132,7 +81,7 @@
                            </div>
                            <h5 class="font-size-16 text-uppercase text-white-50">Total DONASI</h5>
                            <h4 class="fw-medium font-size-24">
-                              Rp. <%= data.donasiVerified %>
+                              <%= totalDonasi %>
                         </div>
                         <div class="pt-2">
                            <p class="text-white-50 mb-0 mt-1">Jumlah donasi yang telah terverifikasi</p>
@@ -149,10 +98,10 @@
                            </div>
                            <h5 class="font-size-16 text-uppercase text-white-50">DONASI</h5>
                            <h4 class="fw-medium font-size-24">
-                              <%= data.donasiBelumVerified %>
+                              <%= donasiBelumVerified %>
                         </div>
                         <div class="pt-2">
-                           <p class="text-white-50 mb-0 mt-1">Jumlah donasi yang belum terverifikasi</p>
+                           <p class="text-white-50 mb-0 mt-1">Donasi yang belum terverifikasi</p>
                         </div>
                      </div>
                   </div>
@@ -160,6 +109,57 @@
 
             </div>
             <!-- end row -->
+
+            <div class="row">
+               <div class="col-xl-8">
+                  <div class="card">
+                     <div class="card-body">
+                        <h4 class="card-title mb-4">Validasi donasi</h4>
+                        <div class="table-responsive">
+                           <table class="table table-hover table-centered table-nowrap mb-0">
+                              <thead>
+                                 <tr>
+                                    <!-- <th scope="col">(#) Id</th> -->
+                                    <th scope="col">Donatur</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col" colspan="2">Status</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <% for(var i=0; i < dataUnalidationDonasi.length; i++) { %>
+                                    <tr>
+                                       <!-- <th scope="row">#14256</th> -->
+                                       <td>
+                                          <div>
+                                             <!-- <img src="assets/images/users/user-2.jpg" alt=""
+                                                class="avatar-xs rounded-circle me-2"> -->
+                                             <%=dataUnalidationDonasi[i].donatur%>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <%=dataUnalidationDonasi[i].jumlah%>
+                                       </td>
+                                       <td>
+                                          <%=dataUnalidationDonasi[i].tanggal_submit%>
+                                       </td>
+                                       <td><span class="badge bg-success">
+                                             <%=dataUnalidationDonasi[i].status_verifikasi%>
+                                          </span></td>
+                                       <!-- <td>
+                                          <div>
+                                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                          </div>
+                                       </td> -->
+                                    </tr>
+                                    <% } %>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
             <div class="row">
                <div class="col-xl-9">

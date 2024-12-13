@@ -140,10 +140,45 @@ function getFirstMondaysAndSaturdays() {
    return { mondays, saturdays };
 }
 
+function formatDateTime(date) {
+   const year = date.getFullYear();
+   const month = date.getMonth() + 1;
+   const day = date.getDate();
+   const hours = date.getHours();
+   const minutes = date.getMinutes();
+   const seconds = date.getSeconds();
+
+   return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+}
+
+function convertDateFormat(inputDate) {
+   // Pengecekan format MM-DD-YYYY
+   const mmDdYyyyRegex = /^(\d{2})-(\d{2})-(\d{4})$/;
+   const match = inputDate.match(mmDdYyyyRegex);
+
+   if (match) {
+      const [, month, day, year] = match;
+
+      // Dapatkan waktu realtime saat ini
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0)');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      // Format tanggal dengan waktu realtime
+      const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      return formattedDate;
+   }
+
+   // Jika format tidak sesuai, kembalikan input asli
+   return inputDate;
+}
 module.exports = {
    ConvertDateTimeUTC,
    GetFirstDateAndLastDateOfMonth,
    GetFirstAndLastDatesPerMonthOfYear,
    GetWeekdayDates,
-   GetThisMonthAndYear
+   GetThisMonthAndYear,
+   formatDateTime,
+   convertDateFormat
 };

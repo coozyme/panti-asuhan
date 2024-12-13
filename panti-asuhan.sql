@@ -152,3 +152,7 @@ MODIFY COLUMN `catatan` text COLLATE utf8mb4_general_ci DEFAULT NULL;
 
 ALTER TABLE `donasi`
 MODIFY COLUMN `id_campaign_donasi` int NULL;
+
+ALTER TABLE `donatur`
+ADD COLUMN `tanggal_login` DATETIME NULL AFTER `status`,
+ADD COLUMN `tanggal_logout` DATETIME NULL AFTER `tanggal_login`;

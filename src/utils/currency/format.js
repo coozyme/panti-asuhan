@@ -4,7 +4,7 @@ function formatRupiah(number) {
       currency: 'IDR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
-   });
+   }).replace('Rp', 'Rp.');;
 }
 
 function getNominal(rupiahString) {
