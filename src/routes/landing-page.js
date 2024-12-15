@@ -1,12 +1,8 @@
 var express = require('express');
-const path = require('path');
+// const path = require('path');
+const landingPage = require('../controller/landingPage');
 var router = express.Router();
-router.get('/', function (req, res) {
-   // res.send('Hello World!')
-   // res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'));
-   res.render(path.join(__dirname, '../../src/views/pages/landing-page/landing-page.ejs'));
-   // res.render('landing-page/landing-page.ejs', {
-   // });
-})
+
+router.get('/', landingPage.LandingPage)
 
 module.exports = router;

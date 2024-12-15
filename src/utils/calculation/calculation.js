@@ -59,8 +59,15 @@ function PercentageCalcuate(oldValue, newValue) {
    return Math.abs(calculate).toFixed(2);
 }
 
+function PercentageCollected(total, target) {
+   const calculate = (total / target) * 100;
+   console.log('LOG-calculate', calculate)
+   return Math.abs(calculate).toFixed(0);
+}
+
 module.exports = {
    ConvertToMeter,
    CalculateMaterialProduction,
-   PercentageCalcuate
+   PercentageCalcuate,
+   PercentageCollected
 }

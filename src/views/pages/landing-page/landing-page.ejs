@@ -657,22 +657,33 @@ Video Area
                </div>
                <div class="donation-card style2">
                   <div class="box-thumb">
-                     <img src="/assets-landing-page/img/donation/donation2-1.png" alt="image">
+                     <img src="<%= mainCampaignData.photo %>" alt="image"
+                        style="width: 208px; height: 232px; object-fit: contain;">
                   </div>
-                  <div class="box-content">
-                     <h3 class="box-title"><a href="blog-details.html">Big charity: build school for poor children</a>
+                  <div class="box-content" style="width: 508px; height: 208px;">
+                     <h3 class="box-title"><a>
+                           <%= mainCampaignData.judul %>
+                        </a>
 
                      </h3>
-                     <p>Stay informed about our upcoming events and campaigns.</p>
+                     <p>
+                        <%= mainCampaignData.deskripsi %>
+                     </p>
                      <div class="donation-card_progress-wrap">
                         <div class="progress">
-                           <div class="progress-bar" style="width: 85%;">
-                              <div class="progress-value">85%</div>
+                           <div class="progress-bar" style="width: <%=mainCampaignData.percentage %>;">
+                              <div class="progress-value">
+                                 <%= mainCampaignData.percentage %>
+                              </div>
                            </div>
                         </div>
                         <div class="donation-card_progress-content">
-                           <span class="donation-card_raise">$5,00.00 Raised</span>
-                           <span class="donation-card_goal text-theme2">Goal - $10,00.00</span>
+                           <span class="donation-card_raise">
+                              <%= mainCampaignData.terkumpul %>
+                           </span>
+                           <span class="donation-card_goal text-theme2">
+                              <%= mainCampaignData.targetDonasi %>
+                           </span>
                         </div>
                      </div>
                      <!-- <a href="#" class="th-btn style6" id="openDonatePopup">Donate Now <i

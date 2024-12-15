@@ -31,8 +31,8 @@
 1. Data Anak Asuh
    1. admin bisa view list data anak asuh & wali &#9745;
    1. admin bisa menambahkan data anak asuh & wali &#9745;
-   1. admin bisa update data anak asuh & wali
-   1. admin bisa delete data anak asuh & wali
+   1. admin bisa update data anak asuh <s>& wali</s>
+   1. admin bisa delete data anak asuh <s>& wali</s>
 1. Donasi
    - Donasi
      1. admin bisa menambahkan data donasi &#9745;
