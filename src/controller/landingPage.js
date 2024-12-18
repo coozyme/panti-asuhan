@@ -7,29 +7,32 @@ const config = require("../config/config");
 
 module.exports = {
    LandingPage: async (req, res) => {
-
+      let mainCampaignData = null;
       const mainCampaign = await CampaignDonasi.findOne({
          where: {
             status: 'PUBLISH',
             main_campaign: true
          }
       })
-      const photoMainCampaign = mainCampaign.photo ? `http://${config.url}/uploads/campaign/${mainCampaign.photo}` : null
 
-      const mainCampaignData = {
-         id: mainCampaign.id,
-         judul: mainCampaign.judul,
-         deskripsi: mainCampaign.deskripsi,
-         targetDonasi: formatRupiah(mainCampaign.target_donasi),
-         terkumpul: formatRupiah(mainCampaign.terkumpul),
-         tanggalMulai: mainCampaign.tanggal_mulai,
-         tanggalSelesai: mainCampaign.tanggal_selesai,
-         photo: photoMainCampaign,
-         status: mainCampaign.status,
-         mainCampaign: mainCampaign.main_campaign,
-         percentage: `${PercentageCollected(mainCampaign.terkumpul, mainCampaign.target_donasi)}%`,
+      if (mainCampaign) {
+         const photoMainCampaign = mainCampaign.photo ? `http://${config.url}/uploads/campaign/${mainCampaign.photo}` : null
+
+         mainCampaignData = {
+            id: mainCampaign.id,
+            judul: mainCampaign.judul,
+            deskripsi: mainCampaign.deskripsi,
+            targetDonasi: formatRupiah(mainCampaign.target_donasi),
+            terkumpul: formatRupiah(mainCampaign.terkumpul),
+            tanggalMulai: mainCampaign.tanggal_mulai,
+            tanggalSelesai: mainCampaign.tanggal_selesai,
+            photo: photoMainCampaign,
+            status: mainCampaign.status,
+            mainCampaign: mainCampaign.main_campaign,
+            percentage: `${PercentageCollected(mainCampaign.terkumpul, mainCampaign.target_donasi)}%`,
+         }
+         console.log('mainCampaignData', mainCampaignData)
       }
-      console.log('mainCampaignData', mainCampaignData)
 
       const campaignList = await CampaignDonasi.findAll({
          where: {
@@ -37,6 +40,7 @@ module.exports = {
             main_campaign: false
          }
       })
+
 
       const campaignData = campaignList.map(item => {
          return {

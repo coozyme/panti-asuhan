@@ -608,62 +608,64 @@ Video Area
                      difference in your community. Whether you have a few hours or a few days, your time and skills can
                      help us achieve our goals.</p>
                </div>
-               <div class="donation-card style2">
-                  <div class="box-thumb">
-                     <img src="<%= mainCampaignData.photo %>" alt="image"
-                        style="width: 208px; height: 232px; object-fit: contain;">
-                  </div>
-                  <div class="box-content" style="width: 508px; height: 208px;">
-                     <h3 class="box-title"><a>
-                           <%= mainCampaignData.judul %>
-                        </a>
+               <% if (mainCampaignData !=null) { %>
+                  <div class="donation-card style2">
+                     <div class="box-thumb">
+                        <img src="<%= mainCampaignData.photo %>" alt="image"
+                           style="width: 208px; height: 232px; object-fit: contain;">
+                     </div>
+                     <div class="box-content" style="width: 508px; height: 208px;">
+                        <h3 class="box-title"><a>
+                              <%= mainCampaignData.judul %>
+                           </a>
 
-                     </h3>
-                     <p>
-                        <%= mainCampaignData.deskripsi %>
-                     </p>
-                     <div class="donation-card_progress-wrap">
-                        <div class="progress">
-                           <div class="progress-bar" style="width: <%=mainCampaignData.percentage %>;">
-                              <div class="progress-value">
-                                 <%= mainCampaignData.percentage %>
+                        </h3>
+                        <p>
+                           <%= mainCampaignData.deskripsi %>
+                        </p>
+                        <div class="donation-card_progress-wrap">
+                           <div class="progress">
+                              <div class="progress-bar" style="width: <%=mainCampaignData.percentage %>;">
+                                 <div class="progress-value">
+                                    <%= mainCampaignData.percentage %>
+                                 </div>
                               </div>
                            </div>
+                           <div class="donation-card_progress-content">
+                              <span class="donation-card_raise">
+                                 <%= mainCampaignData.terkumpul %>
+                              </span>
+                              <span class="donation-card_goal text-theme2">
+                                 <%= mainCampaignData.targetDonasi %>
+                              </span>
+                           </div>
                         </div>
-                        <div class="donation-card_progress-content">
-                           <span class="donation-card_raise">
-                              <%= mainCampaignData.terkumpul %>
-                           </span>
-                           <span class="donation-card_goal text-theme2">
-                              <%= mainCampaignData.targetDonasi %>
-                           </span>
-                        </div>
-                     </div>
-                     <!-- <a href="#" class="th-btn style6" id="openDonatePopup">Donate Now <i
+                        <!-- <a href="#" class="th-btn style6" id="openDonatePopup">Donate Now <i
                            class="fas fa-arrow-up-right ms-2"></i></a> -->
-                     <!-- Button to trigger modal -->
-                     <button type="button" class="th-btn style6" data-bs-toggle="modal"
-                        data-bs-target="#donateNowModal">
-                        Donate Now <i class="fas fa-arrow-up-right ms-2"></i>
-                     </button>
+                        <!-- Button to trigger modal -->
+                        <button type="button" class="th-btn style6" data-bs-toggle="modal"
+                           data-bs-target="#donateNowModal">
+                           Donate Now <i class="fas fa-arrow-up-right ms-2"></i>
+                        </button>
 
 
 
-                     <!-- Button to trigger modal -->
-                     <!-- <a href="#" class="th-btn style6" data-bs-toggle="modal" data-bs-target="#donateNowModal">Donate
+                        <!-- Button to trigger modal -->
+                        <!-- <a href="#" class="th-btn style6" data-bs-toggle="modal" data-bs-target="#donateNowModal">Donate
                         Now <i class="fas fa-arrow-up-right ms-2"></i></a>
 
                      <button type="button" class="icon-btn box-title style2 searchBoxToggler d-lg-block d-none"><i
                            class="far fa-search"></i></button> -->
+                     </div>
                   </div>
-               </div>
-               <!-- <div class="popup-search-box d-none d-lg-block">
+                  <!-- <div class="popup-search-box d-none d-lg-block">
                   <button class="searchClose"><i class="far fa-times"></i></button>
                   <form action="#">
                      <input type="text" placeholder="What are you looking for?">
                      <button type="submit"><i class="fal fa-search"></i></button>
                   </form>
                </div> -->
+                  <% } %>
             </div>
             <div class="col-lg-6">
                <div class="video-thumb2-1 video-box-center">

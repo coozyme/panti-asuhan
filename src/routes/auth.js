@@ -19,7 +19,9 @@ router.get('/login', function (req, res, next) {
    }
 });
 router.post('/login', Login);
-router.get('/register', Register);
+router.get('/register', function (req, res, next) {
+   res.render(path.join(__dirname, '../../src/views/pages/auth/register.ejs'));
+});
 router.post('/register', Register);
 router.get('/generate-password', GeneratePassword);
 router.post('/change-password', ChangePassword);

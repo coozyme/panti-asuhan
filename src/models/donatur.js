@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
          },
          email: {
             type: DataTypes.STRING(128),
-            allowNull: false
+            allowNull: false,
+            unique: true
          },
          password: {
             type: DataTypes.STRING(255),
@@ -35,7 +36,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       {
          tableName: "donatur",
-         timestamps: true
+         timestamps: true,
+         // If don't want createdAt
+         createdAt: false,
+
+         // If don't want updatedAt
+         updatedAt: false,
       }
    );
    return Donatur;
