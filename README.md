@@ -58,12 +58,60 @@
 #### Update dari ferdi
 
 1. kata kata place holder dirubah sama eug &#9745;
-2. #Dashboard
+2. # Landing Page
+
+   - Buat Button Login dan Daftar Donatur samping"an
+   - yang diform login klik daftarnya ilangin ae
+   - isi foto landing page yang perlu perlu ae source : https://drive.google.com/drive/folders/1HNXejV66aeskkzWRFWVp3ge-F-mYqkfL?usp=sharing
+   - pop up Alert Login ,registrasi
+   - Button logout
+
+   # Dashboard
+
    - Buat Card Total anak asuh, Jumlah Donatur yang berpartisipasi,
-     Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
-     Jumlah Donasi yang belum diverifikasi,
-     aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
-3. Jadiin button register donatur
-4. Button Cetak(pdf),Update,Delete belum fungsi
-5. Field hubungan,tanggal wafat, sama data wali dihapus aja
-6. Alert klo gagal login,daftar,create,update,delete.
+   - Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
+   - Jumlah Donasi yang belum diverifikasi,
+   - aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
+
+   # Data Anak Asuh = Anak Asuh
+
+   - urut asc a-z by nama
+   - input tambah nya Pop up aja kek ditambah donasi
+   - tambahin atribut 'Kelas'
+   - textbox photo blm bisa input gambar
+   - Field hubungan,tanggal wafat, sama data wali dihapus aja
+   - field status blm lengkap kategori yatim,piatu,yatim piatu,dhuafa
+   - set semua atribut harus diisi kecuali no hp dan keterangan
+   - databasenya juga di drop yang wali
+   - action CRUD + PRINT (pdf)
+
+   # Donasi = Donasi Masuk
+
+   - urut by tanggal terupdate donasi yang masuk
+   - button simpan, validasi , update adain popup alertnya
+   - di update donasi di box tanggalnya ga muncul pilihan tanggal kalendernya ya ? gw klik ikon kalendernya ga pop up tanggal kalender gitu ?
+   - di tambah gausah dimunculin aja textboxnya (tanggal verifikasi) klo udh di set tanggal hari sekarangnya, di update juga
+
+   # Donatur = BELUM WORK !
+
+   # REKENING = KABARIN GW MAKSUDNYA APA YA?
+
+   # Campaign = dibuat di nav nya 1 aja kaya nav data anak asuh, kalau emg ga ada isi selain buat nambahin campaign doang
+
+   - input tambah nya Pop up aja kek ditambah donasi
+   - field (tanggal mulai campaign set jadi hari sekarang aja) + gausah di tampilin di form
+   - yang radio set sebagai primarynya ganti jadi apa ya enaknya kata"nya ? kbarin
+   - alert CRUD
+
+   # Laporan
+
+   - Jumlah Total donasi per campaign dan yang dikelola untuk yayasan
+   - pengeluaran fieldnya (nama campaign, keterangan pengeluaran, jumlah, tanggal, foto(tidak wajib diisi)) nanti itu relasi sama jumlah total donasi per campign dan yayasan.
+   - CRUD + PRINT
+
+   # Galeri = Belum Work!
+
+3. Button Cetak(pdf),Update,Delete belum fungsi
+4. Simbol sama button" dicek redirect kemana kemananya
+5. Alert klo gagal login,daftar,create,update,delete.
+6. TUNGGU UPDATE SELANJUTNYA
