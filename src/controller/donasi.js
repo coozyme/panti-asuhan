@@ -21,6 +21,7 @@ module.exports = {
          status,
          catatan,
          tanggalDonasi,
+         tanggalVerifikasi
       } = req.body
       console.log('REQ-userId', userId)
       console.log('REQ-BODY', req.body)
@@ -32,7 +33,7 @@ module.exports = {
          metode: methode,
          status_verifikasi: status,
          tanggal_submit: convertDateFormat(tanggalDonasi),
-         tanggal_verifikasi: new Date(),
+         tanggal_verifikasi: convertDateFormat(tanggalVerifikasi),
          catatan: catatan,
          foto: filename,
          id_admin: userId
@@ -50,8 +51,9 @@ module.exports = {
          status,
          catatan,
          tanggalDonasi,
+         tanggalVerifikasi
       } = req.body
-
+      console.log('REQ-tanggalDonasi', tanggalDonasi)
       const { id } = req.params
 
       const objectData = {
@@ -60,7 +62,7 @@ module.exports = {
          metode: methode,
          status_verifikasi: status,
          tanggal_submit: tanggalDonasi,
-         tanggal_verifikasi: new Date(),
+         tanggal_verifikasi: tanggalVerifikasi,
          catatan: catatan,
          id_admin: userId
       }
@@ -108,8 +110,8 @@ module.exports = {
                catatan: item.catatan ? item.catatan : "-",
                photo: photo,
                status_verifikasi: item.status_verifikasi,
-               tanggal_submit: new moment(item.tanggal_submit).format("DD MMM YYYY"),
-               tanggal_verifikasi: item.tanggal_verifikasi ? new moment(item.tanggal_verifikasi).format("DD MMM YYYY") : "-",
+               tanggal_submit: moment(item.tanggal_submit).format("DD MMM YYYY"),
+               tanggal_verifikasi: item.tanggal_verifikasi ? moment(item.tanggal_verifikasi).format("DD MMM YYYY") : "-",
                url_verified: `/donasi/verification/${item.id}/VERIFIED`,
                url_reject: `/donasi/verification/${item.id}/REJECT`,
                id_admin: item.id_admin,
