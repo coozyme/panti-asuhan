@@ -14,6 +14,7 @@ router.get('/tambah-campaign-donasi', function (req, res) {
    // });
 })
 router.post('/tambah-campaign-donasi', AuthMiddleware.isAuthenticated, uploadFile("campaign").single('file'), campaign.AddCampaignDonasi);
+router.post('/edit-campaign-donasi/:id', AuthMiddleware.isAuthenticated, uploadFile("campaign").single('file'), campaign.UpdateCampaignDonasi);
 // router.post('/tambah-campaign-donasi', uploadFile.single('file'), function (req, res, next) {
 // req.file is the `profile-file` file
 // req.body will hold the text fields, if there were any

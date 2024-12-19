@@ -82,11 +82,14 @@
                                              data-bs-target="#detail<%= data[i].id %>id">
                                              <i class="fas fa-eye"></i>
                                           </a>
-                                          <a class="btn btn-warning waves-effect waves-ligh" title="Edit">
-                                             <i class="fas fa-pencil-alt"></i>
-                                          </a>
                                           <%- include('./popup-detail-campaign-donasi.ejs', {detail: data[i], idx: i})
                                              -%>
+                                             <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                data-bs-toggle="modal" data-bs-target="#edit<%= data[i].id %>id">
+                                                <i class="fas fa-pencil-alt"></i>
+                                             </a>
+                                             <%- include('./popup-edit-campaign-donasi.ejs', {edit: data[i], idx: i})
+                                                -%>
                                        </td>
                                     </tr>
                                     <% } %>

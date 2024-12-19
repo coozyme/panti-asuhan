@@ -52,13 +52,15 @@ module.exports = {
             const photo = item.photo ? `http://${config.url}/uploads/campaign/${item.photo}` : null
 
 
-            console.log("LOG-PHOTO", photo)
+            console.log("LOG-item.terkumpul", item.main_campaign)
             return {
                id: item.id,
                judul: item.judul,
                deskripsi: item.deskripsi,
                targetDonasi: formatRupiah(item.target_donasi),
+               targetDonasiFormated: item.target_donasi,
                terkumpul: formatRupiah(item.terkumpul),
+               terkumpulFormated: item.terkumpul,
                tanggalMulai: new moment(item.tanggal_mulai).format("DD MMM YYYY"),
                tanggalSelesai: new moment(item.tanggal_selesai).format("DD MMM YYYY"),
                photo: photo,
@@ -69,4 +71,45 @@ module.exports = {
          res.render(path.join(__dirname, '../../src/views/pages/campaign/donasi.ejs'), { data: datas });
       })
    },
+
+   UpdateCampaignDonasi: async (req, res) => {
+      const { id } = req.params
+      const {
+         judul,
+         deskripsi,
+         targetDonasi,
+         tanggalMulai,
+         tanggalSelesai,
+         isPrimaryCampaign,
+         status,
+      } = req.body
+      console.log("LOG-req.body", req.body)
+
+      console.log("LOG-isPrimaryCampaign", isPrimaryCampaign)
+      const checkListprimaryCampaign = (isPrimaryCampaign && isPrimaryCampaign == 'on') ? 1 : 0
+
+      const objectData = {
+         judul: judul,
+         deskripsi: deskripsi,
+         target_donasi: targetDonasi,
+         tanggal_mulai: moment(tanggalMulai).format("YYYY-MM-DD"),
+         tanggal_selesai: moment(tanggalSelesai).format("YYYY-MM-DD"),
+         status: status,
+         main_campaign: checkListprimaryCampaign,
+      }
+
+      if (req.file) {
+         objectData.photo = req.file.filename
+      }
+
+
+
+      await CampaignDonasi.update(objectData, {
+         where: {
+            id: id
+         }
+      })
+
+      res.redirect('/campaign/donasi')
+   }
 }
