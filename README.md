@@ -31,8 +31,8 @@
 1. Data Anak Asuh
    1. admin bisa view list data anak asuh & wali &#9745;
    1. admin bisa menambahkan data anak asuh & wali &#9745;
-   1. admin bisa update data anak asuh <s>& wali</s>
-   1. admin bisa delete data anak asuh <s>& wali</s>
+   1. admin bisa update data anak asuh <s>& wali</s> &#9745;
+   1. admin bisa delete data anak asuh <s>& wali</s> &#9745;
 1. Donasi
    - Donasi
      1. admin bisa menambahkan data donasi &#9745;
@@ -46,7 +46,7 @@
    1. admin bisa menambahkan campaign donasi &#9745;
    1. admin bisa view list campaign donasi &#9745;
    1. admin bisa view detail campaign donasi &#9745;
-   1. admin bisa update campaign donasi
+   1. admin bisa update campaign donasi &#9745;
    1. <s>admin bisa delete campaign donasi</s>
 1. Report
    1. report
@@ -58,42 +58,42 @@
 #### Update dari ferdi
 
 1. kata kata place holder dirubah sama eug &#9745;
+
 2. # Landing Page
 
    - Buat Button Login dan Daftar Donatur samping"an
    - yang diform login klik daftarnya ilangin ae
-   - isi foto landing page yang perlu perlu ae source : https://drive.google.com/drive/folders/1HNXejV66aeskkzWRFWVp3ge-F-mYqkfL?usp=sharing
+   - isi foto landing page yang perlu perlu ae source : <https://drive.google.com/drive/folders/1HNXejV66aeskkzWRFWVp3ge-F-mYqkfL?usp=sharing>
    - pop up Alert Login ,registrasi
    - Button logout
 
    # Dashboard
 
-   - Buat Card Total anak asuh, Jumlah Donatur yang berpartisipasi,
-<<<<<<< HEAD
+   - Buat Card Total anak asuh, Jumlah Donatur yang berpartisipasi, &#9745;
    - Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
-   - Jumlah Donasi yang belum diverifikasi,
+   - Jumlah Donasi yang belum diverifikasi &#9745;,
    - aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
 
    # Data Anak Asuh = Anak Asuh
 
    - urut asc a-z by nama
-   - input tambah nya Pop up aja kek ditambah donasi
+   - input tambah nya Pop up aja kek ditambah donasi #jelek jadinya field formnya terlalu banyak
    - tambahin atribut 'Kelas'
-   - textbox photo blm bisa input gambar
-   - Field hubungan,tanggal wafat, sama data wali dihapus aja
-   - field status blm lengkap kategori yatim,piatu,yatim piatu,dhuafa
-   - set semua atribut harus diisi kecuali no hp dan keterangan
-   - databasenya juga di drop yang wali
+   - textbox photo blm bisa input gambar &#9745;
+   - Field hubungan,tanggal wafat, sama data wali dihapus aja &#9745;
+   - field status blm lengkap kategori yatim,piatu,yatim piatu,dhuafa &#9745;
+   - set semua atribut harus diisi kecuali no hp dan keterangan &#9745;
+   - databasenya juga di drop yang wali &#9745;
    - action CRUD + PRINT (pdf)
 
    # Donasi = Donasi Masuk
 
    - urut by tanggal terupdate donasi yang masuk
    - button simpan, validasi , update adain popup alertnya
-   - di update donasi di box tanggalnya ga muncul pilihan tanggal kalendernya ya ? gw klik ikon kalendernya ga pop up tanggal kalender gitu ?
+   - di update donasi di box tanggalnya ga muncul pilihan tanggal kalendernya ya ? gw klik ikon kalendernya ga pop up tanggal kalender gitu ? &#9745;
    - di tambah gausah dimunculin aja textboxnya (tanggal verifikasi) klo udh di set tanggal hari sekarangnya, di update juga
 
-   # Donatur = BELUM WORK !
+   # Donatur = BELUM WORK
 
    # REKENING = KABARIN GW MAKSUDNYA APA YA?
 
@@ -110,18 +110,9 @@
    - pengeluaran fieldnya (nama campaign, keterangan pengeluaran, jumlah, tanggal, foto(tidak wajib diisi)) nanti itu relasi sama jumlah total donasi per campign dan yayasan.
    - CRUD + PRINT
 
-   # Galeri = Belum Work!
+   # Galeri = Belum Work
 
 3. Button Cetak(pdf),Update,Delete belum fungsi
 4. Simbol sama button" dicek redirect kemana kemananya
 5. Alert klo gagal login,daftar,create,update,delete.
 6. TUNGGU UPDATE SELANJUTNYA
-=======
-     Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
-     Jumlah Donasi yang belum diverifikasi,
-     aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
-3. Jadiin button register donatur
-4. Button Cetak(pdf),Update,Delete belum fungsi
-5. Field hubungan,tanggal wafat, sama data wali dihapus aja &#9745;
-6. Alert klo gagal login,daftar,create,update,delete.
->>>>>>> 68e4fb1 (feature: detail, edit anak asuh)
