@@ -69,6 +69,7 @@
    # Dashboard
 
    - Buat Card Total anak asuh, Jumlah Donatur yang berpartisipasi,
+<<<<<<< HEAD
    - Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
    - Jumlah Donasi yang belum diverifikasi,
    - aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
@@ -115,3 +116,12 @@
 4. Simbol sama button" dicek redirect kemana kemananya
 5. Alert klo gagal login,daftar,create,update,delete.
 6. TUNGGU UPDATE SELANJUTNYA
+=======
+     Jumlah donasi yang terverfikasi (Per Campaign) klo bisa ada dropdown klik buat bisa ganti" jumlah donasi percampaignnya,
+     Jumlah Donasi yang belum diverifikasi,
+     aktivitas donatur, sama aktivitas list donasi yang perlu diverifikasi (Seperti Jurnal).
+3. Jadiin button register donatur
+4. Button Cetak(pdf),Update,Delete belum fungsi
+5. Field hubungan,tanggal wafat, sama data wali dihapus aja &#9745;
+6. Alert klo gagal login,daftar,create,update,delete.
+>>>>>>> 68e4fb1 (feature: detail, edit anak asuh)

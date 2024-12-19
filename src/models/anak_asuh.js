@@ -57,21 +57,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(50),
             allowNull: true
          },
-         tanggal_wafat: {
-            type: DataTypes.DATEONLY,
-            allowNull: true
-         },
          keterangan: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.TEXT,
             allowNull: true
-         },
-         id_wali: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-               model: 'Wali',
-               key: 'id'
-            }
          },
          id_admin: {
             type: DataTypes.INTEGER,
@@ -91,7 +79,6 @@ module.exports = (sequelize, DataTypes) => {
    );
 
    AnakAsuh.associate = (models) => {
-      AnakAsuh.belongsTo(models.Wali, { foreignKey: 'id_wali', as: 'wali' });
       AnakAsuh.belongsTo(models.Admin, { foreignKey: 'id_admin', as: 'admin' });
    };
 

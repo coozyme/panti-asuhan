@@ -1,0 +1,126 @@
+<div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="detail<%= idx %>"
+   id="detail<%= detail.id %>id" data-target="#detail<%= detail.id %>id" aria-hidden="true">
+   <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="detail<%= idx %>">
+               Detail Anak Asuh
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-xl-4 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Informasi </h4>
+
+                  <div class="table-responsive">
+                     <table class="table table-bordered table-striped">
+                        <tbody>
+                           <tr>
+                              <th>Nama Lengkap </th>
+                              <td>
+                                 <%= detail.namaLengkap %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Jenis Kelamin </th>
+                              <td>
+                                 <%= detail.kelamin %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tempat Lahir </th>
+                              <td>
+                                 <%= detail.tempatLahir %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tanggal Lahir </th>
+                              <td>
+                                 <%= detail.tanggalLahir %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Umur </th>
+                              <td>
+                                 <%= detail.umur %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Status </th>
+                              <td>
+                                 <span>
+                                    <%= detail.status %>
+                                 </span>
+                              </td>
+                           <tr>
+                              <th>No. Telphone </th>
+                              <td>
+                                 <%= detail.noHandphone %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tanggal Masuk </th>
+                              <td>
+                                 <%= detail.tanggalMasuk %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Tanggal Keluar </th>
+                              <td>
+                                 <%= detail.tanggalKeluar %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Ayah </th>
+                              <td>
+                                 <%= detail.ayah %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Ibu </th>
+                              <td>
+                                 <%= detail.ibu %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Keterangan </th>
+                              <td>
+                                 <%= detail.keternagan %>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+
+
+               </div>
+
+               <div class="col-xl-8 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Photo Profile</h4>
+                  <% if (detail.photo) { %>
+                     <div class="card">
+                        <img class="card-img-top img-fluid" src="<%= detail.photo %>" alt="">
+                     </div>
+                     <% } else { %>
+                        <div class="alert alert-warning">
+                           Tidak ada bukti transaksi.
+                        </div>
+                        <% } %>
+               </div>
+            </div>
+         </div>
+
+         <!-- <div class="modal-footer">
+            <form class="custom-validation" action="<%= detail.url_verified %>" method="post">
+               <button type="submit" class="btn btn-primary waves-effect waves-ligh" data-bs-dismiss="modal"
+                  action="submit">VERIFIED</button>
+            </form>
+            <form class="custom-validation" action="<%= detail.url_reject %>" method="post">
+               <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">REJECT</button>
+            </form>
+         </div> -->
+      </div>
+   </div>
+
+</div>

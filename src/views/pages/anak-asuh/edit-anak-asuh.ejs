@@ -8,23 +8,23 @@
             <div class="page-title-box">
                <div class="row align-items-center">
                   <div class="col-md-8">
-                     <h6 class="page-title">Tambah Data Anak Asuh</h6>
+                     <h6 class="page-title">Ubah Data Anak Asuh</h6>
                   </div>
-                  <!-- <div class="col-md-4">
+                  <div class="col-md-4">
                      <div class="float-end d-none d-md-block">
-                        <a href="/anak-asuh/tambah-anak-asuh">
+                        <a href="/anak-asuh/">
                            <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                               data-bs-target=".bs-example-modal-center">
-                              <i class="fas fa-save"></i> Simpan</button>
+                              <i class="fas fa-undo "></i> Kembali</button>
                         </a>
                      </div>
-                  </div> -->
+                  </div>
                </div>
             </div>
             <!-- end page title -->
             <div class="row">
-               <form class="custom-validation" action="/anak-asuh/tambah-anak-asuh" method="post"
-                  enctype="multipart/form-data">
+               <form class="custom-validation" action="/anak-asuh/edit-anak-asuh/<%=data.id%>" method="post"
+                  enctype="multipart/form-data" enctype="multipart/form-data">
                   <div class="col-lg-6">
                      <div class="card">
                         <div class="card-body">
@@ -33,19 +33,19 @@
                            <div class="mb-3">
                               <label class="form-label" for="namaLengkap">Nama Lengkap</label>
                               <input type="text" class="form-control" name="namaLengkap" required
-                                 placeholder="Masukkan Nama Lengkap">
+                                 value="<%=data.namaLengkap%>" placeholder="Masukkan Nama Lengkap">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="tempatLahir">Tempat Lahir</label>
                               <input type="text" class="form-control" name="tempatLahir" required
-                                 placeholder="Masukkan Tempat Lahir">
+                                 value="<%=data.tempatLahir%>" placeholder="Masukkan Tempat Lahir">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="tanggalLahir">Tanggal Lahir</label>
                               <div class="input-group" id="datepicker2">
                                  <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalLahir"
                                     data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    data-provide="datepicker" data-date-autoclose="true">
+                                    data-provide="datepicker" data-date-autoclose="true" value="<%=data.tanggalLahir%>">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                               </div>
@@ -54,13 +54,17 @@
                            <div class="mb-3">
                               <label class="form-label mb-3 d-flex">Jenis Kelamin :</label>
                               <div class="form-check form-check-inline">
-                                 <input type="radio" id="customRadioInline1" name="gender" value="Male"
-                                    class="form-check-input">
+                                 <input type="radio" id="customRadioInline1" <%=data.kelamin==="Laki - Laki"
+                                    && "checked" %>
+                                 name="gender"
+                                 value="Laki - Laki"
+                                 class="form-check-input">
                                  <label class="form-check-label" for="gender">Laki-Laki</label>
                               </div>
                               <div class="form-check form-check-inline">
-                                 <input type="radio" id="customRadioInline2" name="gender" value="Female"
-                                    class="form-check-input">
+                                 <input type="radio" id="customRadioInline2" name="gender" value="Perempuan"
+                                    <%=data.kelamin==="Perempuan" && "checked" %>
+                                 class="form-check-input">
                                  <label class="form-check-label" for="gender">Perempuan</label>
                               </div>
                            </div>
@@ -69,10 +73,11 @@
                               validationCustom04" class="form-label">Status</label>
                               <select class="form-select" id="validationCustom04" required name="status">
                                  <option selected disabled value="">Pilih...</option>
-                                 <option value="YATIM">Yatim</option>
-                                 <option value="PIATU">Piatu</option>
-                                 <option value="YATIM_PIATU">Yatim Piatu</option>
-                                 <option value="DHUAFA">Dhuafa</option>
+                                 <option <%=data.status==="YATIM" && "selected" %> value="YATIM">Yatim</option>
+                                 <option <%=data.status==="PIATU" && "selected" %> value="PIATU">Piatu</option>
+                                 <option <%=data.status==="YATIM_PIATU" && "selected" %> value="YATIM_PIATU">Yatim Piatu
+                                 </option>
+                                 <option <%=data.status==="DHUAFA" && "selected" %> value="DHUAFA">Dhuafa</option>
                               </select>
                               <div class="invalid-feedback">
                                  Please select a valid state.
@@ -80,7 +85,7 @@
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="alamat">Alamat</label>
-                              <input type="text" class="form-control" name="alamat" required
+                              <input type="text" class="form-control" name="alamat" required value="<%=data.address%>"
                                  placeholder="Masukkan Alamat">
                            </div>
                            <div class="mb-3">
@@ -92,7 +97,7 @@
                               <div class="input-group" id="datepicker2">
                                  <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalMasuk"
                                     data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    data-provide="datepicker" data-date-autoclose="true">
+                                    value="<%=data.tanggalMasuk%>" data-provide="datepicker" data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                               </div>
@@ -102,29 +107,32 @@
                               <div class="input-group" id="datepicker2">
                                  <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalKeluar"
                                     data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    data-provide="datepicker" data-date-autoclose="true">
+                                    value="<%=data.tanggalKeluar%>" data-provide="datepicker"
+                                    data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                               </div>
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="ayah">Ayah</label>
-                              <input type="text" class="form-control" placeholder="Masukkan Nama Ayah" name="ayah">
+                              <input type="text" class="form-control" placeholder="Masukkan Nama Ayah" name="ayah"
+                                 value="<%=data.ayah%>">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="ibu">Ibu</label>
-                              <input type="text" class="form-control" placeholder="Masukkan Nama Ibu" name="ibu">
+                              <input type="text" class="form-control" placeholder="Masukkan Nama Ibu" name="ibu"
+                                 value="<%=data.ibu%>">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="noHandphone">Nomor Handphone</label>
-                              <input type="number" class="form-control" name="noHandphone"
+                              <input type="number" class="form-control" name="noHandphone" value="<%=data.noHandphone%>"
                                  placeholder="Masukkan Nomor Handphone">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="keterangan">Keterangan</label>
                               <div>
                                  <textarea name="keterangan" class="form-control" rows="5"
-                                    placeholder="Keterangan"></textarea>
+                                    placeholder="Keterangan"> <%=data.keterangan%> </textarea>
                               </div>
                            </div>
                            <!-- end form -->

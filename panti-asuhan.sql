@@ -156,3 +156,9 @@ MODIFY COLUMN `id_campaign_donasi` int NULL;
 ALTER TABLE `donatur`
 ADD COLUMN `tanggal_login` DATETIME NULL AFTER `status`,
 ADD COLUMN `tanggal_logout` DATETIME NULL AFTER `tanggal_login`;
+
+ALTER TABLE anak_asuh
+DROP FOREIGN KEY anak_asuh_ibfk_2;
+
+ALTER TABLE anak_asuh
+DROP COLUMN id_wali;
