@@ -8,7 +8,7 @@
             <div class="page-title-box">
                <div class="row align-items-center">
                   <div class="col-md-8">
-                     <h6 class="page-title">Data Donasi</h6>
+                     <h6 class="page-title">Data Pengeluaran</h6>
                   </div>
                   <div class="col-md-4">
                      <div class="float-end d-none d-md-block">
@@ -18,6 +18,7 @@
                         <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                            data-bs-target=".bs-example-modal-center">
                            <i class="fas fa-plus"></i> Tambah</button>
+                        <%- include('./popup-add-pengeluaran.ejs') -%>
                      </div>
                   </div>
                </div>
@@ -31,19 +32,18 @@
                   <div class="card">
                      <div class="card-body">
 
-                        <h4 class="card-title">List Donasi</h4>
+                        <h4 class="card-title">List Data Pengeluaran Donasi</h4>
 
                         <div class="table-responsive">
                            <table class="table table-editable table-nowrap align-middle table-edits">
                               <thead>
                                  <tr>
                                     <th>Nomor</th>
-                                    <th>Donatur</th>
+                                    <th>Nama Campaign</th>
+                                    <th>Keterangan</th>
                                     <th>Jumlah</th>
-                                    <th>Metode</th>
-                                    <th>Status</th>
-                                    <th>Tanggal Donasi</th>
-                                    <th>Tanggal Verifikasi</th>
+                                    <th>Tanggal</th>
+                                    <th>Foto</th>
                                     <th>Action</th>
                                  </tr>
                               </thead>
@@ -54,7 +54,6 @@
                                     <td data-field="total">Male</td>
                                     <td data-field="method">Tangerang</td>
                                     <td data-field="status">24</td>
-                                    <td data-field="date-donate">Yatim</td>
                                     <td data-field="date-verif">Yatim</td>
                                     <td style="width: 100px">
                                        <a class="btn btn-secondary btn-sm edit" title="Edit">

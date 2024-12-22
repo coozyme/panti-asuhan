@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
          },
-         kegiatan: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-         },
          keterangan: {
             type: DataTypes.STRING(255),
             allowNull: false
