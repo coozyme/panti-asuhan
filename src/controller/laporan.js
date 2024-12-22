@@ -1,17 +1,23 @@
 const path = require("path");
-const { CampaignDonasi } = require("../models");
+const { CampaignDonasi, Pengeluaran } = require("../models");
 
 module.exports = {
    Pengeluaran: async (req, res) => {
-      const campaiignList = await CampaignDonasi.findAll({
-         where: {
-            status: 1
-         }
-      })
-      console.log('campaiignList', campaiignList)
+      const listCampaign = await CampaignDonasi.findAll()
 
-      // const 
-      res.render(path.join(__dirname, '../../src/views/pages/report/pengeluaran.ejs'));
+      const listPengeluaran = await Pengeluaran.findAll({
+         include: [
+            {
+               model: CampaignDonasi,
+               as: 'campaignDonasi',
+               attributes: ['judul']
+            }
+         ]
+      })
+
+      console.log('listPengeluaran', listPengeluaran)
+
+      res.render(path.join(__dirname, '../../src/views/pages/report/pengeluaran.ejs'), { listCampaign: listCampaign, listPengeluaran: listPengeluaran });
    },
 
    AddLaporanPengeluaran: async (req, res) => {
@@ -23,12 +29,9 @@ module.exports = {
          jumlah,
          tanggal
       } = req.body
-      console.log('REQ-userId', userId)
-      console.log('REQ-BODY', req.body)
-      console.log('REQ-filename', filename)
 
       const objectData = {
-         id_campaign_donasin: idCampaign,
+         id_campaign_donasi: String(idCampaign) === '0' ? null : parseInt(idCampaign),
          keterangan: keterangan,
          jumlah: jumlah,
          tanggal: tanggal,
@@ -41,5 +44,6 @@ module.exports = {
       }
 
       await Pengeluaran.create(objectData)
+      res.redirect('/laporan/pengeluaran')
    },
 }

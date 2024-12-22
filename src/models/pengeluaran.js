@@ -46,13 +46,14 @@ module.exports = (sequelize, DataTypes) => {
       {
          tableName: "pengeluaran",
          createdAt: 'created_at',
-         updatedAt: 'updated_at'
+         updatedAt: 'updated_at',
+         deletedAt: 'deleted_at'
       }
    );
 
    Pengeluaran.associate = (models) => {
       Pengeluaran.belongsTo(models.Admin, { foreignKey: 'id_admin' });
-      Pengeluaran.belongsTo(models.CampaignDonasi, { foreignKey: 'id_campaign_donasi', allowNull: true });
+      Pengeluaran.belongsTo(models.CampaignDonasi, { foreignKey: 'id_campaign_donasi', allowNull: true, as: 'campaignDonasi' });
    };
 
    return Pengeluaran;

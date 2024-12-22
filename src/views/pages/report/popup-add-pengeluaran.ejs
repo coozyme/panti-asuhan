@@ -20,15 +20,17 @@
 
                         <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
 
-                        <form class="custom-validation" action="/donasi/add-manual" method="post"
+                        <form class="custom-validation" action="/laporan/tambah-pengeluaran" method="post"
                            enctype="multipart/form-data">
                            <div class="md-3">
                               <label for="validationCustom04" class="form-label">Campaign Donasi</label>
-                              <select class="form-select" id="validationCustom04" required name="status">
-                                 <option selected disabled value="">Pilih Status Donasi...</option>
-                                 <option value="VERIFIED">VERIFIED</option>
-                                 <option value="PENDING">PENDING</option>
-                                 <option value="REJECT">REJECT</option>
+                              <select class="form-select" id="validationCustom04" required name="idCampaign">
+                                 <option selected disabled value="">Pilih Campaign Donasi...</option>
+                                 <% listCampaign.forEach((campaign, index)=> { %>
+                                    <option value="<%= campaign.id %>">
+                                       <%= campaign.judul %>
+                                    </option>
+                                    <% }) %>
                               </select>
                               <div class="invalid-feedback">
                                  Pilih Salah Satu Status.
@@ -43,8 +45,8 @@
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for=jumlah">Jumlah</label>
-                              <input type="number" class="form-control" required
-                                 placeholder="Jumlah Donasi Yang Diberikan" name="jumlah">
+                              <input type="number" class="form-control" required step="0.01"
+                                 placeholder="Jumlah pengeluaran" name="jumlah">
                            </div>
 
                            <div class="mb-3">

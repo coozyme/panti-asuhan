@@ -95,4 +95,12 @@
     </div>
     <!-- End Page-content -->
   </div>
+  <script>
+    function confirmDelete(id) {
+      if (confirm('Are you sure you want to delete this item?')) {
+        axios.delete(`/anak-asuh/delete/${id}`);
+        window.location.href = `/anak-asuh/delete/${id}`;
+      }
+    }
+  </script>
   <%- include('../../partials/footer.ejs') -%>
