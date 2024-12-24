@@ -25,8 +25,10 @@ module.exports = {
          return {
             id: item.id,
             keterangan: item.keterangan,
-            jumlah: formatRupiah(item.jumlah),
+            jumlahFormated: formatRupiah(item.jumlah),
+            jumlah: item.jumlah,
             tanggal: moment(item.tanggal).format("DD MMM YYYY"),
+            tanggalFormated: new Date(item.tanggal).toISOString().split('T')[0],
             foto: item.foto ? `http://${config.url}/uploads/pengeluaran/${item.foto}` : null,
             judulCampaign: item.campaignDonasi ? item.campaignDonasi.judul : null,
             campaignId: item.campaignDonasi ? item.campaignDonasi.id : null
@@ -50,7 +52,7 @@ module.exports = {
          id_campaign_donasi: String(idCampaign) === '0' ? null : parseInt(idCampaign),
          keterangan: keterangan,
          jumlah: jumlah,
-         tanggal: tanggal,
+         tanggal: new moment(tanggal).format("YYYY-MM-DD"),
 
          id_admin: userId
       }
@@ -66,7 +68,7 @@ module.exports = {
    DeletePengeluaran: async (req, res) => {
       const { id } = req.params
       const { userId } = req.session
-      console.log('id', id)
+
       try {
          await Pengeluaran.update(
             {
@@ -88,32 +90,36 @@ module.exports = {
    EditPengeluaran: async (req, res) => {
       const { id } = req.params
       const { userId } = req.session
-      const {
-         idCampaign,
-         keterangan,
-         jumlah,
-         tanggal
-      } = req.body
 
-      const objectData = {
-         id_campaign_donasi: String(idCampaign) === '0' ? null : parseInt(idCampaign),
-         keterangan: keterangan,
-         jumlah: jumlah,
-         tanggal: tanggal,
+      try {
+         const {
+            idCampaign,
+            keterangan,
+            jumlah,
+            tanggal
+         } = req.body
 
-         id_admin: userId
-      }
-
-      if (req.file) {
-         objectData.foto = req.file.filename
-      }
-
-      await Pengeluaran.update(objectData, {
-         where: {
-            id: id
+         const objectData = {
+            id_campaign_donasi: String(idCampaign) === '0' ? null : parseInt(idCampaign),
+            keterangan: keterangan,
+            jumlah: jumlah,
+            tanggal: tanggal,
+            id_admin: userId,
          }
-      })
 
-      res.redirect('/laporan/pengeluaran')
+         if (req.file) {
+            objectData.foto = req.file.filename
+         }
+
+         await Pengeluaran.update(objectData, {
+            where: {
+               id: id
+            }
+         })
+
+         res.redirect('/laporan/pengeluaran')
+      } catch (error) {
+         console.log('error-22', error)
+      }
    }
 }

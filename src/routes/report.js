@@ -14,6 +14,7 @@ router.get('/donasi', function (req, res) {
 router.get('/pengeluaran', AuthMiddleware.isAuthenticated, laporan.Pengeluaran)
 
 router.post('/tambah-pengeluaran', AuthMiddleware.isAuthenticated, uploadFile("pengeluaran").single('file'), laporan.AddLaporanPengeluaran)
+router.post('/ubah-pengeluaran/:id', AuthMiddleware.isAuthenticated, uploadFile("pengeluaran").single('file'), laporan.EditPengeluaran)
 router.delete('/pengeluaran/:id', AuthMiddleware.isAuthenticated, laporan.DeletePengeluaran)
 
 module.exports = router;

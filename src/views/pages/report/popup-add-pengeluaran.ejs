@@ -49,12 +49,11 @@
                            </div>
 
                            <div class="mb-3">
-                              <label class="form-label" for="tanggalPengeluaran">Tanggal Pengeluaran</label>
+                              <label class="form-label" for="tanggal">Tanggal Pengeluaran</label>
                               <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M yyyy"
-                                    name="tanggalPengeluaran" required data-date-format="dd M yyyy"
-                                    data-date-container='#datepicker2' data-provide="datepicker"
-                                    data-date-autoclose="true">
+                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggal" required
+                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
+                                    data-provide="datepicker" data-date-autoclose="true">
 
                                  <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                               </div>
@@ -106,7 +105,7 @@
             method: 'POST',
             body: formData,
          });
-         showFloatingAlert("success");
+         showFloatingAlert("success_save");
 
 
          // disable modal
@@ -119,38 +118,8 @@
          }, 2000);
       } catch (err) {
          console.error('Save failed:', err);
-         showFloatingAlert('error');
-      }
-   }
-
-   function showFloatingAlert(type = 'success') {
-
-      if (type === 'success') {
-         const alert = document.querySelector('.floating-alert-saving-success')
-         alert.style.display = 'block';
-
-         // Auto hide after 3 seconds
-         setTimeout(() => {
-            alert.style.opacity = '0';
-            alert.style.transition = 'opacity 3s';
-            setTimeout(() => {
-               alert.style.display = 'none';
-               alert.style.opacity = '1';
-            }, 1000);
-         }, 10000);
-      } else {
-         const alert = document.querySelector('.floating-alert-saving-failed')
-         alert.style.display = 'block';
-
-         // Auto hide after 3 seconds
-         setTimeout(() => {
-            alert.style.opacity = '0';
-            alert.style.transition = 'opacity 3s';
-            setTimeout(() => {
-               alert.style.display = 'none';
-               alert.style.opacity = '1';
-            }, 1000);
-         }, 10000);
+         alert('gagal');
+         showFloatingAlert('failed_save');
       }
    }
 </script>
