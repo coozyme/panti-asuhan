@@ -1,0 +1,164 @@
+<div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="edit<%= edit.id %>"
+   id="edit<%= edit.id %>id" data-target="#edit<%= edit.id %>id" aria-hidden="true">
+   <div class="modal-dialog modal-modal-xl modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="edit<%= idx %>">
+               Ubah Pengeluaran
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="col-lg-12">
+               <div class="card">
+                  <div class="card-body">
+                     <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
+
+                     <form class="custom-validation" action="/campaign/edit-pengeluaran/<%= edit.id %>" method="post"
+                        enctype="multipart/form-data">
+                        <div class="md-3">
+                           <label for="validationCustom04" class="form-label">Campaign Donasi</label>
+                           <select class="form-select" id="validationCustom04" required name="idCampaign">
+                              <option selected disabled value="">Pilih Campaign Donasi...</option>
+                              <% listCampaign.forEach((campaign, index)=> { %>
+                                 <%= console.log("LOG-S",campaign.id, edit.campaignId)%>
+                                    <option value="<%= campaign.id %>" <%=campaign.id==edit.campaignId ? 'selected' : ''
+                                       %>
+                                       value="<%= campaign.id %>">
+                                          <%= campaign.judul %>
+                                    </option>
+                                    <% }) %>
+                           </select>
+                           <div class="invalid-feedback">
+                              Pilih Salah Satu Status.
+                           </div>
+                        </div>
+                        <div class="mb-3 mt-3">
+                           <label class="form-label" for="keterangan">Keterangan</label>
+                           <div>
+                              <textarea name="keterangan" class="form-control" rows="5" required
+                                 placeholder="keterangan..."><%= edit.keterangan %></textarea>
+                           </div>
+                        </div>
+                        <div class="mb-3">
+                           <label class="form-label" for=jumlah">Jumlah</label>
+                           <input type="number" class="form-control" required step="0.01" value="<%= edit.jumlah %>"
+                              placeholder="Jumlah pengeluaran" name="jumlah">
+                        </div>
+
+                        <div class="mb-3">
+                           <label class="form-label" for="tanggalPengeluaran">Tanggal Pengeluaran</label>
+                           <div class="input-group" id="datepicker2">
+                              <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalPengeluaran"
+                                 required data-date-format="dd M yyyy" data-date-container='#datepicker2'
+                                 data-provide="datepicker" data-date-autoclose="true">
+
+                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                           </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                           <label class="form-label" for="buktiTransaksi">Bukti</label>
+                           <div class="mb-5">
+                              <div class="fallback">
+                                 <input name="file" type="file" accept="image/png, image/jpeg, image/jpg, .pdf"
+                                    style="background-color: transparent; border-radius: 0; border: none;">
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="mb-0">
+                           <div>
+                              <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                 Submit
+                              </button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                  <!-- end form -->
+               </div><!-- end cardbody -->
+            </div><!-- end card -->
+         </div> <!-- end col -->
+
+         <!-- <div class="col-xl-8 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Bukti Transaksi</h4>
+                  <% if (edit.photo) { %>
+                     <div class="card">
+                        <img class="card-img-top img-fluid" src="<%= edit.photo %>" alt="">
+                     </div>
+                     <% } else { %>
+                        <div class="alert alert-warning">
+                           Tidak ada bukti transaksi.
+                        </div>
+                        <% } %>
+               </div> -->
+      </div>
+
+   </div>
+</div>
+
+<script>
+   async function Save() {
+      try {
+         const form = document.getElementById('formAddPengeluaran');
+         const formData = new FormData(form);
+         const data = {};
+         formData.forEach((value, key) => {
+            data[key] = value;
+         });
+         console.log('data', data);
+         console.log('data', data);
+         await fetch('/laporan/tambah-pengeluaran', {
+            method: 'POST',
+            body: formData,
+         });
+         showFloatingAlert("success");
+
+
+         // disable modal
+         const modal = document.querySelector('.bs-example-modal-center');
+         const modalInstance = bootstrap.Modal.getInstance(modal);
+         modalInstance.hide();
+
+         setTimeout(() => {
+            window.location.reload();
+         }, 2000);
+      } catch (err) {
+         console.error('Save failed:', err);
+         showFloatingAlert('error');
+      }
+   }
+
+   function showFloatingAlert(type = 'success') {
+
+      if (type === 'success') {
+         const alert = document.querySelector('.floating-alert-update-success')
+         alert.style.display = 'block';
+
+         // Auto hide after 3 seconds
+         setTimeout(() => {
+            alert.style.opacity = '0';
+            alert.style.transition = 'opacity 3s';
+            setTimeout(() => {
+               alert.style.display = 'none';
+               alert.style.opacity = '1';
+            }, 1000);
+         }, 10000);
+      } else {
+         const alert = document.querySelector('.floating-alert-update-failed')
+         alert.style.display = 'block';
+
+         // Auto hide after 3 seconds
+         setTimeout(() => {
+            alert.style.opacity = '0';
+            alert.style.transition = 'opacity 3s';
+            setTimeout(() => {
+               alert.style.display = 'none';
+               alert.style.opacity = '1';
+            }, 1000);
+         }, 10000);
+      }
+   }
+</script>

@@ -1,9 +1,45 @@
 <%- include('../../partials/header.ejs') -%>
+
    <div class="main-content">
 
       <div class="page-content">
          <div class="container-fluid">
-
+            <div class="floating-alert-saving-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-saving-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-update-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-update-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal diupdate.
+               </div>
+            </div>
+            <div class="floating-alert-delete-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil dihapus.
+               </div>
+            </div>
+            <div class="floating-alert-delete-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal dihapus.
+               </div>
+            </div>
             <!-- start page title -->
             <div class="page-title-box">
                <div class="row align-items-center">
@@ -24,7 +60,11 @@
                </div>
             </div>
             <!-- end page title -->
-
+            <!-- <div class="">
+               <div class="alert alert-success" role="alert" style="width: 50%; float:right;">
+                  <strong>Well done!</strong> You successfully read this important alert message.
+               </div>
+            </div> -->
 
 
             <div class="row">
@@ -49,49 +89,53 @@
                               <tbody>
                                  <% if (listPengeluaran.length> 0) { %>
                                     <% listPengeluaran.map((pengeluaran, index)=> { %>
-                                       <% console.log("pengeluaran-list-campaignDonasi",pengeluaran) %>
-                                          <tr data-id="<%= index + 1 %>">
-                                             <td data-field="nomor" style="width: 80px">
-                                                <%= index + 1 %>
-                                             </td>
-                                             <td data-field="judul">
-                                                <% if (pengeluaran.campaignDonasi) { %>
-                                                   <%= pengeluaran.campaignDonasi.judul %>
-                                                      <% } else { %>
-                                                         -
-                                                         <% } %>
-                                             </td>
-                                             <td data-field="keterangan">
-                                                <%= pengeluaran.keterangan %>
-                                             </td>
-                                             <td data-field="jumlah">
-                                                <%= pengeluaran.jumlah %>
-                                             </td>
-                                             <td data-field="tanggal">
-                                                <%= pengeluaran.tanggal %>
-                                             </td>
-                                             <td style="width: 100px">
-                                                <a class="btn btn-primary waves-effect waves-light"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#detail<%= pengeluaran.id %>id">
-                                                   <i class="fas fa-eye"></i>
-                                                </a>
+                                       <tr data-id="<%= index + 1 %>">
+                                          <td data-field="nomor" style="width: 80px">
+                                             <%= index + 1 %>
+                                          </td>
+                                          <td data-field="judul">
+                                             <% if (pengeluaran.judulCampaign) { %>
+                                                <%= pengeluaran.judulCampaign %>
+                                                   <% } else { %>
+                                                      -
+                                                      <% } %>
+                                          </td>
+                                          <td data-field="keterangan">
+                                             <%= pengeluaran.keterangan %>
+                                          </td>
+                                          <td data-field="jumlah">
+                                             <%= pengeluaran.jumlah %>
+                                          </td>
+                                          <td data-field="tanggal">
+                                             <%= pengeluaran.tanggal %>
+                                          </td>
+                                          <td style="width: 100px">
+                                             <a class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                                                data-bs-target="#detail<%= pengeluaran.id %>id">
+                                                <i class="fas fa-eye"></i>
+                                             </a>
+                                             <%- include('./popup-detail-pengeluaran.ejs', {detail: pengeluaran, idx:
+                                                index}) -%>
                                                 <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
                                                    data-bs-toggle="modal" data-bs-target="#edit<%= pengeluaran.id %>id">
                                                    <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a class="btn btn-danger waves-effect waves-ligh" title="Delete"
-                                                   data-bs-toggle="modal" data-bs-target="#edit<%= pengeluaran.id %>id">
-                                                   <i class="fas fa-trash-alt"></i>
-                                                </a>
-                                             </td>
-                                          </tr>
-                                          <% }) %>
-                                             <% } else { %>
-                                                <tr>
-                                                   <td colspan="7" class="text-center">Data tidak ditemukan</td>
-                                                </tr>
-                                                <% } %>
+                                                <%- include('./popup-edit-pengeluaran.ejs', {edit: pengeluaran, idx:
+                                                   index}) -%>
+                                                   <a class="btn btn-danger waves-effect waves-ligh" title="Delete"
+                                                      onclick="deleteItem('<%=  pengeluaran.id %>')"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#edit<%= pengeluaran.id %>id">
+                                                      <i class="fas fa-trash-alt"></i>
+                                                   </a>
+                                          </td>
+                                       </tr>
+                                       <% }) %>
+                                          <% } else { %>
+                                             <tr>
+                                                <td colspan="7" class="text-center">Data tidak ditemukan</td>
+                                             </tr>
+                                             <% } %>
 
 
                               </tbody>
@@ -106,8 +150,52 @@
             </div> <!-- end row -->
 
          </div> <!-- container-fluid -->
+
       </div>
       <!-- End Page-content -->
-
    </div>
+   <script>
+      async function deleteItem(id) {
+         try {
+            await fetch(`/laporan/pengeluaran/${id}`, { method: 'DELETE' });
+
+            showFloatingAlert('success_delete');
+            setTimeout(() => {
+               window.location.reload();
+            }, 500);
+         } catch (err) {
+            console.error('Delete failed:', err);
+         }
+      }
+      function showFloatingAlert(type = 'success_delete') {
+
+         if (type === 'success_delete') {
+            const alert = document.querySelector('.floating-alert-delete-success')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 10000);
+         } else {
+            const alert = document.querySelector('.floating-alert-delete-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 10000);
+         }
+      }
+   </script>
    <%- include('../../partials/footer.ejs') -%>

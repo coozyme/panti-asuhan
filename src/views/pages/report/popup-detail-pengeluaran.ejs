@@ -1,0 +1,78 @@
+<!-- Modal untuk Detail Campaign Donasi -->
+<div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="pengeluaran<%= idx %>"
+   id="detail<%= detail.id %>id" data-target="#detail<%= detail.id %>id" aria-hidden="true">
+   <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="detailCampaignModal<%= idx %>">
+               Detail tambah-pengeluaran
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-xl-4 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Informasi </h4>
+
+                  <div class="table-responsive">
+                     <table class="table table-bordered table-striped">
+                        <tbody>
+                           <tr>
+                              <th>Nama Campaign </th>
+                              <td>
+                                 <% if (detail.judulCampaign) { %>
+                                    <%= detail.judulCampaign %>
+                                       <% } else { %>
+                                          -
+                                          <% } %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th style="max-width:150px;">Keterangan</th>
+                              <td>
+                                 <%= detail.keterangan %>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Jumlah</th>
+                              <td>
+                                 <%= detail.jumlah %>
+                              </td>
+                           </tr>
+
+                           <tr>
+                              <th>Tanggal</th>
+                              <td>
+                                 <%= detail.tanggal %>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+
+
+               </div>
+               <div class="col-xl-8 col-lg-6">
+                  <h4 class="font-size-16 mb-3">Bukti</h4>
+                  <% if (detail.foto) { %>
+                     <div class="card">
+                        <img class="card-img-top img-fluid" src="<%= detail.foto %>" alt="Campaign Thumbnail">
+                        <!-- <div class="card-body">
+                           <h5 class="card-title">Thumbnail Campaign</h5>
+                           <p class="card-text">Ini adalah gambar utama untuk campaign donasi.</p>
+                        </div> -->
+                     </div>
+                     <% } else { %>
+                        <div class="alert alert-warning">
+                           Tidak ada bukti tersedia untuk pengeluaran ini.
+                        </div>
+                        <% } %>
+               </div>
+            </div>
+         </div>
+         <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+         </div> -->
+      </div>
+   </div>
+</div>
