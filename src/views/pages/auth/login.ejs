@@ -31,13 +31,13 @@
           <div class="floating-alert-login-success"
             style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
             <div class="alert alert-success" role="alert">
-              Berhasil Login
+              Selamat, Berhasil Login
             </div>
           </div>
           <div class="floating-alert-login-failed"
             style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
             <div class="alert alert-danger" role="alert">
-              Gagal Login
+              Gagal Login, Periksa kembali username dan password
             </div>
           </div>
           <div class="card overflow-hidden">
@@ -126,6 +126,18 @@
             'Accept': 'application/json'
           },
           body: JSON.stringify(data)
+        }).then(res => {
+          if (res.status === 200) {
+            showFloatingAlert('success');
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
+          } else {
+            showFloatingAlert('failed');
+          }
+        }).catch(err => {
+          console.log(err);
+          showFloatingAlert('failed');
         });
 
         showFloatingAlert('success');

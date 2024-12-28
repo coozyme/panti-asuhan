@@ -165,3 +165,6 @@ DROP COLUMN id_wali;
 
 ALTER TABLE pengeluaran
 DROP COLUMN kegiatan;
+
+ALTER TABLE pengeluaran
+add COLUMN deleted_at DATETIME default null;

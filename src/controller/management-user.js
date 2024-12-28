@@ -1,6 +1,6 @@
 const UUID = require('uuid');
 
-const { Admin } = require("../models");
+const { Admin, Donatur } = require("../models");
 const { AuthPayload } = require("../middleware/auth");
 const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
@@ -81,4 +81,55 @@ module.exports = {
          res.status(422).send(Response(false, "422", "Internal Server Error", null))
       }
    },
+   Donatur: async (req, res) => {
+      try {
+         const data = await Donatur.findAll()
+         const datas = data.map((item) => {
+            return {
+               id: item.id,
+               nama: item.fullname,
+               email: item.email,
+               alamat: item.address,
+               noTelp: item.number_phone,
+               status: item.status,
+               created_at: item.created_at,
+               updated_at: item.updated_at,
+            }
+         }
+         )
+
+         res.render(path.join(__dirname, '../../src/views/pages/donasi/donatur.ejs'), { data: datas });
+      } catch (err) {
+         console.log('LOG-ERR-Donatur', err)
+      }
+   },
+   VerifyDonatur: async (req, res) => {
+      try {
+         const id = req.params
+
+
+         let { status } = req.body
+
+         if (status.toUppercase() != 'ACTIVE' || status.toUppercase() != 'REJECT') {
+            return res.status(401).json({
+               success: false,
+               message: 'status must be active or reject'
+            });
+         }
+
+         const payload = {
+            status: status.toUppercase()
+         }
+
+         await Donatur.update(payload, {
+            where: {
+               id: id
+            }
+         })
+
+         res.redirect('/donatur')
+      } catch (err) {
+         console.log('LOG-ERR-VerifyDonatur', err)
+      }
+   }
 }

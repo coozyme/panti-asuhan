@@ -41,6 +41,31 @@ module.exports = {
 
       await Donasi.create(objectData)
    },
+   AddDonasiLandingPage: async (req, res) => {
+      const {
+         donatur,
+         jumlah,
+         status,
+         catatan,
+         tanggalDonasi,
+         tanggalVerifikasi
+      } = req.body
+
+      const objectData = {
+         // id_campaign_donasi:,
+         donatur: donatur,
+         jumlah: jumlah,
+         metode: "TRANSFER",
+         tanggal_submit: new Date(),
+         catatan: catatan,
+      }
+
+      if (req.file) {
+         objectData.foto = filename
+      }
+
+      await Donasi.create(objectData)
+   },
    EditDonasi: async (req, res) => {
       const { userId } = req.session
       const filename = req.file?.filename

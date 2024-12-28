@@ -27,6 +27,7 @@ module.exports = {
          user = await Donatur.findOne({
             where: {
                email: username,
+               status: "VERIFIED"
             }
          })
 
@@ -39,13 +40,15 @@ module.exports = {
          })
 
       }
-
+      console.log('LOG-user', user)
       if (!user) {
          return res.status(401).json({
             success: false,
-            message: 'No user found'
+            message: 'user tidak ditemukan atau tidak terverifikasi'
          });
       }
+
+      console.log('LOG-user', user)
 
       passport.authenticate('local', (err, user, info) => {
          try {

@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 // const { GetRoles, AddRole, GetDetailPermissionRole, UpdateRole, DeleteRole } = require('../controller/management-user.js')
 // const { Get, Create, Update } = require('../controller/menu.js');
-const { AdminPage, CreateAdmin } = require('../controller/management-user.js');
+const { AdminPage, CreateAdmin, Donatur, VerifyDonatur } = require('../controller/management-user.js');
 
 // const { isLoginAdmin } = require('../middleware/auth')
 
 // router.use(isLoginAdmin)
 router.get('/administrator', AdminPage);
 router.post('/create-administrator', CreateAdmin);
+router.get('/donatur', Donatur)
+router.post('/verfify-donatur', VerifyDonatur)
 // router.get('/roles', GetRoles);
 // router.post('/add-role', AddRole)
 // router.get('/role/:id', GetDetailPermissionRole)

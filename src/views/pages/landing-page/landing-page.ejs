@@ -299,7 +299,7 @@
                   </button> -->
                   <a href="/auth/login" class="th-btn style3 d-xl-block d-none"><i
                         class="fa-solid fa-right-to-bracket me-2"></i>
-                     Login</a>
+                     Login / Register</a>
                   <button type="button" class="icon-btn th-menu-toggle d-lg-none"><i class="far fa-bars"></i></button>
                </div>
             </div>
@@ -1136,14 +1136,15 @@ Blog Area
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <form>
+            <form action="/donasi/berdonasi" method="post" enctype="multipart/form-data">
                <div class="mb-3">
-                  <label for="donationAmount" class="form-label">Donation Amount</label>
-                  <input type="number" class="form-control" id="donationAmount" placeholder="Enter amount">
+                  <label for="jumlah" class="form-label">Donation Amount</label>
+                  <input type="number" name="jumlah" class="form-control" id="donationAmount"
+                     placeholder="Enter amount">
                </div>
                <div class="mb-3">
-                  <label for="donorName" class="form-label">Your Name</label>
-                  <input type="text" class="form-control" id="donorName" placeholder="Enter your name">
+                  <label for="donatur" class="form-label">Your Name</label>
+                  <input name="donatur" type="text" class="form-control" id="donorName" placeholder="Enter your name">
                </div>
                <!-- <div class="mb-3">
                   <label for="donorEmail" class="form-label">Email address</label>
@@ -1195,8 +1196,9 @@ Blog Area
                   }
                </script>
                <div class="mb-3">
-                  <label for="donorNotes" class="form-label">Notes</label>
-                  <textarea class="form-control" id="donorNotes" rows="3" placeholder="Enter any notes"></textarea>
+                  <label for="catatan" class="form-label">Notes</label>
+                  <textarea class="form-control" name="catatan" id="donorNotes" rows="3"
+                     placeholder="Enter any notes"></textarea>
                </div>
                <button type="submit" class="btn btn-primary">Donate</button>
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
