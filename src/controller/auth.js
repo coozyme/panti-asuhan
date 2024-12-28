@@ -15,12 +15,30 @@ const passport = require('passport');
 module.exports = {
    Login: async (req, res, next) => {
 
-      // find 
-      const user = await Admin.findOne({
-         where: {
-            username: req.body.username,
-         }
-      })
+      const { type, username, password } = req.body
+      console.log('req.body', req.body)
+      console.log('type, username, password', type, username, password)
+      if (type === '' || username === '' || password === '') {
+         throw new Error('Please fill the form');
+      }
+
+      let user = null
+      if (type.toUpperCase() === 'DONATUR') {
+         user = await Donatur.findOne({
+            where: {
+               email: username,
+            }
+         })
+
+      } else if (type.toUpperCase() === 'ADMINISTRATOR') {
+         // find 
+         user = await Admin.findOne({
+            where: {
+               username: username,
+            }
+         })
+
+      }
 
       if (!user) {
          return res.status(401).json({
@@ -145,5 +163,10 @@ module.exports = {
          res.set('Content-Type', 'application/json')
          res.status(500).send(Response(false, "500", "Internal Server Error", null))
       }
+   },
+   Logout: async (req, res) => {
+      req.session.destroy();
+
+      res.redirect('/auth/login');
    }
 }

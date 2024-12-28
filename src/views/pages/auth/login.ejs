@@ -1,96 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- @@include("partials/title-meta.ejs", {"title": "Dashboard"}) -->
-    <meta charset="utf-8" />
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 
-    <link href="/assets/libs/chartist/chartist.min.css" rel="stylesheet" />
+<head>
+  <!-- @@include("partials/title-meta.ejs", {"title": "Dashboard"}) -->
+  <meta charset="utf-8" />
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+  <meta content="Themesbrand" name="author" />
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 
-    <!-- @@include("partials/head-css.html") -->
+  <link href="/assets/libs/chartist/chartist.min.css" rel="stylesheet" />
 
-    <!-- Bootstrap Css -->
-    <link href="/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-  </head>
+  <!-- @@include("partials/head-css.html") -->
 
-  <body>
-    <div class="account-pages my-5 pt-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-6 col-xl-4">
-            <div class="card overflow-hidden">
-              <div class="bg-primary">
-                <div class="text-primary text-center p-4">
-                  <h5 class="text-white font-size-20">Selamat Datang Kembali !</h5>
-                  </a>
-                </div>
-              </div>
+  <!-- Bootstrap Css -->
+  <link href="/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+  <!-- Icons Css -->
+  <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <!-- App Css-->
+  <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+</head>
 
-              <div class="card-body p-4">
-                <div class="p-3">
-                  <form class="mt-4" action="/auth/login" method="POST">
-                    <div class="mb-3">
-                      <label class="form-label" for="username">Username</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" />
-                    </div>
-
-                    <div class="mb-3">
-                      <label class="form-label" for="password">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" />
-                    </div>
-
-                    <div class="mb-3 row">
-                      <!-- <div class="col-sm-6">
-                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="customControlInline">
-                                    <label class="form-check-label" for="customControlInline">Remember me</label>
-                                 </div>
-                              </div> -->
-                      <div class="col-sm-12 text-end">
-                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
-                      </div>
-                    </div>
-
-                    <!-- <div class="mt-2 mb-0 row">
-                              <div class="col-12 mt-4">
-                                 <a href="pages-recoverpw.html"><i class="mdi mdi-lock"></i> Forgot your password?</a>
-                              </div>
-                           </div> -->
-                  </form>
-                </div>
+<body>
+  <div class="account-pages my-5 pt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+          <div class="floating-alert-login-success"
+            style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+            <div class="alert alert-success" role="alert">
+              Berhasil Login
+            </div>
+          </div>
+          <div class="floating-alert-login-failed"
+            style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+            <div class="alert alert-danger" role="alert">
+              Gagal Login
+            </div>
+          </div>
+          <div class="card overflow-hidden">
+            <div class="bg-primary">
+              <div class="text-primary text-center p-4">
+                <h5 class="text-white font-size-20">Selamat Datang Kembali !</h5>
+                </a>
               </div>
             </div>
 
-            <div class="mt-5 text-center">
-              <p>Belum Punya akun? <a href="/auth/register" class="fw-medium text-primary"> Daftar Sekarang! </a></p>
-              <p class="mb-0">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                Muhamad Ferdiansyah Saputra
-              </p>
+
+            <div class="card-body p-4">
+              <div class="p-3">
+                <form class="mt-4" id="loginForms">
+                  <div class="mb-3">
+                    <label for="type" class="form-label">Masuk Sebagai</label>
+                    <select class="form-select" id="validationTooltip04" required name="type">
+                      <option selected disabled value="">Choose...</option>
+                      <option value="ADMINISTRATOR">ADMIN</option>
+                      <option value="DONATUR">DONATUR</option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      Please select a valid state.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                      placeholder="Masukkan username atau email" />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                      placeholder="Masukkan password" />
+                  </div>
+
+                  <div class="mb-3 row">
+                    <div class="col-sm-12 text-end">
+                      <button class="btn btn-primary w-md waves-effect waves-light" type="button"
+                        onclick="loginButton()">Log
+                        In</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
+
+          <div class="mt-5 text-center">
+            <p>Belum Punya akun? <a href="/auth/register" class="fw-medium text-primary"> Daftar Sekarang! </a></p>
+            <p class="mb-0">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              Muhamad Ferdiansyah Saputra
+            </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <script>
+    async function loginButton() {
+      try {
+        // console.log('formData', new FormData(form));
+        const form = document.getElementById('loginForms');
+        const username = document.getElementById('username')
+        console.log('form', form, username);
 
-    <!-- JAVASCRIPT -->
-    <script src="/assets/libs/jquery/jquery.min.js"></script>
-    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="/assets/libs/node-waves/waves.min.js"></script>
-    <script src="/assets/js/app.js"></script>
-  </body>
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+        console.log('formData2', data);
+
+
+        // const formData = new FormData(form);
+        console.log('formData23', data);
+        await fetch("/auth/login", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        showFloatingAlert('success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      } catch (err) {
+        console.error('Login failed:', err);
+        showFloatingAlert('failed');
+      }
+    }
+
+    function showFloatingAlert(type) {
+
+      if (type === 'success') {
+        const alert = document.querySelector('.floating-alert-login-success')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        }, 1200);
+      } else if (type === 'failed') {
+        console.log('failed LOGIN TYPE');
+        const alert = document.querySelector('.floating-alert-login-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        }, 1200);
+      }
+    }
+  </script>
+
+
+</body>
+
 </html>

@@ -85,13 +85,14 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i
+                    <!-- <a class="dropdown-item" href="#"><i
                             class="mdi mdi-account-circle font-size-17 align-middle me-1"></i> Profile</a>
                     <a class="dropdown-item d-flex align-items-center" href="#"><i
                             class="mdi mdi-cog font-size-17 align-middle me-1"></i> Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="/auth/login"><i
-                            class="bx bx-power-off font-size-17 align-middle me-1 text-danger"></i> Logout</a>
+                    <div class="dropdown-divider"></div> -->
+                    <button class="dropdown-item text-danger" type="button" id="logoutButton"
+                        onclick="logoutButton()"><i
+                            class="bx bx-power-off font-size-17 align-middle me-1 text-danger"></i> Logout</>
                 </div>
             </div>
 
@@ -99,3 +100,21 @@
         </div>
     </div>
 </header>
+<script>
+    async function logoutButton() {
+        try {
+            await fetch("/auth/logout", {
+                method: 'POST',
+            }).then(res => {
+                if (res.status === 200) {
+                    window.location.href = '/auth/login';
+                }
+            }).catch(err => {
+                console.log(err);
+            });
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+</script>

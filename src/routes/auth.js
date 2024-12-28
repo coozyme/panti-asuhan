@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
-const { Login, Register, GeneratePassword, ChangePassword } = require('../controller/auth.js');
+const { Login, Register, GeneratePassword, ChangePassword, Logout } = require('../controller/auth.js');
 
 router.get('/', function (req, res, next) {
    if (req.isAuthenticated()) {
@@ -25,5 +25,6 @@ router.get('/register', function (req, res, next) {
 router.post('/register', Register);
 router.get('/generate-password', GeneratePassword);
 router.post('/change-password', ChangePassword);
+router.post('/Logout', Logout);
 
 module.exports = router;
