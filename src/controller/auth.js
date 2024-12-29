@@ -15,8 +15,8 @@ const passport = require('passport');
 module.exports = {
    Login: async (req, res, next) => {
 
-      const { type, username, password } = req.body
-      console.log('req.body', req.body)
+      let { type, username, password } = req.body
+      console.log('req.body-login', req.body)
       console.log('type, username, password', type, username, password)
       if (type === '' || username === '' || password === '') {
          throw new Error('Please fill the form');
@@ -29,6 +29,19 @@ module.exports = {
                email: username,
                status: "VERIFIED"
             }
+         }).then(async (res) => {
+            if (!res) {
+               return res
+            }
+            console.log('LOG-RES-DONATUR', res)
+            await Donatur.update({
+               tanggal_login: new Date()
+            }, {
+               where: {
+                  id: res.id,
+               }
+            })
+            return res
          })
 
       } else if (type.toUpperCase() === 'ADMINISTRATOR') {
@@ -40,7 +53,6 @@ module.exports = {
          })
 
       }
-      console.log('LOG-user', user)
       if (!user) {
          return res.status(401).json({
             success: false,
@@ -48,7 +60,9 @@ module.exports = {
          });
       }
 
-      console.log('LOG-user', user)
+      type = type.toUpperCase()
+
+      // console.log('LOG-userS', user)
 
       passport.authenticate('local', (err, user, info) => {
          try {
@@ -80,6 +94,7 @@ module.exports = {
                req.session.userAgent = req.headers['user-agent'];
                req.session.lastActive = new Date();
                req.session.userId = user.id;
+               req.session.userType = type;
 
                // Save the session before redirection to ensure cookies are set
                req.session.save(function (err) {
@@ -168,6 +183,17 @@ module.exports = {
       }
    },
    Logout: async (req, res) => {
+      console.log('LOG-LOGOUT', req.session)
+      const { userId, userType } = req.session
+      if (userType === 'DONATUR') {
+         await Donatur.update({
+            tanggal_logout: new Date()
+         }, {
+            where: {
+               id: userId,
+            }
+         })
+      }
       req.session.destroy();
 
       res.redirect('/auth/login');

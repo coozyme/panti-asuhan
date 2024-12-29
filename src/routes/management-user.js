@@ -10,7 +10,7 @@ const { AdminPage, CreateAdmin, Donatur, VerifyDonatur } = require('../controlle
 router.get('/administrator', AdminPage);
 router.post('/create-administrator', CreateAdmin);
 router.get('/donatur', Donatur)
-router.post('/verfify-donatur', VerifyDonatur)
+router.post('/verify-donatur/:id/:status', VerifyDonatur)
 // router.get('/roles', GetRoles);
 // router.post('/add-role', AddRole)
 // router.get('/role/:id', GetDetailPermissionRole)

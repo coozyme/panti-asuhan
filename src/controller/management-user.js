@@ -94,6 +94,8 @@ module.exports = {
                status: item.status,
                created_at: item.created_at,
                updated_at: item.updated_at,
+               url_verified: `/management-user/verify-donatur/${item.id}/VERIFIED`,
+               url_rejected: `/management-user/verify-donatur/${item.id}/REJECT`
             }
          }
          )
@@ -105,12 +107,12 @@ module.exports = {
    },
    VerifyDonatur: async (req, res) => {
       try {
-         const id = req.params
+         const { id, status } = req.params
+         console.log('REQ-params', req.params)
+         console.log('REQ-params-status', typeof status, (status == 'VERIFIED'))
 
 
-         let { status } = req.body
-
-         if (status.toUppercase() != 'ACTIVE' || status.toUppercase() != 'REJECT') {
+         if (status !== 'VERIFIED' && status !== 'REJECT') {
             return res.status(401).json({
                success: false,
                message: 'status must be active or reject'
@@ -118,7 +120,7 @@ module.exports = {
          }
 
          const payload = {
-            status: status.toUppercase()
+            status: status
          }
 
          await Donatur.update(payload, {
@@ -127,7 +129,7 @@ module.exports = {
             }
          })
 
-         res.redirect('/donatur')
+         res.redirect('/donasi/donatur')
       } catch (err) {
          console.log('LOG-ERR-VerifyDonatur', err)
       }

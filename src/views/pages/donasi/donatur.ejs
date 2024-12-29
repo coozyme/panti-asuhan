@@ -54,11 +54,29 @@
                                        <td data-field="email"><%- item.email %></td>
                                        <td data-field="noTelp"><%- item.noTelp %></td>
                                        <td data-field="alamat"><%- item.alamat %></td>
-                                       <td data-field="status"><%- item.status %></td>
+                                       <td data-field="status">
+
+                                          <% if(item.status==="VERIFIED" ) { %>
+                                             <span class="badge bg-success">
+                                                <%- item.status %>
+                                             </span>
+                                             <% } else if(item.status==="PENDING" ) { %>
+                                                <span class="badge bg-warning">
+                                                   <%- item.status %>
+                                                </span>
+                                                <% } else if (item.status==="REJECT" ) { %>
+                                                   <span class="badge bg-danger">
+                                                      <%- item.status %>
+                                                   </span>
+                                                   <% } %>
+                                       </td>
                                        <td style="width: 100px">
-                                          <a class="btn btn-secondary btn-sm edit" title="Edit">
-                                             <i class="fas fa-pencil-alt"></i>
+                                          <a class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                                             data-bs-target="#detail<%= item.id %>id">
+                                             <i class="fas fas fa-users-cog"></i>
                                           </a>
+                                          <%- include('./popup-donatur-verification.ejs', {detail: item, idx: index})
+                                             -%>
                                        </td>
                                     </tr>
                                     <% }) %>

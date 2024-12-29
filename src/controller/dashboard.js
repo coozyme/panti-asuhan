@@ -30,7 +30,7 @@ module.exports = {
       //       status: "DHUAFA"
       //    }
       // })
-
+      console.log('REQ-SESSION-DASH', req.session.userType)
       const totalAnakAsuh = await AnakAsuh.count()
       const donasiVerified = await Donasi.count({
          status_verifikasi: "VERIFIED"

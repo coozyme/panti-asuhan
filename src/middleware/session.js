@@ -16,7 +16,7 @@ const sessionStoreOptions = {
    expiration: 86400000, // Session expiry (24 hours)
    createDatabaseTable: false, // Auto-create sessions table
    schema: {
-      tableName: 'sessions_admin',
+      tableName: 'sessions_users',
       columnNames: {
          session_id: 'session_id',
          expires: 'expires',

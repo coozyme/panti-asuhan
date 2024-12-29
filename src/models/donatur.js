@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
          status: {
             type: DataTypes.ENUM('PENDING', 'VERIFIED', 'REJECT'),
             defaultValue: 'PENDING'
+         },
+         tanggal_login: {
+            type: DataTypes.DATE,
+            allowNull: true
+         },
+         tanggal_logout: {
+            type: DataTypes.DATE,
+            allowNull: true
          }
       },
       {
