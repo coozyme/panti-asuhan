@@ -61,11 +61,11 @@
 
 2. # Landing Page
 
-   - Buat Button Login dan Daftar Donatur samping"an
-   - yang diform login klik daftarnya ilangin ae
-   - isi foto landing page yang perlu perlu ae source : <https://drive.google.com/drive/folders/1HNXejV66aeskkzWRFWVp3ge-F-mYqkfL?usp=sharing>
-   - pop up Alert Login ,registrasi
-   - Button logout
+   - Buat Button Login dan Daftar Donatur samping"an &#9745;
+   - yang diform login klik daftarnya ilangin ae &#9745;
+   - isi foto landing page yang perlu perlu ae source : <https://drive.google.com/drive/folders/1HNXejV66aeskkzWRFWVp3ge-F-mYqkfL?usp=sharing> &#9745;
+   - pop up Alert Login ,registrasi &#9745;
+   - Button logout &#9745;
 
    # Dashboard
 
@@ -77,14 +77,13 @@
    # Data Anak Asuh = Anak Asuh
 
    - urut asc a-z by nama
-   - input tambah nya Pop up aja kek ditambah donasi #jelek jadinya field formnya terlalu banyak
    - tambahin atribut 'Kelas'
    - textbox photo blm bisa input gambar &#9745;
    - Field hubungan,tanggal wafat, sama data wali dihapus aja &#9745;
    - field status blm lengkap kategori yatim,piatu,yatim piatu,dhuafa &#9745;
    - set semua atribut harus diisi kecuali no hp dan keterangan &#9745;
    - databasenya juga di drop yang wali &#9745;
-   - action CRUD + PRINT (pdf)
+   - action CRUD + Filter search
 
    # Donasi = Donasi Masuk
 
@@ -92,14 +91,13 @@
    - button simpan, validasi , update adain popup alertnya
    - di update donasi di box tanggalnya ga muncul pilihan tanggal kalendernya ya ? gw klik ikon kalendernya ga pop up tanggal kalender gitu ? &#9745;
    - di tambah gausah dimunculin aja textboxnya (tanggal verifikasi) klo udh di set tanggal hari sekarangnya, di update juga
+   - action CRUD + Filter search
+   - nama campaign yang dituju
 
    # Donatur = BELUM WORK
 
-   # REKENING = KABARIN GW MAKSUDNYA APA YA?
-
    # Campaign = dibuat di nav nya 1 aja kaya nav data anak asuh, kalau emg ga ada isi selain buat nambahin campaign doang
 
-   - input tambah nya Pop up aja kek ditambah donasi
    - field (tanggal mulai campaign set jadi hari sekarang aja) + gausah di tampilin di form
    - yang radio set sebagai primarynya ganti jadi apa ya enaknya kata"nya ? kbarin
    - alert CRUD
@@ -112,7 +110,7 @@
 
    # Galeri = Belum Work
 
-3. Button Cetak(pdf),Update,Delete belum fungsi
+3. Filter search,Update,Delete belum fungsi
 4. Simbol sama button" dicek redirect kemana kemananya
 5. Alert klo gagal login,daftar,create,update,delete.
 6. TUNGGU UPDATE SELANJUTNYA
