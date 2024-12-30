@@ -101,8 +101,11 @@ module.exports = {
                   if (err) {
                      return next(err);
                   }
-
-                  res.redirect('/dashboard');
+                  if (type === "ADMINISTRATOR") {
+                     res.redirect('/dashboard');
+                  } else if (type === "DONATUR") {
+                     res.redirect('/donasi/donasi');
+                  }
                });
             });
          } catch (error) {

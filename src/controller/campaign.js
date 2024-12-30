@@ -68,7 +68,7 @@ module.exports = {
                mainCampaign: item.main_campaign,
             }
          })
-         res.render(path.join(__dirname, '../../src/views/pages/campaign/donasi.ejs'), { data: datas });
+         res.render(path.join(__dirname, '../../src/views/pages/campaign/donasi.ejs'), { session: req.session, data: datas });
       })
    },
 

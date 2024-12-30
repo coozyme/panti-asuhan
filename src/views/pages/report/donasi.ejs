@@ -1,4 +1,4 @@
-<%- include('../../partials/header.ejs') -%>
+<%- include('../../partials/header.ejs', {session: session}) -%>
    <div class="main-content">
 
       <div class="page-content">
@@ -15,9 +15,11 @@
                         <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                            data-bs-target=".bs-example-modal-center">
                            <i class="fas fa-print"></i> Cetak</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                           data-bs-target=".bs-example-modal-center">
-                           <i class="fas fa-plus"></i> Tambah</button>
+                        <% if (session.userType==='ADMINISTRATOR' ) { %>
+                           <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                              data-bs-target=".bs-example-modal-center">
+                              <i class="fas fa-plus"></i> Tambah</button>
+                           <% } %>
                      </div>
                   </div>
                </div>

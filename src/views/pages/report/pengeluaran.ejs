@@ -1,4 +1,4 @@
-<%- include('../../partials/header.ejs') -%>
+<%- include('../../partials/header.ejs', {session: session}) -%>
 
    <div class="main-content">
 
@@ -47,15 +47,14 @@
                      <h6 class="page-title">Data Pengeluaran</h6>
                   </div>
                   <div class="col-md-4">
-                     <div class="float-end d-none d-md-block">
-                        <!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                           data-bs-target=".bs-example-modal-center">
-                           <i class="fas fa-print"></i> Cetak</button> -->
-                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                           data-bs-target=".bs-example-modal-center">
-                           <i class="fas fa-plus"></i> Tambah</button>
-                        <%- include('./popup-add-pengeluaran.ejs', {listCampaign:listCampaign}) -%>
-                     </div>
+                     <% if (session.userType==='ADMINISTRATOR' ) { %>
+                        <div class="float-end d-none d-md-block">
+                           <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                              data-bs-target=".bs-example-modal-center">
+                              <i class="fas fa-plus"></i> Tambah</button>
+                           <%- include('./popup-add-pengeluaran.ejs', {listCampaign:listCampaign}) -%>
+                        </div>
+                        <% } %>
                   </div>
                </div>
             </div>
@@ -83,7 +82,9 @@
                                     <th>Keterangan</th>
                                     <th>Jumlah</th>
                                     <th>Tanggal</th>
-                                    <th>Action</th>
+                                    <% if (session.userType==='ADMINISTRATOR' ) { %>
+                                       <th>Action</th>
+                                       <% } %>
                                  </tr>
                               </thead>
                               <tbody>
@@ -109,27 +110,29 @@
                                           <td data-field="tanggal">
                                              <%= pengeluaran.tanggal %>
                                           </td>
-                                          <td style="width: 100px">
-                                             <%- include('./popup-detail-pengeluaran.ejs', {detail: pengeluaran, idx:
-                                                index}) -%>
-                                                <a class="btn btn-primary waves-effect waves-light"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#detail<%= pengeluaran.id %>id">
-                                                   <i class="fas fa-eye"></i>
-                                                </a>
-                                                <%- include('./popup-edit-pengeluaran.ejs', {edit: pengeluaran, idx:
+                                          <% if (session.userType==='ADMINISTRATOR' ) { %>
+                                             <td style="width: 100px">
+                                                <%- include('./popup-detail-pengeluaran.ejs', {detail: pengeluaran, idx:
                                                    index}) -%>
-                                                   <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                   <a class="btn btn-primary waves-effect waves-light"
                                                       data-bs-toggle="modal"
-                                                      data-bs-target="#edit<%= pengeluaran.id %>id">
-                                                      <i class="fas fa-pencil-alt"></i>
+                                                      data-bs-target="#detail<%= pengeluaran.id %>id">
+                                                      <i class="fas fa-eye"></i>
                                                    </a>
-                                                   <a class="btn btn-danger waves-effect waves-ligh" title="Delete"
-                                                      onclick="deleteItem('<%=  pengeluaran.id %>')"
-                                                      data-bs-toggle="modal">
-                                                      <i class="fas fa-trash-alt"></i>
-                                                   </a>
-                                          </td>
+                                                   <%- include('./popup-edit-pengeluaran.ejs', {edit: pengeluaran, idx:
+                                                      index}) -%>
+                                                      <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                         data-bs-toggle="modal"
+                                                         data-bs-target="#edit<%= pengeluaran.id %>id">
+                                                         <i class="fas fa-pencil-alt"></i>
+                                                      </a>
+                                                      <a class="btn btn-danger waves-effect waves-ligh" title="Delete"
+                                                         onclick="deleteItem('<%=  pengeluaran.id %>')"
+                                                         data-bs-toggle="modal">
+                                                         <i class="fas fa-trash-alt"></i>
+                                                      </a>
+                                             </td>
+                                             <% } %>
                                        </tr>
                                        <% }) %>
                                           <% } else { %>

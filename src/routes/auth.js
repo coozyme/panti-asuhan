@@ -4,16 +4,28 @@ const path = require('path');
 const { Login, Register, GeneratePassword, ChangePassword, Logout } = require('../controller/auth.js');
 
 router.get('/', function (req, res, next) {
+   const { userType } = req.session
    if (req.isAuthenticated()) {
-      res.redirect('/dashboard')
+      console.log('LOG-USER-TYPE', userType)
+      if (userType === 'ADMINISTRATOR') {
+         return res.redirect('/dashboard')
+      } else if (userType === 'DONATUR') {
+         return res.redirect('/donasi/donasi')
+      }
+
    } else {
       res.redirect('/auth/login')
    }
 });
 
 router.get('/login', function (req, res, next) {
+   const { userType } = req.session
    if (req.isAuthenticated()) {
-      return res.redirect('/dashboard')
+      if (userType === 'ADMINISTRATOR') {
+         return res.redirect('/dashboard')
+      } else if (userType === 'DONATUR') {
+         return res.redirect('/donasi/donasi')
+      }
    } else {
       res.render(path.join(__dirname, '../../src/views/pages/auth/login.ejs'));
    }

@@ -1,76 +1,89 @@
-<%- include('../../partials/header.ejs') -%>
-<div class="main-content">
-  <div class="page-content">
-    <div class="container-fluid">
-      <!-- start page title -->
-      <div class="page-title-box">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <h6 class="page-title">Administrator</h6>
-          </div>
-          <div class="col-md-4">
-            <div class="float-end d-none d-md-block">
-              <!-- <a href="/anak-asuh/tambah-anak-asuh"> -->
-              <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"><i class="fas fa-plus"></i> Buat Akun</button>
-              <%- include('./popup-add-administrator.ejs') -%>
-              <!-- </a> -->
+<%- include('../../partials/header.ejs', {session: session}) -%>
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <!-- start page title -->
+        <div class="page-title-box">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h6 class="page-title">Administrator</h6>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- end page title -->
-
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">List Administrator</h4>
-              <div class="table-responsive">
-                <table class="table table-editable table-nowrap align-middle table-edits">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Username</th>
-                      <th>Nama Lengkap</th>
-                      <th>No. Handphone</th>
-                      <th>Email</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <% for(var i=0; i < data.length; i++) { %>
-
-                    <tr data-id="1">
-                      <td data-field="id" style="width: 80px"><%= i + 1 %></td>
-                      <td data-field="username"><%=data[i].username%></td>
-                      <td data-field="fullname"><%=data[i].fullname%></td>
-                      <td data-field="no-handphone"><%=data[i].number_phone%></td>
-                      <td data-field="email"><%=data[i].email%></td>
-                      <td data-field="status"><%=data[i].is_active%></td>
-                      <td style="width: 100px">
-                        <a class="btn btn-secondary btn-sm edit" title="Edit">
-                          <i class="fas fa-pencil-alt"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <% } %>
-                  </tbody>
-                  <!-- end tbody -->
-                </table>
-                <!-- end table -->
+            <div class="col-md-4">
+              <div class="float-end d-none d-md-block">
+                <!-- <a href="/anak-asuh/tambah-anak-asuh"> -->
+                <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                  data-bs-target=".bs-example-modal-center"><i class="fas fa-plus"></i> Buat Akun</button>
+                <%- include('./popup-add-administrator.ejs') -%>
+                  <!-- </a> -->
               </div>
-              <!-- end -->
             </div>
           </div>
         </div>
-        <!-- end col -->
+        <!-- end page title -->
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">List Administrator</h4>
+                <div class="table-responsive">
+                  <table class="table table-editable table-nowrap align-middle table-edits">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Nama Lengkap</th>
+                        <th>No. Handphone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% for(var i=0; i < data.length; i++) { %>
+
+                        <tr data-id="1">
+                          <td data-field="id" style="width: 80px">
+                            <%= i + 1 %>
+                          </td>
+                          <td data-field="username">
+                            <%=data[i].username%>
+                          </td>
+                          <td data-field="fullname">
+                            <%=data[i].fullname%>
+                          </td>
+                          <td data-field="no-handphone">
+                            <%=data[i].number_phone%>
+                          </td>
+                          <td data-field="email">
+                            <%=data[i].email%>
+                          </td>
+                          <td data-field="status">
+                            <%=data[i].is_active%>
+                          </td>
+                          <td style="width: 100px">
+                            <a class="btn btn-secondary btn-sm edit" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
+                            </a>
+                          </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                    <!-- end tbody -->
+                  </table>
+                  <!-- end table -->
+                </div>
+                <!-- end -->
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
       </div>
-      <!-- end row -->
+      <!-- container-fluid -->
     </div>
-    <!-- container-fluid -->
+    <!-- End Page-content -->
   </div>
-  <!-- End Page-content -->
-</div>
-<%- include('../../partials/footer.ejs') -%>
+  <%- include('../../partials/footer.ejs') -%>

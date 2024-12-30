@@ -100,7 +100,7 @@ module.exports = {
          }
          )
 
-         res.render(path.join(__dirname, '../../src/views/pages/donasi/donatur.ejs'), { data: datas });
+         res.render(path.join(__dirname, '../../src/views/pages/donasi/donatur.ejs'), { session: req.session, data: datas });
       } catch (err) {
          console.log('LOG-ERR-Donatur', err)
       }

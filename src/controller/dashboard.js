@@ -84,6 +84,6 @@ module.exports = {
          dataUnalidationDonasi: mapData
       }
 
-      res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'), { ...dataCount });
+      res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'), { session: req.session, ...dataCount });
    }
 }

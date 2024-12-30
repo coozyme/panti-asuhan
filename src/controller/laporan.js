@@ -35,7 +35,7 @@ module.exports = {
          }
       })
 
-      res.render(path.join(__dirname, '../../src/views/pages/report/pengeluaran.ejs'), { listCampaign: listCampaign, listPengeluaran: listPengeluaran });
+      res.render(path.join(__dirname, '../../src/views/pages/report/pengeluaran.ejs'), { session: req.session, listCampaign: listCampaign, listPengeluaran: listPengeluaran });
    },
 
    AddLaporanPengeluaran: async (req, res) => {
@@ -121,5 +121,9 @@ module.exports = {
       } catch (error) {
          console.log('error-22', error)
       }
+   },
+
+   Donasi: async (req, res) => {
+      res.render(path.join(__dirname, '../../src/views/pages/report/donasi.ejs'), { session: req.session });
    }
 }

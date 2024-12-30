@@ -146,7 +146,7 @@ module.exports = {
          }
          )
 
-         res.render(path.join(__dirname, '../../src/views/pages/donasi/donasi.ejs'), { data: datas });
+         res.render(path.join(__dirname, '../../src/views/pages/donasi/donasi.ejs'), { session: req.session, data: datas });
       })
    },
 

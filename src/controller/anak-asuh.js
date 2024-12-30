@@ -35,7 +35,7 @@ module.exports = {
       })
       console.log("LOG-DATA-ANAK-ASUH", dataAnakAsuh)
 
-      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/anak-asuh.ejs'), { data: dataAnakAsuh });
+      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/anak-asuh.ejs'), { session: req.session, data: dataAnakAsuh });
    },
    AddAnakAsuh: async (req, res) => {
       const { userId } = req.session
