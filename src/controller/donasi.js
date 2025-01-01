@@ -43,28 +43,31 @@ module.exports = {
    },
    AddDonasiLandingPage: async (req, res) => {
       const {
+         item_id,
          donatur,
          jumlah,
-         status,
          catatan,
-         tanggalDonasi,
-         tanggalVerifikasi
       } = req.body
 
+      console.log('REQ-body', req.body)
+      console.log('REQ-file', req.file)
       const objectData = {
-         // id_campaign_donasi:,
+         id_campaign_donasi: parseInt(item_id),
          donatur: donatur,
-         jumlah: jumlah,
+         jumlah: parseFloat(jumlah),
          metode: "TRANSFER",
          tanggal_submit: new Date(),
          catatan: catatan,
       }
 
       if (req.file) {
-         objectData.foto = filename
+         objectData.foto = req.file.filename
       }
-
-      await Donasi.create(objectData)
+      try {
+         await Donasi.create(objectData)
+      } catch (error) {
+         return Response(res, 400, false, error.message)
+      }
    },
    EditDonasi: async (req, res) => {
       const { userId } = req.session

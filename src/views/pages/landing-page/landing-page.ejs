@@ -707,47 +707,47 @@ Donation Area
             <div class="swiper th-slider has-shadow" id="donationSlider2"
                data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}, "autoHeight": "true"}'>
                <div class="swiper-wrapper">
-                  <% for(var i=0; i < campaignData.length; i++) { %>
+                  <% campaignData.length> 0 && campaignData.map((val, idx)=> { %>
                      <div class="swiper-slide">
                         <div class="donation-card" data-theme-color="">
                            <!-- <div class="donation-card-shape"
                               data-mask-src="/assets-landing-page/img/donation/donation-card-bg-shape1-1.png"></div> -->
                            <div class="box-thumb">
                               <!-- <img src="/assets-landing-page/img/donation/donation1-2.png" alt="image"> -->
-                              <img src="<%= campaignData[i].photo %>" alt="image">
+                              <img src="<%= val.photo %>" alt="image">
                               <div class="donation-card-tag">
-                                 <%= campaignData[i].percentage %>
+                                 <%= val.percentage %>
                               </div>
                            </div>
                            <div class="box-content">
                               <h3 class="box-title"><a href="blog-details.html">
-                                    <%= campaignData[i].judul %>
+                                    <%= val.judul %>
                                  </a></h3>
                               <div class="donation-card_progress-wrap">
 
                                  <div class="progress">
-                                    <div class="progress-bar" style="width:  <%= campaignData[i].percentage %>;">
+                                    <div class="progress-bar" style="width:  <%= val.percentage %>;">
                                     </div>
                                  </div>
                                  <div class="donation-card_progress-content">
                                     <span class="donation-card_raise">
-                                       <%= campaignData[i].terkumpul %>
+                                       <%= val.terkumpul %>
                                     </span>
                                     <span class="donation-card_goal">
-                                       <%= campaignData[i].targetDonasi %>
+                                       <%= val.targetDonasi %>
                                     </span>
                                  </div>
                               </div>
                               <!-- <a href="blog-details.html" class="th-btn style6">Donate Now <i
                                     class="fas fa-arrow-up-right ms-2"></i></a> -->
                               <button type="button" class="th-btn style6" data-bs-toggle="modal"
-                                 data-bs-target="#donateNowModal">
+                                 onclick="OpenFormDonate(<%= val.id %>)" data-bs-target="#donateNowModal">
                                  Donate Now <i class="fas fa-arrow-up-right ms-2"></i>
                               </button>
                            </div>
                         </div>
                      </div>
-                     <% } %>
+                     <% })%>
                </div>
             </div>
          </div>
@@ -1136,7 +1136,9 @@ Blog Area
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <form action="/donasi/berdonasi" method="post" enctype="multipart/form-data">
+            <form enctype="multipart/form-data" id="formSubmitDonate">
+               <input type="hidden" name="item_id" id="item_id">
+
                <div class="mb-3">
                   <label for="jumlah" class="form-label">Donation Amount</label>
                   <input type="number" name="jumlah" class="form-control" id="donationAmount"
@@ -1172,7 +1174,7 @@ Blog Area
                      function copyBankAccount() {
                         var copyText = document.getElementById('bankAccountCopy');
                         var textToCopy = copyText.value.split(' - ')[0]; // Take the text value in front of the symbol '-'
-                        alert('Copied the text: ' + textToCopy);
+                        alert('Copy bank account: ' + textToCopy);
                         navigator.clipboard.writeText(textToCopy);
                      }
                   </script>
@@ -1200,7 +1202,7 @@ Blog Area
                   <textarea class="form-control" name="catatan" id="donorNotes" rows="3"
                      placeholder="Enter any notes"></textarea>
                </div>
-               <button type="submit" class="btn btn-primary">Donate</button>
+               <button type="button" class="btn btn-primary" onclick="SubmitDonate()">Donate</button>
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </form>
          </div>
@@ -1208,6 +1210,51 @@ Blog Area
    </div>
    </div>
 
+   <script>
+      async function OpenFormDonate(id) {
+         console.log('LOG-ASD', id);
+         const hiddenInput = document.getElementById('item_id');
+         hiddenInput.value = id;
+      }
+
+      async function SubmitDonate() {
+         console.log("subcmit")
+         const form = document.getElementById('formSubmitDonate');
+         const formData = new FormData(form)
+
+         const dataPayload = {};
+
+         console.log('LOG-formData', formData);
+
+         formData.forEach((value, key) => {
+            dataPayload[key] = value;
+            console.log('LOG-foreachformData', key, value);
+         });
+
+         console.log('LOG-dataPayload', dataPayload);
+
+         const response = await fetch('/donasi/berdonasi', {
+            headers: {
+               'Content-Type': 'application/json',
+               'Accept': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(dataPayload)
+         });
+
+
+         // close modal class="modal fade" id="donateNowModal"
+         const modal = bootstrap.Modal.getInstance(document.getElementById('donateNowModal'));
+         modal.hide();
+
+         // Optional: Reset the form
+         form.reset();
+
+
+
+      }
+
+   </script>
    <!--==============================
     All Js File
 ============================== -->

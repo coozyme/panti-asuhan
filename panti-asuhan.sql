@@ -168,3 +168,8 @@ DROP COLUMN kegiatan;
 
 ALTER TABLE pengeluaran
 add COLUMN deleted_at DATETIME default null;
+
+ALTER TABLE `anak_asuh`
+DROP COLUMN `tanggal_masuk`,
+DROP COLUMN `tanggal_keluar`,
+ADD COLUMN `kelas` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL AFTER `kelamin`;

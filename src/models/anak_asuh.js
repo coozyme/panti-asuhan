@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: true
          },
+         kelas: {
+            type: DataTypes.TEXT,
+            allowNull: true
+         },
          status: {
             type: DataTypes.ENUM('YATIM', 'PIATU', 'YATIM PIATU', 'DHUAFA'),
             defaultValue: 'YATIM',
@@ -39,14 +43,6 @@ module.exports = (sequelize, DataTypes) => {
          },
          photo: {
             type: DataTypes.STRING(255),
-            allowNull: true
-         },
-         tanggal_masuk: {
-            type: DataTypes.DATEONLY,
-            allowNull: true
-         },
-         tanggal_keluar: {
-            type: DataTypes.DATEONLY,
             allowNull: true
          },
          ayah: {

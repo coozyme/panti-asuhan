@@ -11,7 +11,6 @@ const config = require("../config/config");
 module.exports = {
    GetDataAnakAsuh: async (req, res) => {
       const datas = await AnakAsuh.findAll({})
-      console.log("LOG-DATA", datas)
 
       const dataAnakAsuh = datas.map((data) => {
          const photo = data.photo ? `http://${config.url}/uploads/profile/${data.photo}` : null
@@ -23,6 +22,7 @@ module.exports = {
             tanggalLahir: data.tanggal_lahir,
             address: data.address,
             status: data.status,
+            kelas: data.kelas,
             photo: photo,
             umur: new Date().getFullYear() - new Date(data.tanggal_lahir).getFullYear(),
             tanggalMasuk: data.tanggal_masuk,
@@ -33,9 +33,11 @@ module.exports = {
             keterangan: data.keterangan,
          }
       })
-      console.log("LOG-DATA-ANAK-ASUH", dataAnakAsuh)
 
       res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/anak-asuh.ejs'), { session: req.session, data: dataAnakAsuh });
+   },
+   PageAddAnakAsuh: async (req, res) => {
+      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/tambah-anak-asuh.ejs'), { session: req.session });
    },
    AddAnakAsuh: async (req, res) => {
       const { userId } = req.session
@@ -47,9 +49,8 @@ module.exports = {
          tanggalLahir,
          gender,
          alamat,
+         kelas,
          status,
-         tanggalMasuk,
-         tanggalKeluar,
          ayah,
          ibu,
          noHandphone,
@@ -64,9 +65,8 @@ module.exports = {
          tanggal_lahir: moment(tanggalLahir).format("YYYY-MM-DD"),
          address: alamat,
          status: status,
+         kelas: kelas,
          photo: filename,
-         tanggal_masuk: moment(tanggalMasuk).format("YYYY-MM-DD"),
-         tanggal_keluar: moment(tanggalKeluar).format("YYYY-MM-DD"),
          ayah: ayah,
          ibu: ibu,
          number_phone: noHandphone,
@@ -79,7 +79,6 @@ module.exports = {
    EditAnakAsuhPage: async (req, res) => {
       const { id } = req.params
       const data = await AnakAsuh.findOne({ where: { id: id } })
-      console.log("LOG-DATA", data)
       const photo = data.photo ? `http://${config.url}/uploads/profile/${data.photo}` : null
       const dataAnak = {
          id: data.id,
@@ -89,16 +88,17 @@ module.exports = {
          tanggalLahir: moment(data.tanggal_lahir).format("DD MMM YYYY"),
          address: data.address,
          status: data.status,
+         kelas: data.kelas,
          photo: photo,
          umur: new Date().getFullYear() - new Date(data.tanggal_lahir).getFullYear(),
-         tanggalMasuk: moment(data.tanggal_masuk).format("DD MMM YYYY"),
-         tanggalKeluar: moment(data.tanggal_keluar).format("DD MMM YYYY"),
          ayah: data.ayah,
          ibu: data.ibu,
          noHandphone: data.number_phone,
          keterangan: data.keterangan,
       }
-      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/edit-anak-asuh.ejs'), { data: dataAnak });
+      console.log("LOG-REQ-PARAMS", id)
+      console.log("LOG-REQ-req.session", req.session)
+      res.render(path.join(__dirname, '../../src/views/pages/anak-asuh/edit-anak-asuh.ejs'), { session: req.session, data: dataAnak });
    },
    UpdateDataAnakAsuh: async (req, res) => {
       const { id } = req.params
@@ -112,8 +112,7 @@ module.exports = {
          gender,
          alamat,
          status,
-         tanggalMasuk,
-         tanggalKeluar,
+         kelas,
          ayah,
          ibu,
          noHandphone,
@@ -129,8 +128,7 @@ module.exports = {
          tanggal_lahir: moment(tanggalLahir).format("YYYY-MM-DD"),
          address: alamat,
          status: status,
-         tanggal_masuk: moment(tanggalMasuk).format("YYYY-MM-DD"),
-         tanggal_keluar: moment(tanggalKeluar).format("YYYY-MM-DD"),
+         kelas: kelas,
          ayah: ayah,
          ibu: ibu,
          number_phone: noHandphone,
@@ -143,6 +141,12 @@ module.exports = {
 
       await AnakAsuh.update(dataObject, { where: { id: id } })
 
+      res.redirect('/anak-asuh')
+   },
+   DeleteAnakAsuh: async (req, res) => {
+      const { id } = req.params
+      console.log("LOG-REQ-PARAMS", id)
+      await AnakAsuh.destroy({ where: { id: id } })
       res.redirect('/anak-asuh')
    }
 }

@@ -1,4 +1,4 @@
-<%- include('../../partials/header.ejs') -%>
+<%- include('../../partials/header.ejs', {session: session}) -%>
 
    <div class="main-content">
 
@@ -68,6 +68,11 @@
                                  <label class="form-check-label" for="gender">Perempuan</label>
                               </div>
                            </div>
+                           <div class="mb-3">
+                              <label class="form-label" for="kelas">Kelas</label>
+                              <input type="text" class="form-control" name="kelas" required value="<%=data.kelas%>"
+                                 placeholder="Masukkan Kelas">
+                           </div>
                            <div class="md-3">
                               <label for="
                               validationCustom04" class="form-label">Status</label>
@@ -91,27 +96,6 @@
                            <div class="mb-3">
                               <label class="form-label" for="photo">Photo</label>
                               <input name="file" type="file" accept="image/png, image/jpeg, image/jpg">
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label" for="tanggalMasuk">Tanggal Masuk</label>
-                              <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalMasuk"
-                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    value="<%=data.tanggalMasuk%>" data-provide="datepicker" data-date-autoclose="true">
-
-                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div>
-                           </div>
-                           <div class="mb-3">
-                              <label class="form-label" for="tanggalKeluar">Tanggal Keluar</label>
-                              <div class="input-group" id="datepicker2">
-                                 <input type="text" class="form-control" placeholder="dd M yyyy" name="tanggalKeluar"
-                                    data-date-format="dd M yyyy" data-date-container='#datepicker2'
-                                    value="<%=data.tanggalKeluar%>" data-provide="datepicker"
-                                    data-date-autoclose="true">
-
-                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                              </div>
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for="ayah">Ayah</label>
