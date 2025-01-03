@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-   const Galeri = sequelize.define(
-      "Galeri",
+   const Kegiatan = sequelize.define(
+      "Kegiatan",
       {
          id: {
             type: DataTypes.INTEGER,
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
          },
-         foto: {
+         thumbnail: {
             type: DataTypes.STRING(255),
             allowNull: false
          },
@@ -23,18 +23,21 @@ module.exports = (sequelize, DataTypes) => {
          tanggal: {
             type: DataTypes.DATEONLY,
             allowNull: false,
-            defaultValue: DataTypes.NOW
          },
          tanggal_upload: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW
+         },
+         id_admin: {
+            type: DataTypes.INTEGER,
+            allowNull: false
          }
       },
       {
-         tableName: "galeri",
+         tableName: "kegiatan",
          timestamps: false
       }
    );
-   return Galeri;
+   return Kegiatan
 };

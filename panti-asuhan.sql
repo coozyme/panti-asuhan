@@ -81,15 +81,24 @@ CREATE TABLE `campaign_donasi` (
   FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
 );
 
-
-CREATE TABLE `galeri` (
+CREATE TABLE `kegiatan` (
   `id`int NOT NULL AUTO_INCREMENT,
-  `foto` varchar(255) NOT NULL,
+  `thumbnail` varchar(255) NULL,
   `kegiatan` varchar(128) NOT NULL,
   `keterangan` varchar(128),
   `tanggal` DATE NOT NULL DEFAULT (CURRENT_DATE),
   `tanggal_upload` DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-  PRIMARY KEY (`id`)
+  `id_admin` int NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id`)
+);
+
+CREATE TABLE `galeries` (
+  `id`int NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) ,
+  `id_kegiatan` int ,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan`(`id`)
 );
 
 

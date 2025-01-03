@@ -7,6 +7,7 @@ const storage = (folderName) => multer.diskStorage({
       cb(null, path.join(__dirname, '../../uploads/' + folderName))
    },
    filename: function (req, file, cb) {
+      console.log("LOG-REQ-FILE", req.file)
       console.log("LOG-UPLOAD-FILE", file.mimetype, file.originalname)
       // take the original name and replace all spaces with _
       const filename = file.originalname.split(' ').join('_')
