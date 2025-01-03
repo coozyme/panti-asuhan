@@ -59,10 +59,30 @@
                                           <%=data[i].jumlah%>
                                        </td>
                                        <td data-field="metode">
-                                          <%=data[i].metode%>
+                                          <% if(data[i].metode==="TUNAI" ) { %>
+                                             <span class="text-primary" style="font-weight: 700;">
+                                                <%= data[i].metode %>
+                                             </span>
+                                             <% } else if(data[i].metode==="TRANSFER" ) { %>
+                                                <span class="text-info" style="font-weight: 700;">
+                                                   <%= data[i].metode %>
+                                                </span>
+                                                <% } %>
                                        </td>
                                        <td data-field="status">
-                                          <%=data[i].status_verifikasi%>
+                                          <% if(data[i].status_verifikasi==="VERIFIED" ) { %>
+                                             <span class="text-success" style="font-weight: 700;">
+                                                <%= data[i].status_verifikasi %>
+                                             </span>
+                                             <% } else if(data[i].status_verifikasi==="PENDING" ) { %>
+                                                <span class="text-warning" style="font-weight: 700;">
+                                                   <%= data[i].status_verifikasi %>
+                                                </span>
+                                                <% } else { %>
+                                                   <span class="text-danger" style="font-weight: 700;">
+                                                      <%= data[i].status_verifikasi %>
+                                                   </span>
+                                                   <% } %>
                                        </td>
                                        <td data-field="date-donation">
                                           <%=data[i].tanggal_submit%>
