@@ -111,5 +111,8 @@ module.exports = {
       })
 
       res.redirect('/campaign/donasi')
+   },
+   TambahCampaignPage: async (req, res) => {
+      res.render(path.join(__dirname, '../../src/views/pages/campaign/tambah-campaign-donasi.ejs'), { session: req.session });
    }
 }
