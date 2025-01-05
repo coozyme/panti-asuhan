@@ -127,6 +127,15 @@ module.exports = {
    },
 
    Donasi: async (req, res) => {
-      res.render(path.join(__dirname, '../../src/views/pages/report/donasi.ejs'), { session: req.session });
+
+      const campaign = await CampaignDonasi.findAll({
+         order: [
+            ['judul', 'ASC']
+         ],
+      })
+
+
+
+      res.render(path.join(__dirname, '../../src/views/pages/report/donasi.ejs'), { session: req.session, campaign: campaign });
    }
 }

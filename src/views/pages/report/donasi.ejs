@@ -42,13 +42,15 @@
                                  <label class="form-label">Single Campaign</label>
                                  <select class="form-control select2">
                                     <option>Select</option>
-                                    <optgroup label="Alaskan/Hawaiian Time Zone">
-                                       <option value="AK">Alaska</option>
-                                       <option value="HI">Hawaii</option>
-                                    </optgroup>
+                                    <% campaign.map((item, index)=> { %>
+                                       <option value="<%= item.id %>">
+                                          <%= item.judul %>
+                                       </option>
+                                       <% }) %>
                                  </select>
                                  <!-- end -->
                               </div>
+
                               <div style="flex: 1;">
                                  <label class="form-label">Date Range</label>
                                  <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy"
@@ -120,4 +122,20 @@
       <!-- End Page-content -->
 
    </div>
+
+   <script>
+      async function filterDonasiReport(id) {
+         try {
+            await fetch(`/laporan/pengeluaran/${id}`, { method: 'DELETE' });
+
+            showFloatingAlert('success_delete');
+            setTimeout(() => {
+               window.location.reload();
+            }, 500);
+         } catch (err) {
+            console.error('Delete failed:', err);
+            showFloatingAlert('failed_delete');
+         }
+      }
+   </script>
    <%- include('../../partials/footer.ejs') -%>

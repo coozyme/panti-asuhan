@@ -42,7 +42,7 @@ module.exports = {
    },
    AddKegiatan: async (req, res) => {
       const userId = req.session.userId
-      const { kegiatan, deksripsi, tanggal } = req.body;
+      const { kegiatan, deksripsi, tanggalKegiatan } = req.body;
       console.log("LOG-PJO", req.files);
       console.log("LOG-PJO-body", req.body);
 
@@ -64,7 +64,7 @@ module.exports = {
             thumbnail: thumbnail,
             kegiatan: kegiatan,
             keterangan: deksripsi,
-            tanggal: tanggal,
+            tanggal: tanggalKegiatan,
             id_admin: userId
          });
 
