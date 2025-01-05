@@ -126,7 +126,11 @@ module.exports = {
    },
 
    GetDonasi: async (req, res) => {
-      await Donasi.findAll({}).then((data) => {
+      await Donasi.findAll({
+         order: [
+            ['created_at', 'DESC']
+         ]
+      }).then((data) => {
          const datas = data.map((item) => {
             const photo = item.foto ? `http://${config.url}/uploads/donasi/${item.foto}` : null
             return {

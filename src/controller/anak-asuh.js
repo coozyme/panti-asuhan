@@ -10,7 +10,11 @@ const config = require("../config/config");
 
 module.exports = {
    GetDataAnakAsuh: async (req, res) => {
-      const datas = await AnakAsuh.findAll({})
+      const datas = await AnakAsuh.findAll({
+         order: [
+            ['fullname', 'ASC']
+         ]
+      })
 
       const dataAnakAsuh = datas.map((data) => {
          const photo = data.photo ? `http://${config.url}/uploads/profile/${data.photo}` : null

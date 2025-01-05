@@ -9,6 +9,9 @@ module.exports = {
       const listCampaign = await CampaignDonasi.findAll()
 
       let listPengeluaran = await Pengeluaran.findAll({
+         order: [
+            ['created_at', 'DESC']
+         ],
          where: {
             deleted_at: null
          },
