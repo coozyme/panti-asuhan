@@ -71,6 +71,60 @@
                   <div class="card">
                      <div class="card-body">
 
+                        <h4 class="card-title mb-3">Filter Laporan Donasi</h4>
+
+                        <form action="/laporan/pengeluaran" method="GET">
+                           <div class="col-12 d-flex gap-5">
+
+                              <div style="flex: 1;">
+                                 <label for="campaignID" class="form-label">Campaign</label>
+                                 <select class="form-control select2" name="campaignID">
+                                    <option>Select campaign</option>
+                                    <% listCampaign.map((item, index)=> { %>
+                                       <option value="<%= item.id %>">
+                                          <%= item.judul %>
+                                       </option>
+                                       <% }) %>
+                                 </select>
+                                 <!-- end -->
+                              </div>
+
+                              <!-- <div style="flex: 1;">
+                                 <label class="form-label">Date Range</label>
+                                 <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy"
+                                    data-date-autoclose="true" data-provide="datepicker"
+                                    data-date-container='#datepicker6'>
+                                    <input type="text" class="form-control" name="start" placeholder="Start Date" />
+                                    <input type="text" class="form-control" name="end" placeholder="End Date" />
+                                 </div>
+                              </div> -->
+                           </div>
+                           <div class="col-12 d-flex gap-5">
+                              <div style="flex: 1;">
+                                 <button type="submit" class="btn btn-primary waves-effect waves-light mt-10"
+                                    style="width: 100%; margin-top: 10px;">
+                                    <i class="fas fa-filter"></i> Filter
+                                 </button>
+
+                              </div>
+                              <div style="flex: 1;">
+                                 <a class="btn btn-primary waves-effect waves-light mt-10" href="/laporan/pengeluaran"
+                                    style="width: 100%; margin-top: 10px;">
+                                    <i class="fas fa-refresh"></i> Reset
+                                 </a>
+
+                              </div>
+
+                           </div>
+                        </form>
+                        <!-- end form -->
+                     </div>
+                  </div>
+               </div>
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+
                         <h4 class="card-title">Data Pengeluaran</h4>
 
                         <div class="table-responsive">
@@ -88,8 +142,8 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <% if (listPengeluaran.length> 0) { %>
-                                    <% listPengeluaran.map((pengeluaran, index)=> { %>
+                                 <% if (dataAggregate.listPengeluaran.length> 0) { %>
+                                    <% dataAggregate.listPengeluaran.map((pengeluaran, index)=> { %>
                                        <tr data-id="<%= index + 1 %>">
                                           <td data-field="nomor" style="width: 80px">
                                              <%= index + 1 %>
@@ -141,7 +195,9 @@
                                              </tr>
                                              <% } %>
 
-
+                                                <td data-field="nomor" style="width: 80px">Total Pengeluaran
+                                                   <%= dataAggregate.totalPengeluaran %>
+                                                </td>
                               </tbody>
                               <!-- end tbody -->
                            </table>

@@ -43,7 +43,9 @@
                                     <th>Status</th>
                                     <th>Tanggal Donasi</th>
                                     <th>Tanggal Verifikasi</th>
-                                    <th>Action</th>
+                                    <% if (session.userType==='ADMINISTRATOR' ) { %>
+                                       <th>Action</th>
+                                       <% } %>
                                  </tr>
                               </thead>
                               <tbody>
@@ -90,19 +92,20 @@
                                        <td data-field="date-verif">
                                           <%=data[i].tanggal_verifikasi%>
                                        </td>
-                                       <td style="width: 100px">
-                                          <a class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                                             data-bs-target="#detail<%= data[i].id %>id">
-                                             <i class="fas fa-eye"></i>
-                                          </a>
-                                          <%- include('./popup-detail-donasi.ejs', {detail: data[i], idx: i}) -%>
-                                             <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
-                                                data-bs-toggle="modal" data-bs-target="#edit<%= data[i].id %>id">
-                                                <i class="fas fa-pencil-alt"></i>
+                                       <% if (session.userType==='ADMINISTRATOR' ) { %>
+                                          <td style="width: 100px">
+                                             <a class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                                                data-bs-target="#detail<%= data[i].id %>id">
+                                                <i class="fas fa-eye"></i>
                                              </a>
-                                             <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
-
-                                       </td>
+                                             <%- include('./popup-detail-donasi.ejs', {detail: data[i], idx: i}) -%>
+                                                <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                   data-bs-toggle="modal" data-bs-target="#edit<%= data[i].id %>id">
+                                                   <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
+                                          </td>
+                                          <% } %>
                                     </tr>
                                     <% } %>
                               </tbody>

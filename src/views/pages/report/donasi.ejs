@@ -12,14 +12,14 @@
                   </div>
                   <div class="col-md-4">
                      <div class="float-end d-none d-md-block">
-                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                        <!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                            data-bs-target=".bs-example-modal-center">
                            <i class="fas fa-print"></i> Cetak</button>
                         <% if (session.userType==='ADMINISTRATOR' ) { %>
                            <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                               data-bs-target=".bs-example-modal-center">
                               <i class="fas fa-plus"></i> Tambah</button>
-                           <% } %>
+                           <% } %> -->
                      </div>
                   </div>
                </div>
@@ -30,81 +30,49 @@
 
             <div class="row">
                <div class="col-12">
-                  <div class="card">
-                     <div class="card-body">
-
-                        <h4 class="card-title mb-3">Filter Donasi</h4>
-
-                        <form>
-                           <div class="col-12 d-flex gap-5">
-
-                              <div style="flex: 1;">
-                                 <label class="form-label">Single Campaign</label>
-                                 <select class="form-control select2">
-                                    <option>Select</option>
-                                    <% campaign.map((item, index)=> { %>
-                                       <option value="<%= item.id %>">
-                                          <%= item.judul %>
-                                       </option>
-                                       <% }) %>
-                                 </select>
-                                 <!-- end -->
-                              </div>
-
-                              <div style="flex: 1;">
-                                 <label class="form-label">Date Range</label>
-                                 <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy"
-                                    data-date-autoclose="true" data-provide="datepicker"
-                                    data-date-container='#datepicker6'>
-                                    <input type="text" class="form-control" name="start" placeholder="Start Date" />
-                                    <input type="text" class="form-control" name="end" placeholder="End Date" />
-                                 </div>
-                              </div>
-                           </div>
-                           <button type="button" class="btn btn-primary waves-effect waves-light mt-10"
-                              style="width: 100%; margin-top: 10px;">
-                              <i class="fas fa-filter"></i> Filter</button>
-                        </form>
-                        <!-- end form -->
-                     </div>
-                  </div>
-               </div>
-               <div class="col-12">
 
                   <div class="card">
                      <div class="card-body">
 
-                        <h4 class="card-title">List Donasi</h4>
+                        <h4 class="card-title">Laporan Donasi</h4>
 
                         <div class="table-responsive">
                            <table class="table table-editable table-nowrap align-middle table-edits">
                               <thead>
                                  <tr>
                                     <th>Nomor</th>
-                                    <th>Donatur</th>
-                                    <th>Jumlah</th>
-                                    <th>Metode</th>
-                                    <th>Status</th>
-                                    <th>Tanggal Donasi</th>
-                                    <th>Tanggal Verifikasi</th>
-                                    <th>Action</th>
+                                    <th>Nama Campaign</th>
+                                    <th>Target Donasi</th>
+                                    <th>Dana Terkumpul</th>
+                                    <th>Total Pengeluaran</th>
+                                    <th>Sisa Dana</th>
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr data-id="1">
-                                    <td data-field="nomor" style="width: 80px">1</td>
-                                    <td data-field="donatur">David McHenry</td>
-                                    <td data-field="total">Male</td>
-                                    <td data-field="method">Tangerang</td>
-                                    <td data-field="status">24</td>
-                                    <td data-field="date-donate">Yatim</td>
-                                    <td data-field="date-verif">Yatim</td>
-                                    <td style="width: 100px">
-                                       <a class="btn btn-secondary btn-sm edit" title="Edit">
-                                          <i class="fas fa-pencil-alt"></i>
-                                       </a>
-                                    </td>
-                                 </tr>
+                                 <% if (dataAggregation.length> 0) { %>
+                                    <% dataAggregation.map((dt, idx)=> { %>
+                                       <tr data-id="1">
+                                          <td data-field="nomor" style="width: 80px">
+                                             <%= idx+1 %>
+                                          </td>
+                                          <td data-field="donatur">
+                                             <%= dt.namaCampaign %>
+                                          </td>
+                                          <td data-field="total">
+                                             <%= dt.targetDonasi %>
+                                          </td>
+                                          <td data-field="method">
+                                             <%= dt.terkumpul %>
+                                          </td>
+                                          <td data-field="status">
+                                             <%= dt.totalPengeluaran %>
+                                          </td>
+                                          <td data-field="status">
+                                             <%= dt.sisaDana %>
+                                          </td>
+                                       </tr>
+                                       <% }) %>
+                                          <% } %>
 
                               </tbody>
                               <!-- end tbody -->
@@ -128,13 +96,13 @@
          try {
             await fetch(`/laporan/pengeluaran/${id}`, { method: 'DELETE' });
 
-            showFloatingAlert('success_delete');
-            setTimeout(() => {
-               window.location.reload();
-            }, 500);
+            // showFloatingAlert('success_delete');
+            // setTimeout(() => {
+            //    window.location.reload();
+            // }, 500);
          } catch (err) {
-            console.error('Delete failed:', err);
-            showFloatingAlert('failed_delete');
+            // console.error('Delete failed:', err);
+            // showFloatingAlert('failed_delete');
          }
       }
    </script>
