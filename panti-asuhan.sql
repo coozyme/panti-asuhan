@@ -182,3 +182,6 @@ ALTER TABLE `anak_asuh`
 DROP COLUMN `tanggal_masuk`,
 DROP COLUMN `tanggal_keluar`,
 ADD COLUMN `kelas` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL AFTER `kelamin`;
+
+ALTER TABLE donasi
+ADD COLUMN deleted_at DATETIME NULL;
