@@ -65,8 +65,10 @@ module.exports = {
       }
       try {
          await Donasi.create(objectData)
+         console.log('RETURN')
+         return Response(res, 200, true, "Donasi berhasil ditambahkan")
       } catch (error) {
-         return Response(res, 400, false, error.message)
+         return Response(res, 400, false, "Donasi gagal ditambahkan")
       }
    },
    EditDonasi: async (req, res) => {

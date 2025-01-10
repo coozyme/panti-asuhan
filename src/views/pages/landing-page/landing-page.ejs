@@ -1180,11 +1180,11 @@ Blog Area
                   </script>
                </div>
                <div class="mb-3"></div>
-               <label class="form-label" for="buktiTransfer">Bukti Transfer</label>
+               <label class="form-label" for="file">Bukti Transfer</label>
                <div class="mb-5 d-flex justify-content-start">
                   <div style="width: 50%; border-radius: 0;">
-                     <input name="buktiTransfer" type="file" accept="image/png, image/jpeg, image/jpg"
-                        id="buktiTransfer" style="background-color: transparent; border-radius: 0; border: none;">
+                     <input name="file" type="file" accept="image/png, image/jpeg, image/jpg" id="file"
+                        style="background-color: transparent; border-radius: 0; border: none;">
                   </div>
                </div>
                <div class="mb-3">
@@ -1209,53 +1209,45 @@ Blog Area
 
       async function SubmitDonate() {
          console.log("subcmit")
-         const form = document.getElementById('formSubmitDonate');
-         const formData = new FormData(form)
-
-         const dataPayload = {};
-
-         console.log('LOG-formData', formData);
-
-         const fileInput = document.getElementById('buktiTransfer');
-         console.log('LOG-fileInput', fileInput.files[0]);
-
-         const blob = new Blob([fileInput], { type: fileInput.type });
-
-         // Create URL for blob
-         // const blobUrl = URL.createObjectURL(blob);
-         console.log('LOG-blobUrl', blob);
-         // To read blob as base64
-         // const reader = new FileReader();
-         // reader.readAsDataURL(blob);
-         // reader.onloadend = () => {
-         //    const base64data = reader.result;
-         //    // Use base64data as needed
-         // }
-
-         formData.forEach((value, key) => {
-            dataPayload[key] = value;
-            console.log('LOG-foreachformData', key, value);
-         });
-
-         console.log('LOG-dataPayload', dataPayload);
-
-         const response = await fetch('/donasi/berdonasi', {
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: JSON.stringify(dataPayload)
-         });
+         try {
 
 
-         // close modal class="modal fade" id="donateNowModal"
-         const modal = bootstrap.Modal.getInstance(document.getElementById('donateNowModal'));
-         modal.hide();
-
-         // Optional: Reset the form
-         form.reset();
 
 
+            const form = document.getElementById('formSubmitDonate');
+            const formData = new FormData(form)
+
+            const dataPayload = {};
+
+            console.log('LOG-formData', formData);
+
+            const fileInput = document.getElementById('file');
+            console.log('LOG-fileInput', fileInput.files[0]);
+
+            formData.forEach((value, key) => {
+               dataPayload[key] = value;
+               console.log('LOG-foreachformData', key, value);
+            });
+
+            console.log('LOG-dataPayload', dataPayload);
+
+            async function send() {
+               const response = await fetch('/donasi/berdonasi', {
+                  method: 'POST',
+                  body: formData
+               });
+            }
+
+            send()
+
+            const modal = bootstrap.Modal.getInstance(document.getElementById('donateNowModal'));
+            modal.hide();
+
+            document.getElementById('formSubmitDonate').reset();
+
+         } catch (error) {
+            console.error('LOG-ERROR', error);
+         }
 
       }
 
