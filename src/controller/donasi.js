@@ -129,6 +129,9 @@ module.exports = {
 
    GetDonasi: async (req, res) => {
       await Donasi.findAll({
+         where: {
+            deleted_at: null
+         },
          order: [
             ['created_at', 'DESC']
          ]
@@ -157,6 +160,24 @@ module.exports = {
 
          res.render(path.join(__dirname, '../../src/views/pages/donasi/donasi.ejs'), { session: req.session, data: datas });
       })
+   },
+
+   DeleteDonasi: async (req, res) => {
+      const { id } = req.params
+      console.log('REQ-params-delete', req.params)
+      try {
+         await Donasi.update({
+            deleted_at: new Date()
+         }, {
+            where: {
+               id: parseInt(id)
+            }
+         })
+         console.log('RETURN')
+         return Response(res, 200, true, "Donasi berhasil dihapus")
+      } catch (error) {
+         return Response(res, 400, false, "Donasi gagal dihapus")
+      }
    },
 
    VerificationDonasi: async (req, res) => {

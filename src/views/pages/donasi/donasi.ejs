@@ -1,8 +1,19 @@
 <%- include('../../partials/header.ejs', {session: session}) -%>
    <div class="main-content">
-
       <div class="page-content">
          <div class="container-fluid">
+            <div class="floating-alert-delete-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9103;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil dihapus.
+               </div>
+            </div>
+            <div class="floating-alert-delete-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9104;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal dihapus.
+               </div>
+            </div>
 
             <!-- start page title -->
             <div class="page-title-box">
@@ -25,11 +36,31 @@
             <!-- end page title -->
 
 
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                           tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Hapus Data Donasi</h5>
+                                 </div>
+                                 <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus data donasi ini?
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="confirmDelete">Hapus</button>
+                                    <button type="button" class="btn btn-secondary"
+                                       data-bs-dismiss="modal">Cancel</button>
+                                 </div>
+                              </div>
+                              <!-- /.modal-content -->
+                           </div>
+                           <!-- /.modal-dialog -->
+                        </div>
 
-            <div class="row">
-               <div class="col-12">
-                  <div class="card">
-                     <div class="card-body">
                         <h4 class="card-title">List Donasi</h4>
 
                         <div class="table-responsive">
@@ -104,6 +135,10 @@
                                                    <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
+                                                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                      data-item-id="<%= data[i].id %>" data-bs-target="#staticBackdrop">
+                                                      <i class="fas fa-trash-alt"></i>
+                                                   </button>
                                           </td>
                                           <% } %>
                                     </tr>
@@ -157,4 +192,75 @@
       <!-- End Page-content -->
 
    </div>
+
+   <script>
+
+      const modal = document.getElementById('staticBackdrop');
+      let itemToDelete = null;
+
+      // When the modal is shown, get the item ID from the button that triggered it
+      modal.addEventListener('show.bs.modal', function (event) {
+         const button = event.relatedTarget;
+         itemToDelete = button.getAttribute('data-item-id');
+      });
+
+      // Add click handler to the confirm delete button
+      document.getElementById('confirmDelete').addEventListener('click', async function () {
+         if (itemToDelete) {
+            async function send() {
+               await deleteItem(itemToDelete);
+            }
+            send();
+            // Close the modal
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+
+            showFloatingAlert('success_delete');
+            setTimeout(() => {
+               window.location.reload();
+            }, 500);
+         }
+      });
+
+      async function deleteItem(id) {
+         try {
+            await fetch(`/donasi/donasi/${id}`, { method: 'DELETE' });
+
+         } catch (err) {
+            console.error('Delete failed:', err);
+            showFloatingAlert('failed_delete');
+         }
+      }
+
+      function showFloatingAlert(type) {
+
+         if (type === 'success_delete') {
+            const alert = document.querySelector('.floating-alert-delete-success')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'failed_delete') {
+            const alert = document.querySelector('.floating-alert-delete-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         }
+      }
+   </script>
    <%- include('../../partials/footer.ejs') -%>

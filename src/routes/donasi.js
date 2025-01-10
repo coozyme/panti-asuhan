@@ -6,6 +6,7 @@ const uploadFile = require('../config/storage');
 const { Donatur } = require('../controller/management-user');
 var router = express.Router();
 router.get('/donasi', AuthMiddleware.isAuthenticated, donasi.GetDonasi);
+router.delete('/donasi/:id', AuthMiddleware.isAuthenticated, donasi.DeleteDonasi);
 router.post('/add-manual', AuthMiddleware.isAuthenticated, uploadFile("donasi").single('file'), donasi.AddDonasiManual);
 router.post('/berdonasi', uploadFile("donasi").single('file'), donasi.AddDonasiLandingPage);
 router.post('/edit-donasi/:id', AuthMiddleware.isAuthenticated, uploadFile("donasi").single('file'), donasi.EditDonasi);

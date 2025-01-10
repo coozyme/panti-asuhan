@@ -57,12 +57,17 @@ module.exports = (sequelize, DataTypes) => {
                model: 'Admin',
                key: 'id'
             }
+         },
+         deleted_at: {
+            type: DataTypes.DATE,
+            allowNull: true
          }
       },
       {
          tableName: "donasi",
          createdAt: 'created_at',
-         updatedAt: 'updated_at'
+         updatedAt: 'updated_at',
+         deletedAt: 'deleted_at'
       }
    );
 
