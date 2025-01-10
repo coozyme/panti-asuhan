@@ -40,6 +40,18 @@
               Gagal Login, Periksa kembali username dan password
             </div>
           </div>
+          <div class="floating-alert-form-failed"
+            style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+            <div class="alert alert-danger" role="alert">
+              Silahkan isi username dan password
+            </div>
+          </div>
+          <div class="floating-alert-form-choose-failed"
+            style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+            <div class="alert alert-danger" role="alert">
+              Pilih masuk sebagai admin atau donatur
+            </div>
+          </div>
           <div class="card overflow-hidden">
             <div class="bg-primary">
               <div class="text-primary text-center p-4">
@@ -110,6 +122,17 @@
         console.log('form', form, username);
 
         const formData = new FormData(form);
+
+        if (!formData.get('type')) {
+          showFloatingAlert('form_choose_failed');
+          return;
+        }
+
+        if (!formData.get('username') || !formData.get('password')) {
+          showFloatingAlert('form_failed');
+          return;
+        }
+
         const data = {};
         formData.forEach((value, key) => {
           data[key] = value;
@@ -179,6 +202,32 @@
             alert.style.opacity = '1';
           }, 1000);
         }, 1200);
+      } else if (type === 'form_failed') {
+        const alert = document.querySelector('.floating-alert-form-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        })
+      } else if (type === 'form_choose_failed') {
+        const alert = document.querySelector('.floating-alert-form-choose-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        })
       }
     }
   </script>

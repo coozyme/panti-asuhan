@@ -46,36 +46,46 @@
                     Gagal Daftar
                   </div>
                 </div>
+                <div class="floating-alert-form-failed"
+                  style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+                  <div class="alert alert-danger" role="alert">
+                    Form harus diisi semua
+                  </div>
+                </div>
               </div>
-              <form class="mt-4" action="/auth/register" method="POST" id="formRegister">
+              <form class="mt-4" id="formRegister">
                 <div class="mb-3">
                   <label class="form-label" for="nama">Nama Lengkap</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" />
+                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap"
+                    required />
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="alamat">Alamat</label>
-                  <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat" />
+                  <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat"
+                    required />
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="email">Email</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan E-Mail" />
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan E-Mail"
+                    required />
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label" for="noTelp">No. Telp</label>
-                  <input type="number" name="noTelp" class="form-control" id="noTelp"
+                  <input type="number" name="noTelp" class="form-control" id="noTelp" required
                     placeholder="Masukkan Nomor Telepon" />
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label" for="password">Password</label>
-                  <input type="password" name="password" class="form-control" id="password"
+                  <input type="password" name="password" class="form-control" id="password" required
                     placeholder="Masukkan Password" />
                 </div>
 
                 <div class="mb-3 row">
                   <div class="col-12 text-end">
-                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">DAFTAR</button>
+                    <button class="btn btn-primary w-md waves-effect waves-light" type="button"
+                      onclick="register()">DAFTAR</button>
                   </div>
                 </div>
               </form>
@@ -97,15 +107,35 @@
         const form = document.getElementById('formRegister');
         const formData = new FormData(form);
 
-        await fetch(`/auth/register`, {
-          method: 'POST',
-          body: formData
+        if (!formData.get('nama') || !formData.get('alamat') || !formData.get('email') || !formData.get('noTelp') || !formData.get('password')) {
+          showFloatingAlert('form_failed');
+          return;
+        }
+
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
         });
 
+        async function send() {
+          await fetch(`/auth/register`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+        }
+
+        send();
+
         showFloatingAlert('success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+
+        window.location.href = '/auth/login';
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 500);
       } catch (err) {
         console.error('Delete failed:', err);
         showFloatingAlert('failed');
@@ -129,6 +159,19 @@
         }, 1200);
       } else if (type === 'failed') {
         const alert = document.querySelector('.floating-alert-register-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        }, 1200);
+      } else if (type === 'form_failed') {
+        const alert = document.querySelector('.floating-alert-form-failed')
         alert.style.display = 'block';
 
         // Auto hide after 3 seconds
