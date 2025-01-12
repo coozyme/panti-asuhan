@@ -140,6 +140,7 @@ module.exports = {
             const photo = item.foto ? `http://${config.url}/uploads/donasi/${item.foto}` : null
             return {
                id: item.id,
+               campaignId: item.id_campaign_donasi,
                donatur: item.donatur,
                jumlah: formatRupiah(item.jumlah),
                jumlahNominal: item.jumlah,
@@ -200,20 +201,6 @@ module.exports = {
                id: id
             }
          })
-         console.log("donass", donate)
-         // const data = donate.map((item) => {
-         //    return {
-         //       id: item.id,
-         //       donatur: item.donatur,
-         //       jumlah: formatRupiah(item.jumlah),
-         //       metode: item.metode,
-         //       catatan: item.catatan ? item.catatan : "-",
-         //       status_verifikasi: item.status_verifikasi,
-         //       tanggal_submit: moment(item.tanggal_submit).format("DD MMM YYYY"),
-         //       tanggal_verifikasi: item.tanggal_verifikasi ? moment(item.tanggal_verifikasi).format("DD MMM YYYY") : "-",
-         //    }
-         // }
-         // )
 
          if (donate.id_campaign_donasi) {
             const dataDonasi = await CampaignDonasi.findOne({

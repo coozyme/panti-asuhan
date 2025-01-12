@@ -94,11 +94,25 @@
 
          <div class="modal-footer">
             <form class="custom-validation" action="<%= detail.url_verified %>" method="post">
+               <!-- <% if (detail.status_verifikasi=="REJECT" ) { %>
+                  <button type="submit" class="btn btn-primary waves-effect waves-ligh" data-bs-dismiss="modal" disabled
+                     action="submit">VERIFIED</button>
+                  <% } else {%>
+                     <% } %> -->
                <button type="submit" class="btn btn-primary waves-effect waves-ligh" data-bs-dismiss="modal"
-                  action="submit">VERIFIED</button>
+                  <%=detail.status_verifikasi=="VERIFIED" && "disabled" %> action="submit"
+                  <%=detail.status_verifikasi=="REJECT" && "disabled" %> >VERIFIED
+               </button>
             </form>
             <form class="custom-validation" action="<%= detail.url_reject %>" method="post">
-               <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">REJECT</button>
+               <!-- <% if (detail.status_verifikasi=="REJECT" ) { %>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" disabled>REJECT</button>
+                  <% } else { %>
+                     <% } %> -->
+               <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                  <%=detail.status_verifikasi=="VERIFIED" && "disabled" %>
+                  <%=detail.status_verifikasi=="REJECT" && "disabled" %>>REJECT
+               </button>
             </form>
          </div>
       </div>

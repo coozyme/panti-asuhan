@@ -124,23 +124,27 @@
                                           <%=data[i].tanggal_verifikasi%>
                                        </td>
                                        <% if (session.userType==='ADMINISTRATOR' ) { %>
-                                          <td style="width: 100px">
-                                             <a class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                                                data-bs-target="#detail<%= data[i].id %>id">
-                                                <i class="fas fa-eye"></i>
-                                             </a>
-                                             <%- include('./popup-detail-donasi.ejs', {detail: data[i], idx: i}) -%>
-                                                <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
-                                                   data-bs-toggle="modal" data-bs-target="#edit<%= data[i].id %>id">
-                                                   <i class="fas fa-pencil-alt"></i>
+                                          <%= console.log("campaign_id",data[i].campaignId) %>
+                                             <td style="width: 100px">
+                                                <a class="btn btn-primary waves-effect waves-light"
+                                                   data-bs-toggle="modal" data-bs-target="#detail<%= data[i].id %>id">
+                                                   <i class="fas fa-eye"></i>
                                                 </a>
-                                                <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
-                                                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                      data-item-id="<%= data[i].id %>" data-bs-target="#staticBackdrop">
-                                                      <i class="fas fa-trash-alt"></i>
+                                                <%- include('./popup-detail-donasi.ejs', {detail: data[i], idx: i}) -%>
+                                                   <button class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                      <%=data[i].campaignId!=null && "disabled" %>
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#edit<%= data[i].id %>id">
+                                                         <i class="fas fa-pencil-alt"></i>
                                                    </button>
-                                          </td>
-                                          <% } %>
+                                                   <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
+                                                      <button type="button" class="btn btn-danger"
+                                                         data-bs-toggle="modal" data-item-id="<%= data[i].id %>"
+                                                         data-bs-target="#staticBackdrop">
+                                                         <i class="fas fa-trash-alt"></i>
+                                                      </button>
+                                             </td>
+                                             <% } %>
                                     </tr>
                                     <% } %>
                               </tbody>
