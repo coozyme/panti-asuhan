@@ -120,20 +120,22 @@ module.exports = {
       const { id } = req.params;
 
       try {
-         await Kegiatan.destroy({
-            where: {
-               id: id
-            }
-         })
-
          await Galeries.destroy({
             where: {
                id_kegiatan: id
             }
          })
 
+         await Kegiatan.destroy({
+            where: {
+               id: id
+            }
+         })
+
+
          res.redirect("/kegiatan")
       } catch (error) {
+         console.log("LOG-DeleteKegiatan-ERR", error);
          return res.status(400).json({
             status: "error",
             message: error.message
