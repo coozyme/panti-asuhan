@@ -22,13 +22,25 @@
 
                         <form class="custom-validation" action="/donasi/add-manual" method="post"
                            enctype="multipart/form-data">
+
+                           <label for="campaignID" class="form-label">Campaign</label>
+                           <select class="form-control select2 mb-3" name="campaignID">
+                              <option>Select campaign</option>
+                              <% campaign.map((item, index)=> { %>
+                                 <option value="<%= item.id %>">
+                                    <%= item.judul %>
+                                 </option>
+                                 <% }) %>
+                           </select>
                            <div class="mb-3">
                               <label class="form-label" for="namaDonatur">Nama Donatur</label>
-                              <input type="text" class="form-control" required placeholder="Masukkan Nama Donatur" name="namaDonatur">
+                              <input type="text" class="form-control" required placeholder="Masukkan Nama Donatur"
+                                 name="namaDonatur">
                            </div>
                            <div class="mb-3">
                               <label class="form-label" for=jumlah">Jumlah</label>
-                              <input type="number" class="form-control" required placeholder="Jumlah Donasi Yang Diberikan" name="jumlah">
+                              <input type="number" class="form-control" required
+                                 placeholder="Jumlah Donasi Yang Diberikan" name="jumlah">
                            </div>
 
 
@@ -47,9 +59,9 @@
                               <label for="validationCustom04" class="form-label">Status Donasi</label>
                               <select class="form-select" id="validationCustom04" required name="status">
                                  <option selected disabled value="">Pilih Status Donasi...</option>
-                                 <option value="VERIFIED">VERIFIED</option>
-                                 <option value="PENDING">PENDING</option>
-                                 <option value="REJECT">REJECT</option>
+                                 <option value="VERIFIED" disabled>VERIFIED</option>
+                                 <option selected value="PENDING">PENDING</option>
+                                 <option value="REJECT" disabled>REJECT</option>
                               </select>
                               <div class="invalid-feedback">
                                  Pilih Salah Satu Status.

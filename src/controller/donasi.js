@@ -15,6 +15,7 @@ module.exports = {
       const { userId } = req.session
       const { filename } = req.file
       const {
+         campaignID,
          namaDonatur,
          jumlah,
          methode,
@@ -28,6 +29,7 @@ module.exports = {
       console.log('REQ-filename', filename)
 
       const objectData = {
+         id_campaign_donasi: campaignID,
          donatur: namaDonatur,
          jumlah: jumlah,
          metode: methode,
@@ -75,6 +77,7 @@ module.exports = {
       const { userId } = req.session
       const filename = req.file?.filename
       const {
+         campaignID,
          namaDonatur,
          jumlah,
          methode,
@@ -88,6 +91,7 @@ module.exports = {
 
       const objectData = {
          donatur: namaDonatur,
+         id_campaign_donasi: campaignID,
          jumlah: jumlah,
          metode: methode,
          status_verifikasi: status,
@@ -128,6 +132,9 @@ module.exports = {
    },
 
    GetDonasi: async (req, res) => {
+
+      const campaignDonasi = await CampaignDonasi.findAll()
+
       await Donasi.findAll({
          where: {
             deleted_at: null
@@ -159,7 +166,7 @@ module.exports = {
          }
          )
 
-         res.render(path.join(__dirname, '../../src/views/pages/donasi/donasi.ejs'), { session: req.session, data: datas });
+         res.render(path.join(__dirname, '../../src/views/pages/donasi/donasi.ejs'), { session: req.session, data: datas, campaign: campaignDonasi });
       })
    },
 
