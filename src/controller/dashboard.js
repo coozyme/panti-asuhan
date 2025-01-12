@@ -1,5 +1,5 @@
 const path = require("path");
-const { AnakAsuh, Donasi } = require("../models");
+const { AnakAsuh, Donasi, Donatur } = require("../models");
 const { where, Sequelize } = require("sequelize");
 const { formatRupiah } = require("../utils/currency/format");
 const { formatDateTime } = require("../utils/times/datetime");
@@ -70,8 +70,64 @@ module.exports = {
          }
       })
 
+      // const aggreateActivity = []
 
+      const logActivity = await Donatur.findAll({
+         where: {
+            tanggal_logout: {
+               [Sequelize.Op.ne]: null
+            },
+            tanggal_login: {
+               [Sequelize.Op.ne]: null
+            },
+            status: 'VERIFIED'
+         },
+         order: [
+            ['tanggal_login', 'DESC'],
+            ['tanggal_logout', 'DESC']],
+         limit: 5
+      })
 
+      const donasiActivity = await Donasi.findAll({
+         order: [
+            ['tanggal_submit', 'DESC'],
+            ['tanggal_verifikasi', 'DESC']],
+         limit: 5
+      })
+
+      const aggreateActivity = []
+
+      const mapLogActivity = logActivity.map((data) => {
+         console.log('data11', data)
+         const obj = {
+            type: 'login',
+            id: data.id,
+            nama: data.fullname,
+            email: data.email,
+            tanggal_login: formatDateTime(new Date(data.tanggal_login)),
+            tanggal_logout: formatDateTime(new Date(data.tanggal_logout)),
+         }
+         aggreateActivity.push(obj)
+      }
+      )
+
+      const mapDonasiActivity = donasiActivity.map((data) => {
+         const obj = {
+            type: 'donasi',
+            id: data.id,
+            donatur: data.donatur,
+            jumlah: formatRupiah(data.jumlah),
+            tanggal_submit: formatDateTime(new Date(data.tanggal_submit)),
+            tanggal_verifikasi: formatDateTime(new Date(data.tanggal_verifikasi)),
+            status_verifikasi: data.status_verifikasi,
+         }
+         aggreateActivity.push(obj)
+      }
+      )
+      console.log("mapDonasiActivity", mapDonasiActivity)
+      // aggreateActivity.concat(mapLogActivity)
+      // aggreateActivity.concat(mapDonasiActivity)
+      console.log('aggreateActivity', mapLogActivity)
       const dataCount = {
          // yatim: anakYatim,
          // piatu: anakPiatu,
@@ -84,6 +140,6 @@ module.exports = {
          dataUnalidationDonasi: mapData
       }
 
-      res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'), { session: req.session, ...dataCount });
+      res.render(path.join(__dirname, '../../src/views/pages/dashboard/dashboard.ejs'), { session: req.session, log: aggreateActivity, ...dataCount });
    }
 }
