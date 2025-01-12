@@ -139,9 +139,10 @@
                                                    </button>
                                                    <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
                                                       <button type="button" class="btn btn-danger"
+                                                         <%=data[i].status_verifikasi=="VERIFIED" && "disabled" %>
                                                          data-bs-toggle="modal" data-item-id="<%= data[i].id %>"
-                                                         data-bs-target="#staticBackdrop">
-                                                         <i class="fas fa-trash-alt"></i>
+                                                            data-bs-target="#staticBackdrop">
+                                                            <i class="fas fa-trash-alt"></i>
                                                       </button>
                                              </td>
                                              <% } %>
