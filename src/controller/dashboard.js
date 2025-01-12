@@ -8,28 +8,6 @@ const { formatDateTime } = require("../utils/times/datetime");
 module.exports = {
    Dashboard: async (req, res) => {
 
-      // const anakYatim = await AnakAsuh.count({
-      //    where: {
-      //       status: "YATIM"
-      //    }
-      // })
-
-      // const anakPiatu = await AnakAsuh.count({
-      //    where: {
-      //       status: "PIATU"
-      //    }
-      // })
-      // const anakYatimPiatu = await AnakAsuh.count({
-      //    where: {
-      //       status: "YATIM PIATU"
-      //    }
-      // })
-
-      // const anakDhuafa = await AnakAsuh.count({
-      //    where: {
-      //       status: "DHUAFA"
-      //    }
-      // })
       console.log('REQ-SESSION-DASH', req.session.userType)
       const totalAnakAsuh = await AnakAsuh.count()
       const donasiVerified = await Donasi.count({
@@ -37,18 +15,18 @@ module.exports = {
       })
 
       const donasiBelumVerified = await Donasi.count({
-         status_verifikasi: 'PENDING'
+         where: {
+            status_verifikasi: 'PENDING'
+         }
       })
       console.log('donasiBelumVerified', donasiBelumVerified)
 
-      const totalDonasi = await Donasi.sum('jumlah', {
+
+      const resultTotalDonasi = await Donasi.findOne({
+         attributes: [[Sequelize.fn('SUM', Sequelize.col('jumlah')), 'total_jumlah']],
          where: {
             status_verifikasi: 'VERIFIED'
          }
-      });
-
-      const result = await Donasi.findOne({
-         attributes: [[Sequelize.fn('SUM', Sequelize.col('jumlah')), 'total_jumlah']],
       });
 
 
@@ -124,19 +102,11 @@ module.exports = {
          aggreateActivity.push(obj)
       }
       )
-      console.log("mapDonasiActivity", mapDonasiActivity)
-      // aggreateActivity.concat(mapLogActivity)
-      // aggreateActivity.concat(mapDonasiActivity)
-      console.log('aggreateActivity', mapLogActivity)
       const dataCount = {
-         // yatim: anakYatim,
-         // piatu: anakPiatu,
-         // yatimPiatu: anakYatimPiatu,
-         // dhuafa: anakDhuafa,
          totalAnakAsuh: totalAnakAsuh,
          donasiVerified: donasiVerified,
          donasiBelumVerified: donasiBelumVerified,
-         totalDonasi: formatRupiah(result.get('total_jumlah')),
+         totalDonasi: formatRupiah(resultTotalDonasi.get('total_jumlah')),
          dataUnalidationDonasi: mapData
       }
 

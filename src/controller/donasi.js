@@ -1,4 +1,4 @@
-const { Donasi } = require("../models");
+const { Donasi, CampaignDonasi } = require("../models");
 const { AuthPayload } = require("../middleware/auth");
 const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
@@ -193,7 +193,50 @@ module.exports = {
          }
       })
 
-      res.redirect('/donasi/donasi')
+
+      if (status === 'VERIFIED') {
+         const donate = await Donasi.findOne({
+            where: {
+               id: id
+            }
+         })
+         console.log("donass", donate)
+         // const data = donate.map((item) => {
+         //    return {
+         //       id: item.id,
+         //       donatur: item.donatur,
+         //       jumlah: formatRupiah(item.jumlah),
+         //       metode: item.metode,
+         //       catatan: item.catatan ? item.catatan : "-",
+         //       status_verifikasi: item.status_verifikasi,
+         //       tanggal_submit: moment(item.tanggal_submit).format("DD MMM YYYY"),
+         //       tanggal_verifikasi: item.tanggal_verifikasi ? moment(item.tanggal_verifikasi).format("DD MMM YYYY") : "-",
+         //    }
+         // }
+         // )
+
+         if (donate.id_campaign_donasi) {
+            const dataDonasi = await CampaignDonasi.findOne({
+               where: {
+                  id: donate.id_campaign_donasi
+               }
+            })
+            console.log("LOG=DONASD", dataDonasi)
+            await CampaignDonasi.update({
+               terkumpul: dataDonasi.terkumpul + donate.jumlah,
+               updated_at: new Date(),
+            }, {
+               where: {
+                  id: donate.id_campaign_donasi,
+               }
+            })
+         }
+
+         return res.redirect('/donasi/donasi')
+      }
+
+
+      return res.redirect('/donasi/donasi')
    },
 
 }
