@@ -185,3 +185,6 @@ ADD COLUMN `kelas` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL AFTER `ke
 
 ALTER TABLE donasi
 ADD COLUMN deleted_at DATETIME NULL;
+
+ALTER TABLE `donasi`
+MODIFY COLUMN `tanggal_verifikasi` DATETIME NULL;
