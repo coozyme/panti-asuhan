@@ -57,6 +57,50 @@
    <!-- Theme Custom CSS -->
    <link rel="stylesheet" href="/assets-landing-page/css/style.css">
 
+   <style>
+      .toast-container {
+         position: fixed;
+         bottom: 120px;
+         right: 20px;
+         z-index: 1000;
+      }
+
+      .toast {
+         background-color: #333;
+         color: white;
+         padding: 16px 24px;
+         border-radius: 4px;
+         margin: 8px;
+         min-width: 250px;
+         opacity: 0;
+         transform: translateY(100%);
+         transition: all 0.3s ease-in-out;
+      }
+
+      .toast.show {
+         opacity: 1;
+         transform: translateY(0);
+      }
+
+      .toast.success {
+         background-color: #4CAF50;
+      }
+
+      .toast.error {
+         background-color: #f44336;
+      }
+
+      .toast.info {
+         background-color: #2196F3;
+      }
+
+      button {
+         padding: 10px 20px;
+         margin: 5px;
+         cursor: pointer;
+      }
+   </style>
+
 </head>
 
 <body>
@@ -1198,7 +1242,8 @@ Blog Area
          </div>
       </div>
    </div>
-   </div>
+
+   <div class="toast-container" id="toastContainer"></div>
 
    <script>
       async function OpenFormDonate(id) {
@@ -1211,7 +1256,6 @@ Blog Area
          console.log("subcmit")
          try {
 
-
             const form = document.getElementById('formSubmitDonate');
             const formData = new FormData(form)
 
@@ -1220,19 +1264,16 @@ Blog Area
             console.log('LOG-formData', formData);
 
             const fileInput = document.getElementById('file');
-            console.log('LOG-fileInput', fileInput.files[0]);
 
             formData.forEach((value, key) => {
                dataPayload[key] = value;
                console.log('LOG-foreachformData', key, value);
             });
 
-            if (dataPayload.jumlah == '' || dataPayload.donatur == '' || dataPayload.bankAccount == '' || dataPayload.file == '' || dataPayload.catatan == '') {
-               alert('Please fill all the form');
+            if (dataPayload.jumlah == '' || dataPayload.donatur == '' || dataPayload.bankAccount == '' || dataPayload.catatan == '' || fileInput.files.length == 0) {
+               showToast('Form harus diisi semua!', 'info')
                return;
             }
-
-            console.log('LOG-dataPayload', dataPayload);
 
             async function send() {
                const response = await fetch('/donasi/berdonasi', {
@@ -1240,18 +1281,45 @@ Blog Area
                   body: formData
                });
             }
-
             send()
 
+            showToast('Terimakasih sudah berdonasi, Donasi Terkirim!', 'success')
             const modal = bootstrap.Modal.getInstance(document.getElementById('donateNowModal'));
             modal.hide();
 
             document.getElementById('formSubmitDonate').reset();
-
+            return
          } catch (error) {
             console.error('LOG-ERROR', error);
+            showToast('Donasi Gagal Terkirim!', 'error')
          }
 
+      }
+
+
+      function showToast(message, type = 'default') {
+         const container = document.getElementById('toastContainer');
+
+         // Create toast element
+         const toast = document.createElement('div');
+         toast.className = `toast ${type}`;
+         toast.textContent = message;
+
+         // Add toast to container
+         container.appendChild(toast);
+
+         // Trigger reflow and add show class
+         setTimeout(() => {
+            toast.classList.add('show');
+         }, 10);
+
+         // Remove toast after 3 seconds
+         setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+               container.removeChild(toast);
+            }, 300);
+         }, 3000);
       }
 
    </script>
