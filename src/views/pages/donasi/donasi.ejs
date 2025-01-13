@@ -2,6 +2,30 @@
    <div class="main-content">
       <div class="page-content">
          <div class="container-fluid">
+            <div class="floating-alert-save-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-save-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-update-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9101;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-update-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9102;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal diupdate.
+               </div>
+            </div>
             <div class="floating-alert-delete-success"
                style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9103;">
                <div class="alert alert-success" role="alert">
@@ -80,74 +104,74 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <% for(var i=0; i < data.length; i++) { %>
-                                    <tr data-id="1">
-                                       <td data-field="nomor" style="width: 80px">
-                                          <%= i + 1 %>
-                                       </td>
-                                       <td data-field="donatur">
-                                          <%=data[i].donatur%>
-                                       </td>
-                                       <td data-field="total">
-                                          <%=data[i].jumlah%>
-                                       </td>
-                                       <td data-field="metode">
-                                          <% if(data[i].metode==="TUNAI" ) { %>
-                                             <span class="text-primary" style="font-weight: 700;">
-                                                <%= data[i].metode %>
-                                             </span>
-                                             <% } else if(data[i].metode==="TRANSFER" ) { %>
-                                                <span class="text-info" style="font-weight: 700;">
-                                                   <%= data[i].metode %>
+                                 <% if(data.length> 0) { %>
+                                    <% data.map((dt, idx)=> { %>
+                                       <tr data-id="1">
+                                          <td data-field="nomor" style="width: 80px">
+                                             <%= idx+ 1 %>
+                                          </td>
+                                          <td data-field="donatur">
+                                             <%=dt.donatur%>
+                                          </td>
+                                          <td data-field="total">
+                                             <%=dt.jumlah%>
+                                          </td>
+                                          <td data-field="metode">
+                                             <% if(dt.metode==="TUNAI" ) { %>
+                                                <span class="text-primary" style="font-weight: 700;">
+                                                   <%= dt.metode %>
                                                 </span>
-                                                <% } %>
-                                       </td>
-                                       <td data-field="status">
-                                          <% if(data[i].status_verifikasi==="VERIFIED" ) { %>
-                                             <span class="text-success" style="font-weight: 700;">
-                                                <%= data[i].status_verifikasi %>
-                                             </span>
-                                             <% } else if(data[i].status_verifikasi==="PENDING" ) { %>
-                                                <span class="text-warning" style="font-weight: 700;">
-                                                   <%= data[i].status_verifikasi %>
-                                                </span>
-                                                <% } else { %>
-                                                   <span class="text-danger" style="font-weight: 700;">
-                                                      <%= data[i].status_verifikasi %>
+                                                <% } else if(dt.metode==="TRANSFER" ) { %>
+                                                   <span class="text-info" style="font-weight: 700;">
+                                                      <%= dt.metode %>
                                                    </span>
                                                    <% } %>
-                                       </td>
-                                       <td data-field="date-donation">
-                                          <%=data[i].tanggal_submit%>
-                                       </td>
-                                       <td data-field="date-verif">
-                                          <%=data[i].tanggal_verifikasi%>
-                                       </td>
-                                       <% if (session.userType==='ADMINISTRATOR' ) { %>
-                                          <%= console.log("campaign_id",data[i].campaignId) %>
+                                          </td>
+                                          <td data-field="status">
+                                             <% if(dt.status_verifikasi==="VERIFIED" ) { %>
+                                                <span class="text-success" style="font-weight: 700;">
+                                                   <%= dt.status_verifikasi %>
+                                                </span>
+                                                <% } else if(dt.status_verifikasi==="PENDING" ) { %>
+                                                   <span class="text-warning" style="font-weight: 700;">
+                                                      <%= dt.status_verifikasi %>
+                                                   </span>
+                                                   <% } else { %>
+                                                      <span class="text-danger" style="font-weight: 700;">
+                                                         <%= dt.status_verifikasi %>
+                                                      </span>
+                                                      <% } %>
+                                          </td>
+                                          <td data-field="date-donation">
+                                             <%=dt.tanggal_submit%>
+                                          </td>
+                                          <td data-field="date-verif">
+                                             <%=dt.tanggal_verifikasi%>
+                                          </td>
+                                          <% if (session.userType==='ADMINISTRATOR' ) { %>
                                              <td style="width: 100px">
                                                 <a class="btn btn-primary waves-effect waves-light"
-                                                   data-bs-toggle="modal" data-bs-target="#detail<%= data[i].id %>id">
+                                                   data-bs-toggle="modal" data-bs-target="#detail<%= dt.id %>id">
                                                    <i class="fas fa-eye"></i>
                                                 </a>
-                                                <%- include('./popup-detail-donasi.ejs', {detail: data[i], idx: i}) -%>
-                                                   <button class="btn btn-warning waves-effect waves-ligh" title="Edit"
-                                                      <%=data[i].campaignId!=null && "disabled" %>
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#edit<%= data[i].id %>id">
+                                                <%- include('./popup-detail-donasi.ejs', {detail: dt, idx: idx}) -%>
+                                                   <a class="btn btn-warning waves-effect waves-ligh" title="Edit"
+                                                      <%=dt.campaignId!=null && "disabled" %>
+                                                      data-bs-toggle="modal" data-bs-target="#edit<%= idx %>">
                                                          <i class="fas fa-pencil-alt"></i>
-                                                   </button>
-                                                   <%- include('./popup-edit-donasi.ejs', {edit: data[i], idx: i}) -%>
+                                                   </a>
+                                                   <%- include('./popup-edit-donasi.ejs', {edit: dt, idx: idx}) -%>
                                                       <button type="button" class="btn btn-danger"
-                                                         <%=data[i].status_verifikasi=="VERIFIED" && "disabled" %>
-                                                         data-bs-toggle="modal" data-item-id="<%= data[i].id %>"
+                                                         <%=dt.status_verifikasi=="VERIFIED" && "disabled" %>
+                                                         data-bs-toggle="modal" data-item-id="<%= dt.id %>"
                                                             data-bs-target="#staticBackdrop">
                                                             <i class="fas fa-trash-alt"></i>
                                                       </button>
                                              </td>
                                              <% } %>
-                                    </tr>
-                                    <% } %>
+                                       </tr>
+                                       <% }) %>
+                                          <% } %>
                               </tbody>
                               <!-- end tbody -->
                            </table>
@@ -239,7 +263,59 @@
 
       function showFloatingAlert(type) {
 
-         if (type === 'success_delete') {
+         if (type === 'success_save') {
+            const alert = document.querySelector('.floating-alert-save-success')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'failed_save') {
+            const alert = document.querySelector('.floating-alert-save-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'success_update') {
+            const alert = document.querySelector('.floating-alert-update-success')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'failed_update') {
+            const alert = document.querySelector('.floating-alert-update-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'success_delete') {
             const alert = document.querySelector('.floating-alert-delete-success')
             alert.style.display = 'block';
 

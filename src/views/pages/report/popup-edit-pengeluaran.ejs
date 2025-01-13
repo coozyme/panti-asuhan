@@ -15,11 +15,12 @@
 
                      <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
 
-                     <form class="custom-validation" id="formEditPengeluaran" enctype="multipart/form-data" va>
+                     <form class="custom-validation" id="formEditPengeluaran<%= edit.id %>"
+                        enctype="multipart/form-data">
                         <div class="md-3">
                            <label for="idCampaign" class="form-label">Campaign Donasi</label>
                            <select class="form-select" id="validationCustom04" required name="idCampaign">
-                              <option selected disabled value="">Pilih Campaign Donasi...</option>
+                              <option selected disabled value="false">Pilih Campaign Donasi...</option>
                               <% listCampaign.forEach((campaign, index)=> { %>
                                  <option <%=edit.campaignId==campaign.id && "selected" %> value="<%= campaign.id %>"
                                        >
@@ -91,35 +92,23 @@
 <script>
    async function SaveUpdate(id) {
       try {
-         const form = document.getElementById('formEditPengeluaran');
-         // console.log('form', form);
+         const form = document.getElementById(`formEditPengeluaran${id}`);
          const formData = new FormData(form);
-         // const data = {};
-         // formData.forEach((value, key) => {
-         //    data[key] = value;
-         // });
-         // console.log('data', data);
-         // console.log('data', data);
-         // await fetch('/laporan/tambah-pengeluaran', {
-         //    method: 'POST',
-         //    body: formData,
-         // });
 
-
+         if (!formData.get("idCampaign") == "false" || !formData.get("keterangan") || !formData.get("jumlah") || !formData.get("tanggal")) {
+            showFloatingAlert('failed_update');
+            return
+         }
          await fetch(`/laporan/ubah-pengeluaran/${id}`, {
             method: 'POST',
             body: formData,
          });
          showFloatingAlert("success_update");
-         console.log('success_update');
 
-
-         // disable modal
-
-
+         form.reset();
          setTimeout(() => {
             window.location.reload();
-         }, 2000);
+         }, 700);
       } catch (err) {
          console.log('Save failed:', err);
          showFloatingAlert('failed_update');
