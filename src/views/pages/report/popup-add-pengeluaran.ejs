@@ -24,7 +24,7 @@
                            <div class="md-3">
                               <label for="validationCustom04" class="form-label">Campaign Donasi</label>
                               <select class="form-select" id="validationCustom04" required name="idCampaign">
-                                 <option selected disabled value="">Pilih Campaign Donasi...</option>
+                                 <option selected disabled value="false">Pilih Campaign Donasi...</option>
                                  <% listCampaign.forEach((campaign, index)=> { %>
                                     <option value="<%= campaign.id %>">
                                        <%= campaign.judul %>
@@ -95,12 +95,14 @@
       try {
          const form = document.getElementById('formAddPengeluaran');
          const formData = new FormData(form);
-         const data = {};
-         formData.forEach((value, key) => {
-            data[key] = value;
-         });
-         console.log('data', data);
-         console.log('data', data);
+         // const data = {};
+         // formData.forEach((value, key) => {
+         //    data[key] = value;
+         // });
+         if (!formData.get("idCampaign") == "false" || !formData.get("keterangan") || !formData.get("jumlah") || !formData.get("tanggal")) {
+            showFloatingAlert('failed_update');
+            return
+         }
          await fetch('/laporan/tambah-pengeluaran', {
             method: 'POST',
             body: formData,

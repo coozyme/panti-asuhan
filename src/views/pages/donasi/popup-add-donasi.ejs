@@ -20,12 +20,11 @@
 
                         <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
 
-                        <form class="custom-validation" action="/donasi/add-manual" method="post"
-                           enctype="multipart/form-data">
+                        <form class="custom-validation" id="formAddDonasi" enctype="multipart/form-data">
 
                            <label for="campaignID" class="form-label">Campaign</label>
                            <select class="form-control select2 mb-3" name="campaignID">
-                              <option>Select campaign</option>
+                              <option value="false">Select campaign</option>
                               <% campaign.map((item, index)=> { %>
                                  <option value="<%= item.id %>">
                                     <%= item.judul %>
@@ -99,15 +98,16 @@
                            </div>
 
                            <div class="mb-3">
-                              <label class="form-label" for="deskripsi">Catatan</label>
+                              <label class="form-label" for="catatan">Catatan</label>
                               <div>
-                                 <textarea name="deskripsi" class="form-control" rows="5"
+                                 <textarea name="catatan" class="form-control" rows="5"
                                     placeholder="Catatan..."></textarea>
                               </div>
                            </div>
                            <div class="mb-0">
                               <div>
-                                 <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                 <button type="button" onclick="Save()"
+                                    class="btn btn-primary waves-effect waves-light me-1">
                                     Submit
                                  </button>
                               </div>
@@ -125,3 +125,46 @@
    </div>
    <!-- /.modal -->
 </div>
+
+<script>
+   async function Save() {
+      try {
+         const form = document.getElementById('formAddDonasi');
+         const formData = new FormData(form);
+
+
+         if (formData.get('campaignID') == "false" || !formData.get('namaDonatur') || !formData.get('jumlah') || !formData.get('methode') || !formData.get('status') || !formData.get('tanggalDonasi') || !formData.get('tanggalVerifikasi')) {
+            showFloatingAlert('failed_save');
+            return;
+         }
+
+         const data = {};
+         formData.forEach((value, key) => {
+            data[key] = value;
+         });
+
+         async function send() {
+            await fetch('/donasi/add-manual', {
+               method: 'POST',
+               body: formData,
+            });
+         }
+
+         send()
+         showFloatingAlert("success_save");
+
+
+         // disable modal
+         // const modal = document.querySelector('.bs-example-modal-center');
+         // const modalInstance = bootstrap.Modal.getInstance(modal);
+         // modalInstance.hide();
+
+         // setTimeout(() => {
+         //    window.location.reload();
+         // }, 500);
+      } catch (err) {
+         console.error('Save failed:', err);
+         showFloatingAlert('failed_save');
+      }
+   }
+</script>

@@ -4,6 +4,25 @@
 
       <div class="page-content">
          <div class="container-fluid">
+
+            <div class="floating-alert-save-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-save-failed"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Data gagal disimpan.
+               </div>
+            </div>
+            <div class="floating-alert-update-success"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9101;">
+               <div class="alert alert-success" role="alert">
+                  <strong>Well done!</strong> Data berhasil disimpan.
+               </div>
+            </div>
             <!-- start page title -->
             <div class="page-title-box">
                <div class="row align-items-center">
@@ -23,8 +42,7 @@
             </div>
             <!-- end page title -->
             <div class="row">
-               <form class="custom-validation" action="/anak-asuh/tambah-anak-asuh" method="post"
-                  enctype="multipart/form-data">
+               <form class="custom-validation" id="formAddAnakAsuh" enctype="multipart/form-data">
                   <div class="col-lg-6">
                      <div class="card">
                         <div class="card-body">
@@ -76,7 +94,7 @@
                                  <option selected disabled value="">Pilih...</option>
                                  <option value="YATIM">Yatim</option>
                                  <option value="PIATU">Piatu</option>
-                                 <option value="YATIM_PIATU">Yatim Piatu</option>
+                                 <option value="YATIM PIATU">Yatim Piatu</option>
                                  <option value="DHUAFA">Dhuafa</option>
                               </select>
                               <div class="invalid-feedback">
@@ -118,7 +136,7 @@
                      <!-- end col -->
                      <div class="mb-0">
                         <div>
-                           <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                           <button type="button" class="btn btn-primary waves-effect waves-light me-1" onclick="Save()">
                               Submit
                            </button>
                         </div>
@@ -129,4 +147,73 @@
       </div>
    </div>
    <!-- end row -->
+
+   <script>
+      async function Save() {
+         try {
+            const form = document.getElementById('formAddAnakAsuh');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+               data[key] = value;
+            });
+            console.log('data', data);
+            console.log('data', data);
+            async function send() {
+               await fetch('/anak-asuh/tambah-anak-asuh', {
+                  method: 'POST',
+                  body: formData,
+               });
+            }
+
+            send();
+            showFloatingAlert("success_save");
+
+
+            // disable modal
+            // const modal = document.querySelector('.bs-example-modal-center');
+            // const modalInstance = bootstrap.Modal.getInstance(modal);
+            // modalInstance.hide();
+
+            setTimeout(() => {
+               window.location.assign('/anak-asuh');
+            }, 500);
+         } catch (err) {
+            console.error('Save failed:', err);
+            showFloatingAlert('failed_save');
+            alert('gagal');
+         }
+      }
+
+      function showFloatingAlert(type) {
+
+         if (type === 'success_save') {
+            const alert = document.querySelector('.floating-alert-save-success')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'failed_save') {
+            const alert = document.querySelector('.floating-alert-save-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         }
+      }
+   </script>
    <%- include('../../partials/footer.ejs') -%>

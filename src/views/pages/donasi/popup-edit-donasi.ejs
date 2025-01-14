@@ -1,5 +1,5 @@
-<div class="modal fade col-sm-6 col-md-4 col-xl-3" tabindex="-9999" role="dialog" aria-labelledby="edit<%= edit.id %>"
-   id="edit<%= edit.id %>id" data-target="#edit<%= edit.id %>id" aria-hidden="true">
+<div class="modal fade col-sm-6 col-md-4 col-xl-3" tabindex="-9999" role="dialog" aria-labelledby="edit<%= idx %>"
+   id="edit<%= idx %>" data-target="#edit<%= idx %>" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
          <div class="modal-header">
@@ -14,11 +14,10 @@
                   <div class="card-body">
                      <!-- <h4 class="card-title mb-4">Data Wali Anak Asuh</h4> -->
 
-                     <form class="custom-validation" action="/donasi/edit-donasi/<%= edit.id %>" method="post"
-                        enctype="multipart/form-data">
+                     <form class="custom-validation" enctype="multipart/form-data" id="formUpdateDonasi<%= edit.id %>">
                         <label for="campaignID" class="form-label">Campaign</label>
                         <select class="form-control select2 mb-3" name="campaignID">
-                           <option>Select campaign</option>
+                           <option value="false">Select campaign</option>
                            <% campaign.map((item, index)=> { %>
                               <option value="<%= item.id %>" <%=item.id===edit.campaignId && "selected" %>>
                                  <%= item.judul %>
@@ -53,7 +52,8 @@
                            <label for="validationCustom04" class="form-label">Status</label>
                            <select class="form-select" id="validationCustom04" required name="status">
                               <option selected disabled value="">Choose...</option>
-                              <option <%=edit.status_verifikasi==="VERIFIED" && "selected" %> disabled value="VERIFIED">
+                              <option <%=edit.status_verifikasi==="VERIFIED" && "selected" %> disabled
+                                 value="VERIFIED">
                                  VERIFIED</option>
                               <option selected <%=edit.status_verifikasi==="PENDING" && "selected" %>
                                  value="PENDING">PENDING</option>
@@ -113,7 +113,8 @@
                         </div>
                         <div class="mb-0">
                            <div>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                              <button type="button" onclick="SaveUpdate(`<%= edit.id %>`)"
+                                 class="btn btn-primary waves-effect waves-light me-1">
                                  Submit
                               </button>
                            </div>
@@ -141,3 +142,39 @@
 
    </div>
 </div>
+
+<script>
+   async function SaveUpdate(id) {
+      try {
+         const form = document.getElementById(`formUpdateDonasi${id}`);
+         const formData = new FormData(form);
+
+         if (formData.get('campaignID') == "false" || !formData.get('namaDonatur') || !formData.get('jumlah') || !formData.get('methode') || !formData.get('status') || !formData.get('tanggalDonasi') || !formData.get('tanggalVerifikasi')) {
+
+            showFloatingAlert('failed_update');
+            return
+         }
+
+         async function send() {
+            await fetch(`/donasi/edit-donasi/${id}`, {
+               method: 'POST',
+               body: formData,
+            });
+         }
+
+         send()
+
+
+         showFloatingAlert("success_update");
+         form.reset();
+
+         setTimeout(() => {
+            window.location.reload();
+         }, 500);
+      } catch (err) {
+         console.error('Save failed:', err);
+         showFloatingAlert('failed_update');
+      }
+   }
+
+</script>
