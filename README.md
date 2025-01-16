@@ -92,7 +92,7 @@
    - di update donasi di box tanggalnya ga muncul pilihan tanggal kalendernya ya ? gw klik ikon kalendernya ga pop up tanggal kalender gitu ? &#9745;
    - di tambah gausah dimunculin aja textboxnya (tanggal verifikasi) klo udh di set tanggal hari sekarangnya, di update juga
    - action CRUD + Filter search
-   - tambah nama campaign yang ditujudas
+   - nama campaign yang dituju
 
    # Donatur = BELUM WORK
 
@@ -114,3 +114,4 @@
 4. Simbol sama button" dicek redirect kemana kemananya
 5. Alert klo gagal login,daftar,create,update,delete.
 6. TUNGGU UPDATE SELANJUTNYA
+   123123
