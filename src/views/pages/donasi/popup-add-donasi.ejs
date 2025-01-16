@@ -155,13 +155,13 @@
 
 
          // disable modal
-         // const modal = document.querySelector('.bs-example-modal-center');
-         // const modalInstance = bootstrap.Modal.getInstance(modal);
-         // modalInstance.hide();
+         const modal = document.querySelector('.bs-example-modal-center');
+         const modalInstance = bootstrap.Modal.getInstance(modal);
+         modalInstance.hide();
 
-         // setTimeout(() => {
-         //    window.location.reload();
-         // }, 500);
+         setTimeout(() => {
+            window.location.reload();
+         }, 500);
       } catch (err) {
          console.error('Save failed:', err);
          showFloatingAlert('failed_save');
