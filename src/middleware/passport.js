@@ -63,7 +63,6 @@ const initialize = (passport) => {
       done(null, user)
    })
    passport.deserializeUser(async (serializedUser, done) => {
-      console.log('LOG-serializedUser202', serializedUser)
 
       let user = await Admin.findByPk(serializedUser.id).then((res) => {
          if (!res) {

@@ -35,6 +35,7 @@ const campaign = require('./routes/campaign.js');
 const report = require('./routes/report.js');
 const managementUser = require('./routes/management-user.js');
 const kegiatan = require('./routes/kegiatan.js');
+const Galeri = require('./routes/galeri.js');
 const passport = require('passport');
 var flash = require('connect-flash');
 const { Admin } = require("../src/models");
@@ -127,6 +128,7 @@ app.use(passport.session());
 
 
 app.get('/', landingPage);
+app.use('/galeri', Galeri);
 
 app.use('/dashboard', dashboard);
 app.use('/anak-asuh', anakAsuh);

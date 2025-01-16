@@ -1,5 +1,5 @@
 const path = require("path");
-const { CampaignDonasi } = require("../models");
+const { CampaignDonasi, Kegiatan, Galeries } = require("../models");
 const { PercentageCalcuate, PercentageCollected } = require("../utils/calculation/calculation");
 const { formatRupiah } = require("../utils/currency/format");
 const config = require("../config/config");
@@ -58,6 +58,25 @@ module.exports = {
          }
       })
 
-      res.render(path.join(__dirname, '../../src/views/pages/landing-page/landing-page.ejs'), { mainCampaignData: mainCampaignData, campaignData: campaignData });
+      const listOfKegiatan = []
+      const kegiatan = await Kegiatan.findAll()
+
+      kegiatan.forEach(item => {
+         const urlThumbnail = `http://${config.url}/uploads/galeri/${item.thumbnail}`
+         console.log('URL THUMBNAIL', urlThumbnail)
+         listOfKegiatan.push({
+            id: item.id,
+            kegiatan: item.kegiatan,
+            keterangan: item.keterangan,
+            tanggal: item.tanggal,
+            tanggalUpload: item.tanggal_upload,
+            thumbnail: item.thumbnail ? urlThumbnail : null,
+         })
+      })
+
+
+      // console.log('LEGIATAK', kegiatan)
+
+      res.render(path.join(__dirname, '../../src/views/pages/landing-page/landing-page.ejs'), { mainCampaignData: mainCampaignData, campaignData: campaignData, listOfKegiatan: listOfKegiatan });
    }
 }
