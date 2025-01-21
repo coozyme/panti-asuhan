@@ -9,6 +9,7 @@ const path = require('path');
 const { formatRupiah, getNominal } = require("../utils/currency/format");
 const config = require("../config/config");
 const { convertDateFormat } = require("../utils/times/datetime");
+const { Op } = require("sequelize");
 
 module.exports = {
    AddDonasiManual: async (req, res) => {
@@ -133,21 +134,61 @@ module.exports = {
 
    GetDonasi: async (req, res) => {
 
+      // let statusDonasi = ''
+      let startDate = ''
+      let endDate = ''
+
+      let queryWhere = {
+         deleted_at: null
+      }
+      console.log('REQ-QUERY', req.query)
+
+      if (req.query) {
+         campaignID = req.query.campaignID
+
+         if (req.query.status) {
+            queryWhere.status_verifikasi = req.query.status.toUpperCase()
+            // statusDonasi = req.query.status
+         }
+         if (req.query.start || req.query.end) {
+            startDate = moment(req.query.start).endOf('day').format('YYYY-MM-DD HH:mm:ss') || new Date()
+            endDate = moment(req.query.end).endOf('day').format('YYYY-MM-DD HH:mm:ss') || new Date()
+
+            console.log('START-DATE', startDate, endDate)
+            queryWhere.tanggal_submit = {
+               [Op.gte]: startDate,
+               [Op.lte]: endDate
+            }
+         }
+
+         // if (req.query.endDate) {
+         //    endDate = req.query.endDate
+         // }
+
+      }
+      console.log('QUERY-WHERE', queryWhere)
+
       const campaignDonasi = await CampaignDonasi.findAll()
 
       await Donasi.findAll({
-         where: {
-            deleted_at: null
-         },
+         where: queryWhere,
          order: [
             ['created_at', 'DESC']
+         ],
+         include: [
+            {
+               model: CampaignDonasi,
+               as: 'campaign_donasi'
+            }
          ]
       }).then((data) => {
          const datas = data.map((item) => {
+            // console.log('DATA-DONASI', item.cam paign_donasi)
             const photo = item.foto ? `http://${config.url}/uploads/donasi/${item.foto}` : null
             return {
                id: item.id,
                campaignId: item.id_campaign_donasi,
+               campaignName: item.campaign_donasi ? item.campaign_donasi.judul : "-",
                donatur: item.donatur,
                jumlah: formatRupiah(item.jumlah),
                jumlahNominal: item.jumlah,

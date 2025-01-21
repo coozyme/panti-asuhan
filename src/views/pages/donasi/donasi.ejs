@@ -58,7 +58,58 @@
                </div>
             </div>
             <!-- end page title -->
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
 
+                     <h4 class="card-title mb-3">Filter Laporan Donasi</h4>
+
+                     <form action="/donasi/donasi" method="GET">
+                        <div class="col-12 d-flex gap-5">
+
+                           <div style="flex: 1;">
+                              <label for="status" class="form-label">Status Donasi</label>
+                              <select class="form-control select2" name="status">
+                                 <option>Select status</option>
+                                 <option value="PENDING">PENDING</option>
+                                 <option value="REJECT">REJECT</option>
+                                 <option value="VERIFIED">VERIFIED</option>
+                              </select>
+                              <!-- end -->
+                           </div>
+
+                           <div style="flex: 1;">
+                              <label class="form-label">Tanggal Donasi</label>
+                              <div class="input-daterange input-group" id="datepicker6" data-date-format="dd M, yyyy"
+                                 data-date-autoclose="true" data-provide="datepicker"
+                                 data-date-container='#datepicker6'>
+                                 <input type="text" class="form-control" name="start" placeholder="Start Date" />
+                                 <input type="text" class="form-control" name="end" placeholder="End Date" />
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-12 d-flex gap-5">
+                           <div style="flex: 1;">
+                              <button type="submit" class="btn btn-primary waves-effect waves-light mt-10"
+                                 style="width: 100%; margin-top: 10px;">
+                                 <i class="fas fa-filter"></i> Filter
+                              </button>
+
+                           </div>
+                           <div style="flex: 1;">
+                              <a class="btn btn-primary waves-effect waves-light mt-10" href="donasi/donasi"
+                                 style="width: 100%; margin-top: 10px;">
+                                 <i class="fas fa-refresh"></i> Reset
+                              </a>
+
+                           </div>
+
+                        </div>
+                     </form>
+                     <!-- end form -->
+                  </div>
+               </div>
+            </div>
 
             <div class="col-12">
                <div class="card">
@@ -93,6 +144,7 @@
                                  <tr>
                                     <th>Nomor</th>
                                     <th>Donatur</th>
+                                    <th>Nama Campaign</th>
                                     <th>Jumlah</th>
                                     <th>Metode</th>
                                     <th>Status</th>
@@ -112,6 +164,9 @@
                                           </td>
                                           <td data-field="donatur">
                                              <%=dt.donatur%>
+                                          </td>
+                                          <td data-field="campaignName">
+                                             <%=dt.campaignName%>
                                           </td>
                                           <td data-field="total">
                                              <%=dt.jumlah%>
