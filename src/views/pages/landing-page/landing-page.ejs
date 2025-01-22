@@ -99,6 +99,19 @@
       margin: 5px;
       cursor: pointer;
     }
+
+    .map-container {
+      width: 150%;
+      height: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
   </style>
 </head>
 
@@ -459,19 +472,19 @@ About Area
             <!div class="img3 moving" data-mask-src="/assets-landing-page/img/normal/about_2_3-mask.png">
               <!img data-mask-src="/assets-landing-page/img/normal/about_2_3-mask.png"
                 src="/assets-landing-page/img/normal/salaman.png" alt="About" />
-            </-div>
-            <div class="about-shape2-1 jump">
-              <div class="color-masking">
-                <div class="masking-src" data-mask-src="/assets-landing-page/img/shape/about_shape2_1.png"></div>
-                <img src="/assets-landing-page/img/shape/about_shape2_1.png" alt="img" />
+              </-div>
+              <div class="about-shape2-1 jump">
+                <div class="color-masking">
+                  <div class="masking-src" data-mask-src="/assets-landing-page/img/shape/about_shape2_1.png"></div>
+                  <img src="/assets-landing-page/img/shape/about_shape2_1.png" alt="img" />
+                </div>
               </div>
-            </div>
-            <div class="about-shape2-2 jump-reverse">
-              <div class="color-masking2">
-                <div class="masking-src" data-mask-src="/assets-landing-page/img/shape/about_shape2_2.png"></div>
-                <img src="/assets-landing-page/img/shape/about_shape2_2.png" alt="img" />
+              <div class="about-shape2-2 jump-reverse">
+                <div class="color-masking2">
+                  <div class="masking-src" data-mask-src="/assets-landing-page/img/shape/about_shape2_2.png"></div>
+                  <img src="/assets-landing-page/img/shape/about_shape2_2.png" alt="img" />
+                </div>
               </div>
-            </div>
           </div>
         </div>
         <div class="col-xl-6">
@@ -525,7 +538,9 @@ Counter Area
       <div class="counter-wrap">
         <div class="counter-card">
           <div class="media-body">
-            <h2 class="box-number text-theme"><span class="counter-number">200</span>Anak<span class="fw-light">+</span>
+            <h2 class="box-number text-theme"><span class="counter-number">
+                <%= countData.totalAnakAsuh %>
+              </span>Anak<span class="fw-light">+</span>
             </h2>
             <p class="box-text">Anak Asuh</p>
           </div>
@@ -533,16 +548,18 @@ Counter Area
         <div class="divider"></div>
         <div class="counter-card">
           <div class="media-body">
-            <h2 class="box-number text-theme2"><span class="counter-number">-</span>Campaign<span
-                class="fw-light">+</span></h2>
+            <h2 class="box-number text-theme2"><span class="counter-number">
+                <%= countData.totalCampaign %>
+              </span>Campaign<span class="fw-light">+</span></h2>
             <p class="box-text">Campaign Sukses</p>
           </div>
         </div>
         <div class="divider"></div>
         <div class="counter-card">
           <div class="media-body">
-            <h2 class="box-number text-theme"><span class="counter-number">-</span>Donatur<span
-                class="fw-light">+</span></h2>
+            <h2 class="box-number text-theme"><span class="counter-number">
+                <%= countData.totalDonatur %>
+              </span>Donatur<span class="fw-light">+</span></h2>
             <p class="box-text">Partisipasi Donatur</p>
           </div>
         </div>
@@ -824,7 +841,7 @@ Process Area
             </div>
             <div class="box-content">
               <h3 class="box-title">Kesadaran & Keterlibatan</h3>
-              <p class="box-text">Untuk menginformasikan dan melibatkan calon donatur dan pendukung yayasan 
+              <p class="box-text">Untuk menginformasikan dan melibatkan calon donatur dan pendukung yayasan
                 tentang misi dan dan tujuan yang didukungnya. Memanfaatkan berbagai saluran seperti media sosial.</p>
             </div>
           </div>
@@ -844,7 +861,7 @@ Process Area
             </div>
             <div class="box-content">
               <h3 class="box-title">Pengumpulan Donasi</h3>
-              <p class="box-text">Menyiapkan platform donasi online untuk memudahkan pengurus yayasan dalam 
+              <p class="box-text">Menyiapkan platform donasi online untuk memudahkan pengurus yayasan dalam
                 mendata donasi masuk dan keluar juga untuk para donatur mengetahui transparansi donasi yang ada.</p>
             </div>
           </div>
@@ -978,6 +995,15 @@ Blog Area
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-auto">
+            <div class="map-container">
+              <!-- Replace 'GOOGLE_MAPS_EMBED_URL' with your actual Google Maps embed URL -->
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8276096118175!2d106.54967060000001!3d-6.2863779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fd69cafc61e1%3A0x7ca35955777f8a2e!2sYayasan%20Baitul%20Yatim%20H.%20CAONG!5e0!3m2!1sen!2sid!4v1737563200739!5m2!1sen!2sid"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
           <div class="col-sm-6 col-xl-auto">

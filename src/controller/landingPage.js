@@ -1,8 +1,9 @@
 const path = require("path");
-const { CampaignDonasi, Kegiatan, Galeries } = require("../models");
+const { CampaignDonasi, Kegiatan, Galeries, Donatur, AnakAsuh, Donasi } = require("../models");
 const { PercentageCalcuate, PercentageCollected } = require("../utils/calculation/calculation");
 const { formatRupiah } = require("../utils/currency/format");
 const config = require("../config/config");
+const { where } = require("sequelize");
 
 
 module.exports = {
@@ -74,9 +75,21 @@ module.exports = {
          })
       })
 
+      const totalAnakAsuh = await AnakAsuh.count()
+      const totalDonatur = await Donasi.count()
+      const totalCampaign = await CampaignDonasi.count({
+         where: {
+            status: 'UNPUBLISH'
+         }
+      })
 
+      const countData = {
+         totalAnakAsuh: totalAnakAsuh,
+         totalDonatur: totalDonatur,
+         totalCampaign: totalCampaign
+      }
       // console.log('LEGIATAK', kegiatan)
 
-      res.render(path.join(__dirname, '../../src/views/pages/landing-page/landing-page.ejs'), { mainCampaignData: mainCampaignData, campaignData: campaignData, listOfKegiatan: listOfKegiatan });
+      res.render(path.join(__dirname, '../../src/views/pages/landing-page/landing-page.ejs'), { mainCampaignData: mainCampaignData, campaignData: campaignData, listOfKegiatan: listOfKegiatan, countData: countData });
    }
 }
