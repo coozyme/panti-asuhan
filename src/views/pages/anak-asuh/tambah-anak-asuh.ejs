@@ -17,6 +17,12 @@
                   <strong>Failed!</strong> Data gagal disimpan.
                </div>
             </div>
+            <div class="floating-alert-field-empty"
+               style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+               <div class="alert alert-danger" role="alert">
+                  <strong>Failed!</strong> Form data harus diisi semua.
+               </div>
+            </div>
             <div class="floating-alert-update-success"
                style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9101;">
                <div class="alert alert-success" role="alert">
@@ -153,12 +159,11 @@
          try {
             const form = document.getElementById('formAddAnakAsuh');
             const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-               data[key] = value;
-            });
-            console.log('data', data);
-            console.log('data', data);
+            if (!formData.get('namaLengkap') || !formData.get('tempatLahir') || !formData.get('tanggalLahir') || !formData.get('gender') || !formData.get('kelas') || !formData.get('status') || !formData.get('alamat') || !formData.get('ayah') || !formData.get('ibu') || !formData.get('noHandphone') || !formData.get('keterangan')) {
+               showFloatingAlert('field_empty');
+               return;
+            }
+
             async function send() {
                await fetch('/anak-asuh/tambah-anak-asuh', {
                   method: 'POST',
@@ -202,6 +207,19 @@
             }, 1200);
          } else if (type === 'failed_save') {
             const alert = document.querySelector('.floating-alert-save-failed')
+            alert.style.display = 'block';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+               alert.style.opacity = '0';
+               alert.style.transition = 'opacity 3s';
+               setTimeout(() => {
+                  alert.style.display = 'none';
+                  alert.style.opacity = '1';
+               }, 1000);
+            }, 1200);
+         } else if (type === 'field_empty') {
+            const alert = document.querySelector('.floating-alert-field-empty')
             alert.style.display = 'block';
 
             // Auto hide after 3 seconds
