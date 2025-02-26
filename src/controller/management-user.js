@@ -138,7 +138,7 @@ module.exports = {
 
             })
             // email send
-            await SendEmailActive("coozyme.dev@gmail.com")
+            await SendEmailActive(data.email)
          }
 
          res.redirect('/donasi/donatur')
