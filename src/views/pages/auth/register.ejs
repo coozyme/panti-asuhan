@@ -52,6 +52,18 @@
                     Form harus diisi semua
                   </div>
                 </div>
+                <div class="floating-alert-email-failed"
+                  style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+                  <div class="alert alert-danger" role="alert">
+                    Masukan email yang valid
+                  </div>
+                </div>
+                <div class="floating-alert-phone-failed"
+                  style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9100;">
+                  <div class="alert alert-danger" role="alert">
+                    Masukan nomor telepon yang valid
+                  </div>
+                </div>
               </div>
               <form class="mt-4" id="formRegister">
                 <div class="mb-3">
@@ -109,6 +121,22 @@
 
         if (!formData.get('nama') || !formData.get('alamat') || !formData.get('email') || !formData.get('noTelp') || !formData.get('password')) {
           showFloatingAlert('form_failed');
+          return;
+        }
+
+        const regexPatern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = formData.get('email');
+
+
+        if (!regexPatern.test(email)) {
+          showFloatingAlert('email_failed');
+          return;
+        }
+
+        const phone = formData.get('noTelp');
+
+        if (phone.length < 10) {
+          showFloatingAlert('phone_failed');
           return;
         }
 
@@ -172,6 +200,32 @@
         }, 1200);
       } else if (type === 'form_failed') {
         const alert = document.querySelector('.floating-alert-form-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        }, 1200);
+      } else if (type === 'email_failed') {
+        const alert = document.querySelector('.floating-alert-email-failed')
+        alert.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transition = 'opacity 3s';
+          setTimeout(() => {
+            alert.style.display = 'none';
+            alert.style.opacity = '1';
+          }, 1000);
+        }, 1200);
+      } else if (type === 'phone_failed') {
+        const alert = document.querySelector('.floating-alert-phone-failed')
         alert.style.display = 'block';
 
         // Auto hide after 3 seconds

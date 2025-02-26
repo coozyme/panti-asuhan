@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_DIALECT, PORT, SECRET_KEY } =
+const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_DIALECT, PORT, SECRET_KEY, TOKEN_EMAIL } =
    process.env;
 
 module.exports = {
@@ -16,5 +16,6 @@ module.exports = {
       secretKey: SECRET_KEY
    },
    url: `127.0.0.1:${PORT}`,
-   port: PORT
+   port: PORT,
+   tokenEmail: TOKEN_EMAIL
 };

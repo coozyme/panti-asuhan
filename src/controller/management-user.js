@@ -4,6 +4,7 @@ const { Admin, Donatur } = require("../models");
 const { AuthPayload } = require("../middleware/auth");
 const { Response } = require("../utils/response/response");
 const { EncryptPassword, CheckPassword, GenerateToken, GeneratePassword } = require("../utils/encrypt/encrypt");
+const { SendEmailActive } = require("../utils/mail/mail");
 const { TimeZoneIndonesia, GetDate } = require("../utils/times/timezone");
 const user = require('./user');
 const path = require('path');
@@ -128,6 +129,17 @@ module.exports = {
                id: id
             }
          })
+
+         if (status == 'VERIFIED') {
+            const data = await Donatur.findOne({
+               where: {
+                  id: id
+               }
+
+            })
+
+            await SendEmailActive("coozyme.dev@gmail.com")
+         }
 
          res.redirect('/donasi/donatur')
       } catch (err) {
